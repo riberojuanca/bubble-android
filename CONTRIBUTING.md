@@ -29,7 +29,23 @@ Requirements: JDK 17, Android SDK with platform 36 and build-tools 36.0.0.
 
 The build compiles and dexes the engine into the APK automatically. Install with `adb install -r bubble-app/build/outputs/apk/debug/bubble-app-debug.apk`.
 
-Release builds must be signed with your own key; never commit keystores (`*.jks` and `*.keystore` are ignored).
+Release builds must be signed with your own key; never commit keystores (`*.jks` and `*.keystore` are ignored). A local release build reads its key from `BUBBLE_KEYSTORE`, `BUBBLE_KEYSTORE_PASSWORD`, `BUBBLE_KEY_ALIAS` and `BUBBLE_KEY_PASSWORD`, and its version from `BUBBLE_VERSION`; without them it stays unsigned.
+
+## Releasing (maintainers)
+
+Pushing a tag `vMAJOR.MINOR.PATCH` runs [`release.yml`](.github/workflows/release.yml): it builds the APK, signs it with the key stored in the repository secrets (`BUBBLE_KEYSTORE_BASE64`, `BUBBLE_KEYSTORE_PASSWORD`, `BUBBLE_KEY_ALIAS`, `BUBBLE_KEY_PASSWORD`), verifies the signature and publishes a GitHub release with the APK and its SHA-256. `versionCode` is `MAJOR×10000 + MINOR×100 + PATCH`.
+
+```sh
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+The signing key must never change: Android refuses to update an app signed with a different key, and uninstalling Bubble deletes nothing but would force users to set it up again.
+
+## Website
+
+`site/` holds the home page; [`tools/build-site.py`](tools/build-site.py) adds the manual (English and Spanish) as HTML pages. [`pages.yml`](.github/workflows/pages.yml) builds and publishes it to GitHub Pages when any of them change. To preview: `python3 tools/build-site.py` and open `_site/index.html`.
+
+The Spanish manual in `docs/manual/es/` mirrors the English one chapter by chapter (same numbers); update both when behaviour changes.
 
 ## Checking a change
 
@@ -40,7 +56,7 @@ Release builds must be signed with your own key; never commit keystores (`*.jks`
 
 - One logical change per commit, in English, imperative mood ("Add per-network rules to the Meta space").
 - Pull requests explain the problem, the change, and how it was verified.
-- Update the [manual](docs/manual/README.md) when user-visible behaviour changes.
+- Update the [manual](docs/manual/README.md), in English and Spanish, when user-visible behaviour changes.
 
 ## Reporting bugs
 

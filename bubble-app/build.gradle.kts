@@ -2,6 +2,15 @@ plugins {
     id("com.android.application")
 }
 
+// Release builds take their version from the tag (BUBBLE_VERSION=0.1.0 → versionCode 100) and their
+// signing key from the environment, so no secret lives in the repository. Without them, a local
+// release build is simply left unsigned.
+val releaseVersion = System.getenv("BUBBLE_VERSION") ?: "0.1.0"
+val releaseCode = releaseVersion.split(".").map { it.toInt() }.let { (major, minor, patch) ->
+    major * 10000 + minor * 100 + patch
+}
+val keystorePath: String? = System.getenv("BUBBLE_KEYSTORE")
+
 android {
     namespace = "org.bubble.app"
     compileSdk = 36
@@ -10,16 +19,29 @@ android {
         applicationId = "org.bubble.app"
         minSdk = 34
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = releaseCode
+        versionName = releaseVersion
         testInstrumentationRunner = "org.bubble.app.ProfileBridgeInstrumentation"
+    }
+    signingConfigs {
+        if (keystorePath != null) {
+            create("release") {
+                storeFile = file(keystorePath)
+                storePassword = System.getenv("BUBBLE_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("BUBBLE_KEY_ALIAS")
+                keyPassword = System.getenv("BUBBLE_KEY_PASSWORD")
+            }
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
     buildTypes {
-        getByName("release") { isMinifyEnabled = false }
+        getByName("release") {
+            isMinifyEnabled = false
+            if (keystorePath != null) signingConfig = signingConfigs.getByName("release")
+        }
     }
 }
 
