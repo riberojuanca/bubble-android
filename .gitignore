@@ -11,3 +11,6 @@ notes/
 # Emulator harness scratch files
 tools/emulator/.keep
 tools/emulator/.disallow
+
+# Website build output
+_site/

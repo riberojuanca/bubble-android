@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bubble — a Google-free space for your Android apps</title>
+<meta name="description" content="Bubble turns Android's Private Space into a Google-free bubble for the apps you choose. Stock phone, no root, no custom OS. Free and open source.">
+<link rel="icon" href="logo-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+<link rel="icon" href="logo-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="style.css">
+<script>
+  // Pick the language before the first paint: saved choice, else the browser's.
+  (function () {
+    var lang = null;
+    try { lang = localStorage.getItem('lang'); } catch (e) {}
+    if (!lang) lang = (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+    document.documentElement.lang = lang;
+  })();
+</script>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="#top">
+    <picture>
+      <source srcset="logo-dark.svg" media="(prefers-color-scheme: dark)">
+      <img src="logo-light.svg" alt="" width="28" height="28">
+    </picture>
+    Bubble
+  </a>
+  <nav>
+    <a href="manual/en/index.html" lang="en">Manual</a><a href="manual/es/index.html" lang="es">Manual</a>
+    <a href="https://github.com/riberojuanca/bubble-android">GitHub</a>
+    <button class="lang" type="button" aria-label="Language / Idioma">
+      <span data-l="en">EN</span><span data-l="es">ES</span>
+    </button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <picture>
+      <source srcset="logo-dark.svg" media="(prefers-color-scheme: dark)">
+      <img class="logo" src="logo-light.svg" alt="Bubble logo" width="132" height="132">
+    </picture>
+    <h1>Bubble</h1>
+    <p class="lead">
+      <span lang="en">A Google-free space for your Android apps, on a stock phone. No root, no custom OS.</span>
+      <span lang="es">Un espacio sin Google para tus apps de Android, en un teléfono de fábrica. Sin root y sin cambiar el sistema.</span>
+    </p>
+    <div class="actions">
+      <a class="button" href="https://github.com/riberojuanca/bubble-android/releases/latest">
+        <span lang="en">Download the APK</span><span lang="es">Descargar el APK</span>
+      </a>
+      <a class="button ghost" href="manual/en/index.html" lang="en">Read the manual</a>
+      <a class="button ghost" href="manual/es/index.html" lang="es">Leer el manual</a>
+    </div>
+    <p class="note">
+      <span lang="en">Experimental. Tested on a Pixel 9a with Android 17. Free and open source (MIT).</span>
+      <span lang="es">Experimental. Probado en un Pixel 9a con Android 17. Gratis y de código abierto (MIT).</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span lang="en">What it is</span><span lang="es">Qué es</span></h2>
+    <p>
+      <span lang="en">Bubble turns Android's own <em>Private Space</em> into a bubble: a separate, hidden profile where the apps you choose run natively, with their own data, without Google services inside and behind a firewall. Your normal phone keeps working exactly as before, banking and Google apps included.</span>
+      <span lang="es">Bubble convierte el <em>Espacio privado</em> de Android en una burbuja: un perfil aparte y oculto donde las apps que elijas corren normalmente, con sus propios datos, sin servicios de Google adentro y detrás de un firewall. Tu teléfono sigue igual que siempre, con tus apps de banco y de Google.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span lang="en">What it does</span><span lang="es">Qué hace</span></h2>
+    <ul class="grid">
+      <li><strong><span lang="en">No Google inside</span><span lang="es">Sin Google adentro</span></strong>
+        <span lang="en">Play Services and the Play Store are left out from the first boot, and a guard turns off any that appears.</span>
+        <span lang="es">Play Services y Play Store quedan afuera desde el primer arranque, y un guardián apaga cualquiera que aparezca.</span></li>
+      <li><strong><span lang="en">Internet per app</span><span lang="es">Internet por app</span></strong>
+        <span lang="en">Every app starts offline. You allow each one on Wi-Fi, mobile data, or both.</span>
+        <span lang="es">Toda app empieza sin internet. Vos decidís cuáles usan Wi-Fi, datos móviles o ambos.</span></li>
+      <li><strong><span lang="en">Use stays hidden</span><span lang="es">El uso no queda registrado</span></strong>
+        <span lang="en">System events that would show what you do in the bubble are never written.</span>
+        <span lang="es">Los eventos del sistema que mostrarían qué usás en la burbuja no se escriben.</span></li>
+      <li><strong><span lang="en">Smart lock</span><span lang="es">Bloqueo inteligente</span></strong>
+        <span lang="en">The bubble locks when the screen turns off, unless music is playing.</span>
+        <span lang="es">La burbuja se cierra al apagar la pantalla, salvo que esté sonando música.</span></li>
+      <li><strong><span lang="en">Your apps, your way</span><span lang="es">Tus apps, como quieras</span></strong>
+        <span lang="en">Copy apps you already have, install APK files, or use F-Droid inside.</span>
+        <span lang="es">Copiá apps que ya tenés, instalá archivos APK o usá F-Droid adentro.</span></li>
+      <li><strong><span lang="en">Widget and app grid</span><span lang="es">Widget y cuadrícula</span></strong>
+        <span lang="en">Open bubble apps from your home screen, with no extra steps.</span>
+        <span lang="es">Abrí las apps de la burbuja desde la pantalla de inicio, sin vueltas.</span></li>
+      <li><strong><span lang="en">Meta space</span><span lang="es">Espacio Meta</span></strong>
+        <span lang="en">Optional: a separate profile for Facebook and Instagram, which crash without Google.</span>
+        <span lang="es">Opcional: un perfil aparte para Facebook e Instagram, que sin Google se cierran.</span></li>
+      <li><strong><span lang="en">One-step removal</span><span lang="es">Se quita en un paso</span></strong>
+        <span lang="en">Remove everything and the phone is as it was before Bubble.</span>
+        <span lang="es">«Quitar todo» deja el teléfono como estaba antes de Bubble.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span lang="en">How to start</span><span lang="es">Cómo empezar</span></h2>
+    <ol class="steps">
+      <li><span lang="en">Download the APK and install it.</span><span lang="es">Descargá el APK e instalalo.</span></li>
+      <li><span lang="en">Turn on Developer options and Wireless debugging, and pair Bubble with the 6-digit code. No computer needed.</span><span lang="es">Activá las Opciones de desarrollador y la Depuración inalámbrica, y vinculá Bubble con el código de 6 dígitos. No hace falta una computadora.</span></li>
+      <li><span lang="en">Tap <em>Create the bubble</em>. About a minute later, the <em>Private</em> section at the bottom of your app drawer is your bubble.</span><span lang="es">Tocá <em>Crear la burbuja</em>. En un minuto, la sección <em>Privado</em> al final del cajón de apps es tu burbuja.</span></li>
+    </ol>
+  </section>
+
+  <section class="honest">
+    <h2><span lang="en">What it cannot do</span><span lang="es">Lo que no puede hacer</span></h2>
+    <p>
+      <span lang="en">Without root, the phone's Google services can still know that a private profile exists and which apps are installed in it. They cannot see when you use them, your data, your accounts or your traffic. Apps that require Google's Play Integrity check, such as many banking apps, will not work inside.</span>
+      <span lang="es">Sin root, los servicios de Google del teléfono todavía pueden saber que existe un perfil privado y qué apps tiene instaladas. No pueden ver cuándo las usás, tus datos, tus cuentas ni tu tráfico. Las apps que exigen la verificación Play Integrity de Google, como muchas de bancos, no funcionan adentro.</span>
+    </p>
+    <p><a href="https://github.com/riberojuanca/bubble-android/blob/main/docs/privacy-model.md"><span lang="en">Read the full privacy model →</span><span lang="es">Leer el modelo de privacidad completo (en inglés) →</span></a></p>
+  </section>
+
+  <section>
+    <h2><span lang="en">Requirements</span><span lang="es">Requisitos</span></h2>
+    <table>
+      <tr><th><span lang="en">Tested</span><span lang="es">Probado</span></th><td>Pixel 9a, Android 17</td></tr>
+      <tr><th><span lang="en">Needs</span><span lang="es">Necesita</span></th><td><span lang="en">Wireless debugging and Wi-Fi for setup</span><span lang="es">Depuración inalámbrica y Wi-Fi para configurar</span></td></tr>
+      <tr><th><span lang="en">Does not need</span><span lang="es">No necesita</span></th><td><span lang="en">Root, an unlocked bootloader, a computer</span><span lang="es">Root, desbloquear el bootloader ni una computadora</span></td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2><span lang="en">Documentation</span><span lang="es">Documentación</span></h2>
+    <p class="muted" lang="es">El manual está en español; el resto de la documentación técnica, en inglés.</p>
+    <ul class="links">
+      <li lang="en"><a href="manual/en/index.html">User manual</a> — install, daily use, troubleshooting, FAQ</li>
+      <li lang="es"><a href="manual/es/index.html">Manual de uso</a> — instalación, uso diario, problemas y preguntas frecuentes</li>
+      <li><a href="https://github.com/riberojuanca/bubble-android/blob/main/docs/privacy-model.md"><span lang="en">Privacy model</span><span lang="es">Modelo de privacidad</span></a> — <span lang="en">what Bubble protects and what it cannot</span><span lang="es">qué protege Bubble y qué no puede</span></li>
+      <li><a href="https://github.com/riberojuanca/bubble-android/blob/main/docs/architecture.md"><span lang="en">Architecture</span><span lang="es">Arquitectura</span></a> — <span lang="en">the pieces and how they talk</span><span lang="es">las piezas y cómo se comunican</span></li>
+      <li><a href="https://github.com/riberojuanca/bubble-android/blob/main/docs/reverse-engineering/README.md"><span lang="en">Reverse engineering</span><span lang="es">Ingeniería inversa</span></a> — <span lang="en">what we found inside Android 17, with evidence</span><span lang="es">lo que encontramos dentro de Android 17, con evidencia</span></li>
+      <li><a href="https://github.com/riberojuanca/bubble-android/blob/main/SECURITY.md"><span lang="en">Security</span><span lang="es">Seguridad</span></a> — <span lang="en">every permission and why</span><span lang="es">cada permiso y por qué</span></li>
+    </ul>
+  </section>
+
+  <section class="support">
+    <h2><span lang="en">Support the project</span><span lang="es">Apoyá el proyecto</span></h2>
+    <p>
+      <span lang="en">Bubble is free and open source, and will stay that way. If it is useful to you, you can support its development.</span>
+      <span lang="es">Bubble es gratis y de código abierto, y lo va a seguir siendo. Si te sirve, podés apoyar su desarrollo.</span>
+    </p>
+    <a class="button" href="https://github.com/sponsors/riberojuanca"><span lang="en">Sponsor on GitHub</span><span lang="es">Apoyar en GitHub</span></a>
+  </section>
+</main>
+
+<footer>
+  <span lang="en">Bubble is not affiliated with Google. Android is a trademark of Google LLC.</span>
+  <span lang="es">Bubble no está afiliado a Google. Android es una marca de Google LLC.</span>
+  · <a href="https://github.com/riberojuanca/bubble-android/blob/main/LICENSE">MIT</a>
+</footer>
+
+<script>
+  document.querySelector('.lang').addEventListener('click', function () {
+    var next = document.documentElement.lang === 'es' ? 'en' : 'es';
+    document.documentElement.lang = next;
+    try { localStorage.setItem('lang', next); } catch (e) {}
+  });
+</script>
+</body>
+</html>
