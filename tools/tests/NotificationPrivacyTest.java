@@ -10,6 +10,7 @@ public final class NotificationPrivacyTest {
     private static final String OWN = "org.bubble.app/org.bubble.app.AdbNoticeListener";
     private static final String READER = "example.reader/example.reader.Listener";
     private static final String ASSISTANT = "example.reader/example.reader.Assistant";
+    private static final String FACE = "com.google.android.settings.future.biometrics.faceenroll";
 
     public static void main(String[] args) throws Exception {
         String inventory = "Packages:\n  Package [android] (a):\n  Package [example.shared] (b):\n"
@@ -67,6 +68,13 @@ public final class NotificationPrivacyTest {
         Fake noAppOp = device;
         reject(() -> new NotificationPrivacy(noAppOp, journalUnchecked()).enforce());
 
+        // Google code the Pixel ships in UID 1000 is the OS itself: reported, never mutated or fatal.
+        device = new Fake();
+        device.systemGoogle = true;
+        NotificationPrivacy system = new NotificationPrivacy(device, journal());
+        system.enforce();
+        require(system.systemQueryExemptions.contains(FACE));
+
         device = new Fake();
         device.failedInventory = true;
         Fake noInventory = device;
@@ -92,14 +100,17 @@ public final class NotificationPrivacyTest {
         final Set<String> listeners = new LinkedHashSet<>(java.util.Arrays.asList(OWN, READER));
         String assistant = ASSISTANT;
         String mode = "allow";
-        boolean ignoreRevoke, ignoreAppOp, failedInventory, uidOverride;
+        boolean ignoreRevoke, ignoreAppOp, failedInventory, uidOverride, systemGoogle;
 
         @Override public String run(String... args) {
             String command = String.join(" ", args);
             if (command.equals("pm list users")) return "Users:\n UserInfo{0:Owner:13} running";
-            if (command.equals("pm list packages -U --user 0")) return "package:android uid:1000\npackage:example.reader uid:10123";
+            if (command.equals("pm list packages -U --user 0")) return "package:android uid:1000\npackage:example.reader uid:10123"
+                    + (systemGoogle ? "\npackage:" + FACE + " uid:1000" : "");
             if (command.equals("dumpsys package")) return failedInventory ? "Permission Denial" :
-                    "Packages:\n  Package [android] (a):\n  Package [example.reader] (b):\n    android.permission.ACCESS_NOTIFICATIONS: granted=true\n";
+                    "Packages:\n  Package [android] (a):\n  Package [example.reader] (b):\n    android.permission.ACCESS_NOTIFICATIONS: granted=true\n"
+                    + (systemGoogle ? "  Package [" + FACE + "] (c):\n    android.permission.ACCESS_NOTIFICATIONS: granted=true\n" : "");
+            if (command.startsWith("appops") && command.contains(FACE)) throw new AssertionError("System UID app-op touched");
             if (command.startsWith("settings get")) {
                 return args[5].equals("enabled_notification_listeners") ? String.join(":", listeners) : assistant;
             }

@@ -23,7 +23,7 @@ Bubble turns Android's own *Private Space* into a "bubble": a separate, hidden p
 
 ## What Bubble does not do
 
-Bubble cannot make the bubble invisible to Android itself. The phone's Google services can still know that **a private profile exists** and **which apps are installed in it**; while the profile is open its notifications could also reach notification listeners on the phone. Bubble revokes the Google notification listeners and assistant that could read them (verified on the Android 17 emulator and a Pixel 9a), but Android's own system components still process notifications locally, and complete isolation from the OS is not possible without root. Apps that require Google's Play Integrity check (many banking apps, some games) will not work inside. Read the full, honest [privacy model](docs/privacy-model.md).
+Bubble cannot make the bubble invisible to Android itself. The phone's Google services can still know that **a private profile exists** and **which apps are installed in it**; while the profile is open its notifications could also reach notification listeners on the phone. Bubble revokes the Google notification listeners and assistant that could read them (verified on the Android 17 emulator and a Pixel 9a), but Android's own system components still process notifications locally (on the Pixel this includes some Google components that run as the system itself), and complete isolation from the OS is not possible without root. Apps that require Google's Play Integrity check (many banking apps, some games) will not work inside. Read the full, honest [privacy model](docs/privacy-model.md).
 
 ## How it works, in one paragraph
 
