@@ -2,6 +2,8 @@
 
 **A Google-free space for your Android apps, on a stock phone. No root, no custom OS.**
 
+Website: [riberojuanca.github.io/bubble-android](https://riberojuanca.github.io/bubble-android/)
+
 Bubble turns Android's own *Private Space* into a "bubble": a separate, hidden profile where the apps you choose run natively, with their own data, **without Google services inside**, behind a deny-by-default firewall. Your normal phone keeps working exactly as before, banks and Google apps included.
 
 > **Status: experimental.** Built and tested on a **Pixel 9a with Android 17** (stock, locked bootloader). Other phones and Android versions are untested; some parts are known to depend on Android 17 (see [Compatibility](#compatibility)).
@@ -36,7 +38,7 @@ The [user manual](docs/manual/README.md) explains every screen, every option and
 
 ## Documentation
 
-- [User manual](docs/manual/README.md): install, daily use, troubleshooting, FAQ.
+- [User manual](docs/manual/README.md): install, daily use, troubleshooting, FAQ ([en español](docs/manual/es/README.md)).
 - [Privacy model](docs/privacy-model.md): what Bubble protects and what it cannot.
 - [Architecture](docs/architecture.md): the pieces and how they talk.
 - [Reverse engineering](docs/reverse-engineering/README.md): what we found inside Android 17 to make this possible, with evidence.

@@ -16,7 +16,7 @@ The phone's firewall does not use a VPN (Play Store can take a VPN down; it cann
 
 - A kernel firewall chain that cuts the app completely. It is lost at every reboot; the guard puts it back.
 - Background data blocked on metered networks, with every saved Wi-Fi network marked as metered, so it applies on Wi-Fi too.
-- The guard, which re-applies everything every few seconds while it runs.
+- The guard, which re-applies everything every minute while it runs.
 
 Limits:
 

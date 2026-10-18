@@ -2,6 +2,8 @@
 
 Everything you need to install Bubble, use it every day and fix what goes wrong. Read chapters 1 and 2 before installing; the rest can be read when you need it.
 
+*Versión en español: [manual](es/README.md).*
+
 1. [Before you start](01-before-you-start.md): what Bubble is, what you need, what to expect.
 2. [Install and set up](02-install-and-set-up.md): pairing and creating the bubble, step by step.
 3. [The home screen and the bubble](03-home-and-bubble.md): what each part of Bubble shows; entering and leaving the bubble.
