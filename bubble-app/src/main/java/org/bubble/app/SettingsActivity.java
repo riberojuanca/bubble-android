@@ -18,6 +18,8 @@ public final class SettingsActivity extends Activity {
             Ui.alert(this, getString(R.string.setup_pair_title), getString(R.string.setup_pair_next));
         });
         Ui.row(page, getString(R.string.settings_log), getString(R.string.settings_log_sub), v -> showLog());
+        Ui.row(page, getString(R.string.settings_updates), getString(R.string.settings_updates_sub),
+                v -> startActivity(new Intent(this, UpdateActivity.class)));
         Ui.row(page, getString(R.string.settings_remove_all), getString(R.string.settings_remove_all_sub), v -> explainRemoveAll());
         Ui.row(page, getString(R.string.settings_about), version(), v -> { });
     }

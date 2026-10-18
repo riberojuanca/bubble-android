@@ -6,8 +6,11 @@
 |---|---|
 | **Pair again** | Repeats the pairing ([chapter 2](02-install-and-set-up.md)). Only needed if Bubble cannot connect anymore, for example after revoking debugging authorizations |
 | **Technical log** | Shows the last output of the engine. Useful when something fails; you can select and copy it |
+| **Check for updates** | Checks GitHub for a newer version and lets you download and install it |
 | **Remove everything** | Leaves the phone as it was before Bubble ([chapter 11](11-removing.md)) |
 | **About** | Bubble's version |
+
+Bubble also checks automatically when you open it, at most once every six hours. If a newer release is available, tap **Update** to download it and confirm the installation in Android. The first time, Android may ask you to allow installations from Bubble; after enabling that permission, return to Bubble to continue. Updates keep your data and pairing. Bubble verifies the download checksum, package version and signing certificate before installation. There is no need to uninstall the old version.
 
 ## The guard
 

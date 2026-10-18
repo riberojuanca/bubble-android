@@ -95,6 +95,7 @@ public final class MainActivity extends Activity {
             finish();
             return;
         }
+        Updates.checkAutomatically(this);
         firewallRow.setSubtitle(store.phoneFirewallOn()
                 ? getString(R.string.firewall_phone_on, store.applied().size()) : getString(R.string.firewall_phone_off));
         appsRow.setSubtitle(bubbleCounts());

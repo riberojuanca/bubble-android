@@ -36,6 +36,12 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      - name: Check update verification rules
+        run: |
+          javac --release 17 -d "$RUNNER_TEMP/update-policy-tests" \
+            bubble-app/src/main/java/org/bubble/app/UpdatePolicy.java tools/tests/UpdatePolicyTest.java
+          java -cp "$RUNNER_TEMP/update-policy-tests" org.bubble.app.UpdatePolicyTest
+
       - name: Install Android SDK packages
         run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" > /dev/null'
 

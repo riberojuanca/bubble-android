@@ -29,7 +29,8 @@ These carry Android's `development` flag, which allows granting them over adb:
 
 ### Normal permissions
 
-- Internet: to download F-Droid and the fallback keyboard from f-droid.org, with pinned signatures.
+- Internet: to download F-Droid and the fallback keyboard from f-droid.org, with pinned signatures, and to check and download Bubble updates from its official GitHub releases.
+- Request package installs: to open Android's confirmation for a Bubble update. The downloaded APK must match the published SHA-256, Bubble's package name, the expected newer version and the installed signing certificate. The user allows this source and confirms installation; the updater does not use `shell` or uninstall the current app.
 - Network and Wi-Fi state, Wi-Fi multicast: to know whether wireless debugging can work and to find the pairing port on the phone (mDNS).
 - Notifications: the pairing code field and warnings.
 - Foreground service: while pairing and during maintenance.

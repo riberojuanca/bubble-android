@@ -114,6 +114,26 @@
     <string name="settings_log_sub">La última salida del motor</string>
     <string name="settings_about">Acerca de</string>
     <string name="settings_version">Versión %1$s</string>
+    <string name="settings_updates">Buscar actualizaciones</string>
+    <string name="settings_updates_sub">Nuevas versiones de Bubble desde GitHub</string>
+    <string name="update_available_title">Actualización disponible</string>
+    <string name="update_available_body">Bubble %1$s está disponible. Se conservan tus datos y la vinculación.</string>
+    <string name="update_action">Actualizar</string>
+    <string name="update_later">Más tarde</string>
+    <string name="update_checking">Buscando actualizaciones…</string>
+    <string name="update_current">Bubble está actualizado.</string>
+    <string name="update_downloading">Descargando actualización… %1$d%%</string>
+    <string name="update_ready">La actualización está lista para instalar.</string>
+    <string name="update_install">Instalar actualización</string>
+    <string name="update_installing">Esperando que Android instale la actualización…</string>
+    <string name="update_permission">Permití las actualizaciones desde Bubble en los ajustes de Android y después tocá Instalar actualización.</string>
+    <string name="update_installed">Bubble se actualizó.</string>
+    <string name="update_open">Abrir Bubble</string>
+    <string name="update_retry">Reintentar</string>
+    <string name="update_check_failed">No se pudo buscar actualizaciones. Revisá tu conexión a internet y reintentá.</string>
+    <string name="update_download_failed">No se pudo descargar o verificar la actualización. Revisá tu conexión a internet y reintentá.</string>
+    <string name="update_install_failed">Android no pudo instalar la actualización. Tu versión actual sigue instalada.</string>
+    <string name="update_cancelled">Se canceló la actualización. Tu versión actual sigue instalada.</string>
 
     <!-- Trabajo y errores -->
     <string name="working">Trabajando</string>

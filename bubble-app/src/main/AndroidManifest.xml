@@ -4,6 +4,8 @@
 
     <!-- Talks to the phone's own wireless-debugging daemon over the Wi-Fi interface. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Lets Android ask the user to install a verified Bubble update from GitHub. -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
@@ -76,6 +78,7 @@
             android:taskAffinity="org.bubble.app.shortcut" />
         <activity android:name=".FirewallActivity" android:exported="false" />
         <activity android:name=".SettingsActivity" android:exported="false" />
+        <activity android:name=".UpdateActivity" android:exported="false" android:launchMode="singleTop" />
         <activity android:name=".AppPickerActivity" android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
