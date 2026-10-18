@@ -211,21 +211,32 @@ final class Ui {
      * the system theme (on the Pixel it tinted the button with the wallpaper colour at night).
      */
     static Button button(Context c, CharSequence label, View.OnClickListener onClick) {
+        boolean night = night(c);
+        return button(c, label, night ? 0xFFFFFFFF : INK, night ? INK : 0xFFFFFFFF, onClick);
+    }
+
+    /** Red, by day and by night: for what deletes or replaces (the bubble, the Meta space, everything). */
+    static final int DANGER = 0xFFD93025;
+
+    static Button dangerButton(Context c, CharSequence label, View.OnClickListener onClick) {
+        return button(c, label, DANGER, 0xFFFFFFFF, onClick);
+    }
+
+    private static Button button(Context c, CharSequence label, int fill, int text, View.OnClickListener onClick) {
         Button b = new Button(c);
         b.setText(label);
         b.setAllCaps(false);
-        boolean night = night(c);
-        b.setTextColor(night ? INK : 0xFFFFFFFF);
+        b.setTextColor(text);
         b.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 16);
         b.setStateListAnimator(null);
         b.setMinHeight(0);
         b.setMinimumHeight(0);
         b.setPadding(dp(c, 20), 0, dp(c, 20), 0);
         android.graphics.drawable.GradientDrawable shape = new android.graphics.drawable.GradientDrawable();
-        shape.setColor(night ? 0xFFFFFFFF : INK);
+        shape.setColor(fill);
         shape.setCornerRadius(dp(c, RADIUS_DP));
         b.setBackground(new android.graphics.drawable.RippleDrawable(
-                android.content.res.ColorStateList.valueOf(night ? 0x33000000 : 0x33FFFFFF), shape, null));
+                android.content.res.ColorStateList.valueOf(text == INK ? 0x33000000 : 0x33FFFFFF), shape, null));
         b.setBackgroundTintList(null);
         b.setOnClickListener(onClick);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -675,6 +686,15 @@ final class Ui {
         /** The main action: Bubble's black button. {@code run} may be null (just close). */
         Sheet action(CharSequence label, Runnable run) {
             actions.addView(button(a, label, v -> {
+                dialog.dismiss();
+                if (run != null) run.run();
+            }));
+            return this;
+        }
+
+        /** The main action when it deletes or replaces something: the same button, in red. */
+        Sheet danger(CharSequence label, Runnable run) {
+            actions.addView(dangerButton(a, label, v -> {
                 dialog.dismiss();
                 if (run != null) run.run();
             }));

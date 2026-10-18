@@ -97,7 +97,7 @@ public final class SettingsActivity extends Activity {
                 .action(getString(R.string.action_continue), () -> new Ui.Sheet(this)
                         .title(R.string.remove_all_confirm_title)
                         .message(R.string.remove_all_confirm_body)
-                        .action(getString(R.string.settings_remove_all), this::removeAll)
+                        .danger(getString(R.string.settings_remove_all), this::removeAll)
                         .cancel()
                         .show())
                 .cancel()

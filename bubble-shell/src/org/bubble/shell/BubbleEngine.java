@@ -82,6 +82,7 @@ public final class BubbleEngine {
             "com.android.packageinstaller",
             "com.google.android.documentsui",
             "com.android.documentsui",
+            "com.android.externalstorage",
     };
 
     /** Package installer names: Pixel/GMS builds, then AOSP. */
@@ -102,6 +103,13 @@ public final class BubbleEngine {
      */
     private static final String[] CHOOSERS = {
             "com.android.intentresolver",
+    };
+    /**
+     * The storage provider behind the file browser's "internal storage": without it "Bubble files"
+     * opens DocumentsUI with nothing in it (Pixel 18/10/2026). AOSP, no network, not Google.
+     */
+    private static final String[] STORAGE = {
+            "com.android.externalstorage",
     };
 
     /** Package name prefixes removed from the bubble user before it is first started. */
@@ -489,6 +497,7 @@ public final class BubbleEngine {
         ensureOneOf(id, INSTALLERS, "installer", inside, system);
         ensureOneOf(id, FILE_PICKERS, "file picker", inside, system);
         ensureOneOf(id, CHOOSERS, "share sheet", inside, system);
+        ensureOneOf(id, STORAGE, "storage provider", inside, system);
         // Made without the setup wizard, the profile stays "setup not complete" and Android leaves
         // its apps out of Recents (RecentTasks.getRecentTasksImpl skips such tasks; the value is
         // copied into each task when it is created, so tasks made before stay hidden).

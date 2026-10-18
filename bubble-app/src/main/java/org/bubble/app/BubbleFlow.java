@@ -42,7 +42,7 @@ final class BubbleFlow {
         if (r.googleServices > 0) {
             dialog.title(R.string.decision_google_title)
                     .message(a.getString(R.string.decision_google_body, r.googleServices))
-                    .action(a.getString(R.string.action_replace), () -> confirmRecreate(a, r.user, done));
+                    .danger(a.getString(R.string.action_replace), () -> confirmRecreate(a, r.user, done));
         } else {
             dialog.title(R.string.decision_clean_title)
                     .message(R.string.decision_clean_body)
@@ -56,7 +56,7 @@ final class BubbleFlow {
         new Ui.Sheet(a)
                 .title(R.string.confirm_replace_title)
                 .message(R.string.confirm_replace_body)
-                .action(a.getString(R.string.action_delete), () -> run(a, c -> c.recreateBubble(user), done))
+                .danger(a.getString(R.string.action_delete), () -> run(a, c -> c.recreateBubble(user), done))
                 .cancel()
                 .show();
     }

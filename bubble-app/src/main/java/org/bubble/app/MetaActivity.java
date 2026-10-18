@@ -66,7 +66,7 @@ public final class MetaActivity extends Activity {
         content.addView(Ui.title(this, getString(R.string.meta_inside)));
         list = Ui.column(this);
         content.addView(list);
-        content.addView(Ui.button(this, getString(R.string.meta_delete), v -> confirmDelete(r.user)));
+        content.addView(Ui.dangerButton(this, getString(R.string.meta_delete), v -> confirmDelete(r.user)));
         reloadApps();
     }
 
@@ -88,7 +88,7 @@ public final class MetaActivity extends Activity {
         new Ui.Sheet(this)
                 .title(R.string.meta_delete_title)
                 .message(R.string.meta_delete_body)
-                .action(getString(R.string.action_delete), () -> Ui.work(this, getString(R.string.working_meta),
+                .danger(getString(R.string.action_delete), () -> Ui.work(this, getString(R.string.working_meta),
                         () -> new Controller(this).deleteMeta(user), r -> {
                             if (r.failed()) Ui.alert(this, getString(R.string.error_title), problem(r));
                             show(r);
@@ -147,7 +147,7 @@ public final class MetaActivity extends Activity {
         new Ui.Sheet(this)
                 .title(getString(R.string.meta_remove_title, app.label))
                 .message(R.string.meta_remove_body)
-                .action(getString(R.string.action_remove), () -> Ui.work(this, getString(R.string.working_applying),
+                .danger(getString(R.string.action_remove), () -> Ui.work(this, getString(R.string.working_applying),
                         () -> new Controller(this).removeMetaApps(java.util.Collections.singleton(app.pkg)),
                         log -> reloadApps()))
                 .cancel()

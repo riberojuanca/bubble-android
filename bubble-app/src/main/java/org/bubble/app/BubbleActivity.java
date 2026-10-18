@@ -37,9 +37,9 @@ public final class BubbleActivity extends Activity {
         page.addView(Ui.small(this, getString(R.string.bubble_fingerprint_hint)));
         page.addView(Ui.button(this, getString(R.string.bubble_fingerprint_open), v -> startActivity(
                 new android.content.Intent(android.provider.Settings.ACTION_SECURITY_SETTINGS))));
-        page.addView(Ui.button(this, getString(R.string.bubble_replace), v ->
+        page.addView(Ui.dangerButton(this, getString(R.string.bubble_replace), v ->
                 BubbleFlow.recreate(this, store.bubbleUser(), r -> check())));
-        page.addView(Ui.button(this, getString(R.string.bubble_delete), v -> confirmDelete()));
+        page.addView(Ui.dangerButton(this, getString(R.string.bubble_delete), v -> confirmDelete()));
         Ui.onPull(this, this::check);
     }
 
@@ -81,7 +81,7 @@ public final class BubbleActivity extends Activity {
         new Ui.Sheet(this)
                 .title(R.string.bubble_delete_title)
                 .message(R.string.bubble_delete_body)
-                .action(getString(R.string.action_delete), () -> Ui.work(this, getString(R.string.working_bubble),
+                .danger(getString(R.string.action_delete), () -> Ui.work(this, getString(R.string.working_bubble),
                         () -> new Controller(this).deleteBubble(user), log -> {
                             if (log.contains("bubble-shell:")) {
                                 Ui.alert(this, getString(R.string.error_title), log.substring(log.indexOf("bubble-shell:")));

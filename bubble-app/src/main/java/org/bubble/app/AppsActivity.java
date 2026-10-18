@@ -165,7 +165,7 @@ public final class AppsActivity extends Activity {
         new Ui.Sheet(this)
                 .title(getString(R.string.apps_remove_title, app.label))
                 .message(R.string.apps_remove_body)
-                .action(getString(R.string.action_remove), () -> Ui.work(this, getString(R.string.working_applying),
+                .danger(getString(R.string.action_remove), () -> Ui.work(this, getString(R.string.working_applying),
                         () -> new Controller(this).removeApps(java.util.Collections.singleton(app.pkg)), log -> reload()))
                 .cancel()
                 .show();
