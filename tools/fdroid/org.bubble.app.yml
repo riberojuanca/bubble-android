@@ -3,6 +3,8 @@
 # published on GitHub and ships that one, signed with Bubble's own key, so GitHub and F-Droid
 # installs update each other. The in-app GitHub updater turns itself off when F-Droid installed
 # Bubble (Updates.fromStore). Without BUBBLE_VERSION, Gradle reads the version from the vX.Y.Z tag.
+# The version code is computed when a release is published, so each GitHub release carries a
+# version.txt that the update check reads.
 Categories:
   - Security
   - System
@@ -22,7 +24,7 @@ Binaries: https://github.com/riberojuanca/bubble-android/releases/download/v%v/b
 Builds:
   - versionName: 0.1.3
     versionCode: 103
-    commit: v0.1.3
+    commit: d27e94d70b5962d6d5800d76966fcebe9c544e06
     subdir: bubble-app
     gradle:
       - yes
@@ -30,6 +32,7 @@ Builds:
 AllowedAPKSigningKeys: 1aa7f8990a322c9c14ff9fb985ebbc36f27704b1746a3c6700307a6db3e90d31
 
 AutoUpdateMode: Version
-UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.[0-9]+$
+UpdateCheckMode: HTTP
+UpdateCheckData: https://github.com/riberojuanca/bubble-android/releases/latest/download/version.txt|versionCode=(\d+)|.|versionName=(.+)
 CurrentVersion: 0.1.3
 CurrentVersionCode: 103
