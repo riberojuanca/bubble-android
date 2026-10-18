@@ -45,3 +45,11 @@ Mientras la burbuja está bloqueada, Bubble muestra el último estado que leyó;
 Con la burbuja bloqueada, Android detiene todas sus apps y mantiene su almacenamiento cifrado. Sus apps no corren, no usan la red ni notifican hasta que la vuelvas a abrir.
 
 La sección Privado solo aparece en el cajón de apps si la burbuja tiene al menos una app. Por eso Bubble siempre deja F-Droid ahí.
+
+## Usar fotos de la burbuja en el teléfono
+
+Las fotos guardadas dentro de la burbuja (bajadas con Immich o con un navegador de ahí) se quedan en la burbuja. Para usar una en el teléfono, por ejemplo como fondo de pantalla, elegila desde **Fotos de la burbuja** en el selector de archivos de Android: Fondo de pantalla y estilo → Mis fotos → menú → **Explorar** → **Fotos de la burbuja**. La misma fuente aparece en cualquier app del teléfono que te pida elegir un archivo.
+
+- Muestra las carpetas de fotos de la burbuja, las más nuevas primero, con miniaturas.
+- Solo se lee la foto que elegís, y Bubble no guarda ninguna copia. La app a la que se la das puede guardar la suya (Android guarda la imagen del fondo, por ejemplo).
+- Funciona solo con la burbuja desbloqueada. Si está bloqueada, la carpeta lo avisa: desbloqueala y volvé a abrirla.

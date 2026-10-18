@@ -234,4 +234,13 @@
     <string name="firewall_rules_missing_body">The firewall could not get the list of apps with internet, so to be safe none has network. Open Bubble to send it again.</string>
     <string name="bubble_fingerprint_hint">If an app in the bubble asks for your fingerprint (a bank, for example), give the bubble its own lock: in Settings → Private space → Private space lock, choose a PIN and add your fingerprint. Do it with the bubble open.</string>
     <string name="bubble_fingerprint_open">Open security settings</string>
+    <!-- Bubble photos in the phone's file and photo pickers (BubblePhotosProvider) -->
+    <string name="photos_root">Bubble photos</string>
+    <string name="photos_root_summary">Pick a photo saved in the bubble</string>
+    <string name="photos_locked">The bubble is locked. Unlock it and open this folder again.</string>
+    <string name="photos_no_access">Bubble cannot see the bubble\'s photos yet. Open Bubble once and try again.</string>
+    <plurals name="photos_count">
+        <item quantity="one">%d photo</item>
+        <item quantity="other">%d photos</item>
+    </plurals>
 </resources>

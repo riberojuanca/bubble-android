@@ -30,6 +30,9 @@
          back on if the user switched it off. -->
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
+    <!-- Granted only to Bubble's copy inside the bubble, by the engine (pm grant for that user), so
+         it can hand the bubble's photos to BubblePhotosProvider. Never requested on the phone. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:label="@string/app_name"
@@ -135,6 +138,19 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
+
+        <!-- "Bubble photos" in the phone's file picker: the bubble's photos, read one at a time
+             through the profile bridge, without copying them to the phone. -->
+        <provider
+            android:name=".BubblePhotosProvider"
+            android:authorities="org.bubble.app.photos"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
+        </provider>
 
         <receiver
             android:name=".FirewallReceiver"

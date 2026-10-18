@@ -856,6 +856,8 @@ public final class BubbleEngine {
             sh("pm", "grant", "--user", target, bubblePkg, "android.permission.INTERACT_ACROSS_USERS");
             sh("pm", "grant", "--user", target, bubblePkg, "android.permission.MODIFY_QUIET_MODE");
         }
+        // Only inside: the copy there hands one photo at a time to "Bubble photos" on the phone.
+        sh("pm", "grant", "--user", user, bubblePkg, "android.permission.READ_MEDIA_IMAGES");
         // Always-on (without lockdown): Android itself starts the VPN every time the bubble is
         // unlocked. Needed because on Android 17 the profile's BOOT_COMPLETED does not reach this
         // copy, and broadcasts sent while the bubble is locked are dropped (both seen on the Pixel).

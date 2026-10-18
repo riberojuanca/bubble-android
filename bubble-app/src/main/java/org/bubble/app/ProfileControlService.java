@@ -71,6 +71,23 @@ public final class ProfileControlService extends Service {
                     case ProfileBridge.STATUS:
                         profileStatus(out);
                         break;
+                    case ProfileBridge.PHOTO_FOLDERS:
+                    case ProfileBridge.PHOTOS:
+                    case ProfileBridge.PHOTO_THUMB:
+                    case ProfileBridge.PHOTO_OPEN:
+                        // Media queries and thumbnails read storage: off the main thread.
+                        int what = request.what;
+                        Bundle args = new Bundle(request.getData());
+                        new Thread(() -> {
+                            try {
+                                Bundle photos = BubblePhotos.serve(this, what, args);
+                                reply(reply, photos);
+                                android.os.ParcelFileDescriptor sent =
+                                        photos.getParcelable(ProfileBridge.FILE, android.os.ParcelFileDescriptor.class);
+                                if (sent != null) sent.close();
+                            } catch (Exception e) { reply(reply, ProfileBridge.error(e.getMessage())); }
+                        }, "bubble-profile-photos").start();
+                        return true;
                     default:
                         throw new IllegalArgumentException("Unknown profile operation");
                 }

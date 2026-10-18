@@ -45,3 +45,11 @@ While the bubble is locked, Bubble shows the last state it read; nothing can be 
 When the bubble is locked, Android stops all its apps and keeps its storage encrypted. Its apps do not run, do not use the network and do not notify until you open it again.
 
 The Private section only appears in the app drawer when the bubble has at least one app. Bubble always keeps F-Droid there for this reason.
+
+## Using bubble photos on the phone
+
+Photos saved inside the bubble (downloaded with Immich or a browser there) stay in the bubble. To use one on the phone, for example as wallpaper, pick it from **Bubble photos** in Android's file picker: Wallpaper & style → My photos → menu → **Browse** → **Bubble photos**. The same source appears in any phone app that asks you to choose a file.
+
+- It shows the bubble's photo folders, newest first, with thumbnails.
+- Only the photo you choose is read, and Bubble keeps no copy. The app you give it to may keep its own (Android stores the wallpaper image, for example).
+- It works only while the bubble is unlocked. Locked, the folder says so: unlock the bubble and open it again.

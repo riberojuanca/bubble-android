@@ -232,4 +232,14 @@
     <string name="firewall_rules_missing_body">El firewall no pudo recibir la lista de apps con internet, así que por seguridad todas quedaron sin red. Abrí Bubble para que la vuelva a enviar.</string>
     <string name="bubble_fingerprint_hint">Si una app de la burbuja te pide huella (por ejemplo un banco), dale a la burbuja su propio bloqueo: en Ajustes → Espacio privado → Bloqueo del espacio privado, elegí un PIN y agregá tu huella. Hacelo con la burbuja abierta.</string>
     <string name="bubble_fingerprint_open">Abrir ajustes de seguridad</string>
+    <!-- Fotos de la burbuja en los selectores de archivos y fotos del teléfono (BubblePhotosProvider) -->
+    <string name="photos_root">Fotos de la burbuja</string>
+    <string name="photos_root_summary">Elegí una foto guardada en la burbuja</string>
+    <string name="photos_locked">La burbuja está bloqueada. Desbloqueala y volvé a abrir esta carpeta.</string>
+    <string name="photos_no_access">Bubble todavía no puede ver las fotos de la burbuja. Abrí Bubble una vez y volvé a intentar.</string>
+    <plurals name="photos_count">
+        <item quantity="one">%d foto</item>
+        <item quantity="other">%d fotos</item>
+        <item quantity="many">%d fotos</item>
+    </plurals>
 </resources>

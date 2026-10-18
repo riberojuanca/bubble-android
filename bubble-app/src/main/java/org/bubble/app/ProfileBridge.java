@@ -24,8 +24,11 @@ import java.util.concurrent.TimeUnit;
 
 /** Local, signature-protected Binder calls between Bubble's copies. No network transport. */
 final class ProfileBridge {
-    static final int APPS = 1, OPEN = 2, NETWORK = 3, RULES = 4, STATUS = 5;
-    static final String ERROR = "error", ALLOWED = "allowed", PACKAGE = "package";
+    static final int APPS = 1, OPEN = 2, NETWORK = 3, RULES = 4, STATUS = 5,
+            PHOTO_FOLDERS = 6, PHOTOS = 7, PHOTO_THUMB = 8, PHOTO_OPEN = 9;
+    static final String ERROR = "error", ALLOWED = "allowed", PACKAGE = "package",
+            ID = "id", IDS = "ids", NAMES = "names", MIMES = "mimes", SIZES = "sizes", DATES = "dates",
+            COUNTS = "counts", BYTES = "bytes", FILE = "file";
     static final Handler MAIN = new Handler(Looper.getMainLooper());
 
     private ProfileBridge() {}
@@ -101,6 +104,38 @@ final class ProfileBridge {
         List<String[]> out = new ArrayList<>();
         for (int i = 0; i < packages.size(); i++) out.add(new String[]{packages.get(i), paths.get(i)});
         return out;
+    }
+
+    /** The bubble's photo folders, newest first: ids, names, photo counts and newest dates. */
+    static Bundle photoFolders(Context c, int user) throws Exception {
+        return call(c, user, PHOTO_FOLDERS, null);
+    }
+
+    /** The photos of one folder, newest first: ids, names, mime types, sizes and dates. */
+    static Bundle photos(Context c, int user, String folder) throws Exception {
+        Bundle request = new Bundle();
+        request.putString(ID, folder);
+        return call(c, user, PHOTOS, request);
+    }
+
+    /** A small JPEG of one photo, made by the bubble's media provider. */
+    static byte[] photoThumb(Context c, int user, long id, int size) throws Exception {
+        Bundle request = new Bundle();
+        request.putLong(ID, id);
+        request.putInt(BYTES, size);
+        byte[] jpeg = call(c, user, PHOTO_THUMB, request).getByteArray(BYTES);
+        if (jpeg == null) throw new IOException("Missing thumbnail");
+        return jpeg;
+    }
+
+    /** One photo opened for reading inside the bubble; only this file leaves it. */
+    static android.os.ParcelFileDescriptor openPhoto(Context c, int user, long id) throws Exception {
+        Bundle request = new Bundle();
+        request.putLong(ID, id);
+        android.os.ParcelFileDescriptor file = call(c, user, PHOTO_OPEN, request)
+                .getParcelable(FILE, android.os.ParcelFileDescriptor.class);
+        if (file == null) throw new IOException("Missing photo");
+        return file;
     }
 
     static String applyNetwork(Context c, int user) throws Exception {
