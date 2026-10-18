@@ -4,7 +4,7 @@
 
 Website: [riberojuanca.github.io/bubble-android](https://riberojuanca.github.io/bubble-android/)
 
-Bubble turns Android's own *Private Space* into a "bubble": a separate, hidden profile where the apps you choose run natively, with their own data, **without Google services inside**, behind a deny-by-default firewall. Your normal phone keeps working exactly as before, banks and Google apps included.
+Bubble turns Android's own *Private Space* into a "bubble": a separate, hidden profile where the apps you choose run natively, with their own data, **without Google services inside**, behind a deny-by-default firewall. Your banking and Google apps stay installed on the normal phone. Notification privacy controls affect features such as suggested replies, accessory forwarding and launcher badges.
 
 > **Status: experimental.** Built and tested on a **Pixel 9a with Android 17** (stock, locked bootloader). Other phones and Android versions are untested; some parts are known to depend on Android 17 (see [Compatibility](#compatibility)).
 
@@ -23,7 +23,7 @@ Bubble turns Android's own *Private Space* into a "bubble": a separate, hidden p
 
 ## What Bubble does not do
 
-Bubble cannot make the bubble invisible to Android itself. The phone's Google services can still know that **a private profile exists** and **which apps are installed in it**; they cannot see when you use them, your data, your accounts or your traffic. Apps that require Google's Play Integrity check (many banking apps, some games) will not work inside. Read the full, honest [privacy model](docs/privacy-model.md).
+Bubble cannot make the bubble invisible to Android itself. The phone's Google services can still know that **a private profile exists** and **which apps are installed in it**; while the profile is open its notifications could also reach notification listeners on the phone. Bubble revokes the Google notification listeners and assistant that could read them (verified on the Android 17 emulator and a Pixel 9a), but Android's own system components still process notifications locally, and complete isolation from the OS is not possible without root. Apps that require Google's Play Integrity check (many banking apps, some games) will not work inside. Read the full, honest [privacy model](docs/privacy-model.md).
 
 ## How it works, in one paragraph
 

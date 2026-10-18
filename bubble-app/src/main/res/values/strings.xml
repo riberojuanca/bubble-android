@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="notification_restore_failed">Some notification access could not be restored. Recovery data was kept. Check the technical log and retry Remove everything.</string>
+    <string name="notification_privacy_failed">Bubble could not verify its privacy restrictions. Screen auto-lock remains required. See the technical log for the unresolved access.</string>
     <string name="error_profile_unavailable">Could not reach the profile. Unlock it and try again.</string>
     <string name="error_profile_app_missing">This app is not available in the profile.</string>
     <string name="error_profile_setup">Open Bubble with its setup connection once to finish configuring this profile.</string>

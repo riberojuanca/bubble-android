@@ -8,7 +8,7 @@ Thanks for wanting to help. Bubble is small and deliberately simple; these notes
 - **No third-party libraries** without discussing it first in an issue. Bubble's security argument rests on all privileged code being here.
 - **Evidence over assumptions.** A claim about Android's behaviour should say how it was checked (command, source file, method). New findings belong in [docs/reverse-engineering](docs/reverse-engineering/README.md).
 - **Emulator first.** Anything that changes how profiles are created, or what is excluded from them, is tested on an emulator before a real phone. One mistake here caused a boot loop and a factory reset ([why](docs/reverse-engineering/private-space.md#the-boot-loop)).
-- **Never touch user 0** beyond network rules the user chooses.
+- **Restrict changes to user 0** to the documented network rules, log/app-op restrictions and notification privacy controls. Never disable or remove host system packages to work around a failed privacy restriction.
 
 ## Project layout
 

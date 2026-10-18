@@ -4,7 +4,7 @@
 Bubble needs system permissions to build and govern the bubble, which no ordinary app can get, so it borrows Android's `shell` identity through wireless debugging. You grant it once, with a code, on purpose: no app can get that identity without you. Bubble is open source so anyone can check what it does with it. [SECURITY.md](../../SECURITY.md) lists every permission and why.
 
 **Does Google still know anything?**
-The phone's Google services can know that a private profile exists and which apps are installed in it. They cannot see when you use them, your data, your accounts or your traffic. See the [privacy model](../privacy-model.md).
+The phone's Google services can know that a private profile exists and which apps are installed in it. Notifications from an open profile can also expose activity and content. The new restrictions on host notification access still need device validation; complete isolation from Google has not been demonstrated. See the [privacy model](../privacy-model.md).
 
 **Why not just use Android's normal Private Space?**
 A normal Private Space comes with Google Play Services and the Play Store inside, which follow you across apps. The bubble leaves them out from the first boot, filters every app's internet, hides its use from the system log and keeps Google out with a guard.

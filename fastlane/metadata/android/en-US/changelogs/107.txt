@@ -1,0 +1,1 @@
+- Stops the phone's Google notification listeners and assistant from reading the bubble's notifications

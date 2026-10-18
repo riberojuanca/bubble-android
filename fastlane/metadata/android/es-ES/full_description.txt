@@ -4,6 +4,7 @@
 <ul>
 <li>Crea la burbuja: un Espacio privado mínimo, sin Google Play Services, sin Play Store y sin sus piezas desde el primer arranque.</li>
 <li>Mantiene afuera a Google: un guardián apaga cualquier servicio de Google que aparezca adentro.</li>
+<li>Protege las notificaciones: revoca los listeners y el assistant de Google del teléfono para que no puedan leer las notificaciones de la burbuja.</li>
 <li>Filtra la red: cada app de adentro empieza sin internet; vos le das Wi-Fi, datos móviles o ambos.</li>
 <li>Agrega apps como quieras: copiá apps que ya tenés, instalá archivos APK o usá F-Droid dentro de la burbuja.</li>
 <li>Se bloquea sola: la burbuja se cierra al apagar la pantalla, salvo que una de sus apps esté sonando.</li>

@@ -14,7 +14,7 @@ Opening it again always asks for your screen lock (or the bubble's own lock, see
 
 Android's own Private Space auto-lock stops the whole bubble when the screen locks, with no exception for music. Bubble replaces it: it sets Android's auto-lock to *Only after device restarts* and locks the bubble itself, except while one of its apps is playing. So you can listen to NewPipe or Spotify in the bubble with the phone locked; when you stop the music, the bubble locks.
 
-While something plays, the whole bubble stays open behind your lock screen, not only that app. It is still hidden from Google exactly as when it is closed.
+While something plays, the whole bubble stays open behind your lock screen, not only that app. Its apps can still publish notifications and access allowed networks. This does not provide the same protection as stopping the profile.
 
 Do not change the auto-lock in Android's Settings: Bubble manages it. If you set it back to *Every time device locks*, music will stop with the screen again; Bubble sets it back the next time it does its maintenance.
 

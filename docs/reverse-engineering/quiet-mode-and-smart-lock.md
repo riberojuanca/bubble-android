@@ -27,4 +27,4 @@ The engine's `bubble-smart-lock <id> <bubble-pkg>` grants, approves and only the
 
 ## Limit
 
-While something plays, the whole bubble stays unlocked, not only that app. It remains hidden exactly as when locked.
+While something plays, the whole bubble stays unlocked, not only that app. Its apps remain active and can publish notifications. This does not provide the same protection as a stopped profile. See [notification access](notification-access.md).

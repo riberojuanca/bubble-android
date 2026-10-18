@@ -254,6 +254,9 @@ public final class BubbleEngine {
                 case "quiet-logs":
                     quietLogs();
                     break;
+                case "notification-privacy":
+                    enforceNotificationPrivacy();
+                    break;
                 case "bubble-keyboard":
                     bubbleKeyboard(requireUserId(args), requireArg(args, 2, "ime-id"));
                     break;
@@ -373,16 +376,56 @@ public final class BubbleEngine {
      */
     private static void bubbleSmartLock(int userId, String bubblePkg) {
         requireBubble(userId);
+        // Re-establish the OS fallback before granting a music exception. An older installation
+        // may have left this at 2 even if approval or the VPN no longer works.
+        requireScreenLock();
+        enforceNotificationPrivacy();
         String user = String.valueOf(userId);
         if (!listPackages(userId).contains(bubblePkg)) sh("pm", "install-existing", "--user", user, bubblePkg);
         Result grant = sh("pm", "grant", "--user", user, bubblePkg, "android.permission.MODIFY_QUIET_MODE");
         Result listen = sh("cmd", "notification", "allow_listener", bubblePkg + "/.BubbleMediaWatcher", user);
         if (grant.code != 0 || listen.code != 0) {
-            say("smart lock: COULD NOT SET (" + (grant.err() + " " + listen.err()).trim() + "); auto lock kept");
-            return;
+            throw new EngineError("smart lock: could not grant access; screen auto-lock restored");
         }
-        sh("settings", "put", "--user", "0", "secure", "private_space_auto_lock", "2");
+        if (sh("settings", "put", "--user", "0", "secure", "private_space_auto_lock", "2").code != 0
+                || !"2".equals(sh("settings", "get", "--user", "0", "secure", "private_space_auto_lock").out.trim())) {
+            requireScreenLock();
+            throw new EngineError("smart lock: could not configure auto-lock");
+        }
         say("smart lock: on");
+    }
+
+    private static void requireScreenLock() {
+        if (sh("settings", "put", "--user", "0", "secure", "private_space_auto_lock", "0").code != 0
+                || !"0".equals(sh("settings", "get", "--user", "0", "secure", "private_space_auto_lock").out.trim())) {
+            throw new EngineError("could not restore screen auto-lock");
+        }
+    }
+
+    private static NotificationPrivacy notificationPrivacy() {
+        return new NotificationPrivacy(args -> {
+            Result result = sh(args);
+            if (result.code != 0 || !result.errText.trim().isEmpty()) {
+                throw new IllegalStateException("Notification privacy command failed: " + result.err());
+            }
+            return result.out;
+        }, new java.io.File("/data/local/tmp/bubble/notification-privacy.properties"));
+    }
+
+    private static void enforceNotificationPrivacy() {
+        try (java.io.RandomAccessFile lock = new java.io.RandomAccessFile(
+                "/data/local/tmp/bubble/notification-privacy.lock", "rw");
+                java.nio.channels.FileLock ignored = lock.getChannel().lock()) {
+            NotificationPrivacy privacy = notificationPrivacy();
+            privacy.enforce();
+            if (!privacy.systemQueryExemptions.isEmpty()) {
+                say("notification_system_uid_exempt=" + String.join(",", privacy.systemQueryExemptions));
+            }
+            say("notification_privacy=restricted");
+        } catch (Exception e) {
+            requireScreenLock();
+            throw new EngineError("notification privacy NOT VERIFIED: " + e.getMessage());
+        }
     }
 
     /**
@@ -421,6 +464,13 @@ public final class BubbleEngine {
      * firewall are removed by their own commands first.
      */
     private static void undoTweaks() {
+        try (java.io.RandomAccessFile lock = new java.io.RandomAccessFile(
+                "/data/local/tmp/bubble/notification-privacy.lock", "rw");
+                java.nio.channels.FileLock ignored = lock.getChannel().lock()) {
+            notificationPrivacy().restore();
+        } catch (Exception e) {
+            throw new EngineError("could not restore notification access: " + e.getMessage());
+        }
         int restored = 0;
         for (String tag : QUIET_EVENTS) {
             sh("setprop", "persist.log.tag." + tag, "");
@@ -433,7 +483,12 @@ public final class BubbleEngine {
             for (String pkg : pkgs) sh("appops", "set", pkg, "GET_USAGE_STATS", "default");
             say("usage dump: back to default for " + pkgs.size() + " apps");
         }
-        for (String path : new String[]{USAGE_HOLDERS, FIREWALL_STATE, FIREWALL_PENDING,
+        if (new java.io.File(USAGE_DISABLED).exists()) {
+            List<String> pkgs = readRules(USAGE_DISABLED);
+            for (String pkg : pkgs) sh("pm", "enable", "--user", "0", pkg);
+            say("usage dump: re-enabled " + pkgs.size() + " readers in user 0");
+        }
+        for (String path : new String[]{USAGE_HOLDERS, USAGE_DISABLED, FIREWALL_STATE, FIREWALL_PENDING,
                 META_FIREWALL_STATE, META_FIREWALL_PENDING}) {
             new java.io.File(path).delete();
         }
@@ -441,6 +496,7 @@ public final class BubbleEngine {
 
     /** Start the bubble if stopped, give it its system tools, watch the system, then report. */
     private static void startBubble(int id, boolean created) {
+        enforceNotificationPrivacy();
         ensureSystemTools(id);
         if (!privateProfileLine(id).contains("(running)")) {
             int[] before = systemPids();
@@ -607,6 +663,7 @@ public final class BubbleEngine {
             System.out.println("bubble-guard: " + (r.code == 0 ? "disabled " : "COULD NOT DISABLE ") + pkg
                     + " in user " + id);
         }
+        enforceNotificationPrivacy();
     }
 
     /** Report the bubble: its user id (or none), whether it runs, packages and Google services. */
@@ -814,6 +871,17 @@ public final class BubbleEngine {
     private static final String FIREWALL_STATE = "/data/local/tmp/bubble/bubble-firewall.txt";
     /** The apps denied the usagestats dump, found by denyUsageDump. */
     private static final String USAGE_HOLDERS = "/data/local/tmp/bubble/usage-holders.txt";
+    /** Usage readers disabled in user 0 because the app-op would not take; re-enabled by undo. */
+    private static final String USAGE_DISABLED = "/data/local/tmp/bubble/usage-disabled.txt";
+    /**
+     * Usage-stats readers that accept the GET_USAGE_STATS app-op (exit 0) but stay at "default",
+     * so the op never denies the dump. The only no-root way left to stop them reading it is to
+     * disable them in user 0. Kept to packages that are safe to disable there and that undo-tweaks
+     * re-enables: com.google.android.apps.restore is the device-transfer app, not needed for
+     * normal use. Anything else that resists the op stays a reported failure, never disabled blind.
+     */
+    private static final java.util.Set<String> UNRESTRICTABLE_USAGE_READERS =
+            new java.util.HashSet<>(Arrays.asList("com.google.android.apps.restore"));
     /** Present while the saved list could not reach the bubble (it was locked). */
     private static final String FIREWALL_PENDING = "/data/local/tmp/bubble/bubble-firewall.pending";
 
@@ -987,7 +1055,12 @@ public final class BubbleEngine {
             }
         }
         say("quiet events: " + QUIET_EVENTS.length + " (newly set " + set + ")");
-        denyUsageDump();
+        try {
+            denyUsageDump();
+        } catch (EngineError e) {
+            requireScreenLock();
+            throw e;
+        }
         lockWithScreen();
     }
 
@@ -1017,53 +1090,70 @@ public final class BubbleEngine {
      * found on the phone, never listed by hand. See docs/reverse-engineering/google-visibility.md.
      */
     private static void denyUsageDump() {
-        // Finding the holders reads every package (~1.7 s on the Pixel): done at most once a day,
-        // or sooner if one of them got the op back.
-        java.io.File saved = new java.io.File(USAGE_HOLDERS);
-        if (saved.exists() && System.currentTimeMillis() - saved.lastModified() < 24 * 3600 * 1000L) {
-            List<String> denied = Arrays.asList(sh("appops", "query-op", "GET_USAGE_STATS", "ignore").out.split("\n"));
-            List<String> holders = readRules(USAGE_HOLDERS);
-            if (denied.containsAll(holders)) {
-                say("usage dump: denied to " + holders.size() + " apps");
-                return;
-            }
+        // Re-discover readers at every maintenance pass. Older cached files omitted failed
+        // targets, and newly granted permissions must not wait a day to be considered.
+        Result inventory = sh("dumpsys", "package");
+        if (inventory.code != 0 || !inventory.out.contains("  Package [android]")) {
+            throw new EngineError("cannot verify usage readers: package inventory unavailable");
         }
-        Map<String, Integer> granted = new HashMap<>();
-        String pkg = null;
-        for (String line : sh("dumpsys", "package").out.split("\n")) {
-            if (line.startsWith("  Package [")) {
-                pkg = line.substring(11, line.indexOf(']'));
-            } else if (pkg != null && (line.contains("android.permission.DUMP: granted=true")
-                    || line.contains("android.permission.PACKAGE_USAGE_STATS: granted=true"))) {
-                granted.merge(pkg, 1, Integer::sum);
-            }
+        Map<String, java.util.Set<String>> granted;
+        try {
+            granted = PackagePermissions.parse(inventory.out);
+        } catch (IllegalStateException e) {
+            throw new EngineError(e.getMessage());
         }
+        List<String> installed = listPackages(0);
         List<String> tried = new ArrayList<>();
-        for (Map.Entry<String, Integer> e : granted.entrySet()) {
+        for (Map.Entry<String, java.util.Set<String>> e : granted.entrySet()) {
             String p = e.getKey();
-            if (e.getValue() < 2 || p.equals("android") || p.equals("com.android.shell") || p.startsWith("org.bubble.")) continue;
+            if (!e.getValue().contains("android.permission.DUMP")
+                    || !e.getValue().contains("android.permission.PACKAGE_USAGE_STATS")
+                    || !installed.contains(p) || p.equals("android") || p.equals("com.android.shell")
+                    || p.equals("org.bubble.app")) continue;
             sh("appops", "set", p, "GET_USAGE_STATS", "ignore");
             tried.add(p);
         }
-        // appops can answer 0 and keep "default" (com.google.android.apps.restore on the Pixel):
-        // only what really took is saved, so the daily check does not redo everything each time.
+        // Preserve failed targets too. Dropping them made the next cached check report success
+        // while a known reader remained authorized.
         List<String> denied = Arrays.asList(sh("appops", "query-op", "GET_USAGE_STATS", "ignore").out.split("\n"));
+        List<String> disabledInUser0 = listPackages(0, "-d");
         StringBuilder list = new StringBuilder();
+        StringBuilder disabled = new StringBuilder();
         int count = 0;
         for (String p : tried) {
+            list.append(p).append('\n');
             if (denied.contains(p)) {
                 count++;
-                list.append(p).append('\n');
-            } else {
-                say("usage dump: COULD NOT DENY " + p);
+                continue;
             }
+            // The op was accepted but did not take. For a reader known safe to disable in user 0
+            // (com.google.android.apps.restore), close the dump by disabling it; undo re-enables it.
+            if (UNRESTRICTABLE_USAGE_READERS.contains(p)) {
+                if (!disabledInUser0.contains(p)) {
+                    sh("pm", "disable-user", "--user", "0", p);
+                    disabledInUser0 = listPackages(0, "-d");
+                }
+                if (disabledInUser0.contains(p)) {
+                    disabled.append(p).append('\n');
+                    count++;
+                    say("usage dump: disabled reader " + p + " in user 0 (op would not take)");
+                    continue;
+                }
+            }
+            say("usage dump: COULD NOT DENY " + p);
         }
         try (java.io.FileOutputStream out = new java.io.FileOutputStream(USAGE_HOLDERS)) {
             out.write(list.toString().getBytes(StandardCharsets.UTF_8));
         } catch (java.io.IOException e) {
             say("could not save usage holders: " + e.getMessage());
         }
+        try (java.io.FileOutputStream out = new java.io.FileOutputStream(USAGE_DISABLED)) {
+            out.write(disabled.toString().getBytes(StandardCharsets.UTF_8));
+        } catch (java.io.IOException e) {
+            say("could not save disabled usage readers: " + e.getMessage());
+        }
         say("usage dump: denied to " + count + " apps");
+        if (count != tried.size()) throw new EngineError("usage dump restriction incomplete; see failed packages above");
     }
 
     /** Operate only on the current Private Space, never on user 0 or another profile. */
@@ -1501,6 +1591,7 @@ public final class BubbleEngine {
                 "  bubble-allow-installs <id> <pkg>  let an app store inside install apps",
                 "  bubble-keyboard <id> <ime>  enable and select the bubble's keyboard",
                 "  quiet-logs                  stop writing the events that reveal the bubble",
+                "  notification-privacy        restrict host listeners, assistant and notification queries",
                 "  bubble-firewall <id> <bubble-pkg> [pkg...]  only these apps inside have network",
                 "  firewall-on <user-id>       deny-by-default network for the bubble",
                 "  firewall-off <user-id>      lift the firewall chain",

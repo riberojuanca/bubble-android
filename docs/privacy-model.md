@@ -1,10 +1,10 @@
 # Privacy model
 
-What Bubble protects, what it cannot, and why. Every claim here comes from the phone itself (Pixel 9a, Android 17); the evidence is in [reverse engineering](reverse-engineering/README.md).
+What Bubble protects, what it cannot, and why. Existing device findings are recorded in [reverse engineering](reverse-engineering/README.md). New notification controls are source-reviewed and require device validation; do not treat implementation as proof of isolation.
 
 ## The goal
 
-**Google does not see what you use in the bubble.** Not "Google does not know the bubble exists": that would need control of the operating system (root or a custom OS such as GrapheneOS), which Bubble deliberately does not require.
+**Goal, not a verified guarantee: prevent Google services from observing activity inside the bubble.** An open Private Space can publish notifications to authorized services in its parent user. This contradicts the former unconditional claim. Notification hardening is implemented but not yet validated on Android 17; the operating system, SystemUI, shell and Bubble remain trusted. See [notification access](reverse-engineering/notification-access.md).
 
 ## Who is above the bubble
 
@@ -25,15 +25,16 @@ Android's main user and its system Google services (`com.google.android.gms`, Pl
 |---|---|
 | Google services inside the bubble (accounts, advertising ID, Firebase, Play Integrity) | Never installed: the bubble is created with them excluded; the guard disables any that appears |
 | System events that name the bubble's user, uids or packages | Around 66 event tags set to silent (`log.tag.*` and the persistent `persist.log.tag.*`): they are never written, so nobody can read them later |
-| Usage-statistics dump | The `GET_USAGE_STATS` app-op is set to `ignore` for every app that holds `DUMP` + `PACKAGE_USAGE_STATS` |
+| Usage-statistics dump | The `GET_USAGE_STATS` app-op is set to `ignore` for every app that holds `DUMP` + `PACKAGE_USAGE_STATS`. `com.google.android.apps.restore` accepts the op but ignores it, so it is disabled in user 0 instead (re-enabled by *Remove everything*) |
 | The bubble's apps talking to the internet | Deny-by-default firewall per app, separately for Wi-Fi and mobile data |
+| Host notification access (pending device validation) | Revoke external listeners and the assistant; restrict ACCESS_NOTIFICATIONS for discovered permission holders. Read back settings and app-ops; failures are errors, not success |
 | The bubble's data at rest | A locked bubble is stopped and its storage stays encrypted; Bubble locks it with the screen unless something plays |
 
 ## What remains (the honest ceiling)
 
 - **Existence**: Google can know there is a private profile, as on millions of phones that use Private Space.
-- **The list of apps**: with `INTERACT_ACROSS_USERS`, Google can list which packages are installed in the bubble (verified with a probe app holding the same permissions). Not when they are used.
-- **One exception to the usage-statistics restriction**: `com.google.android.apps.restore` accepts the app-op command but stays at `default`, so it could still read the dump.
+- **The list of apps**: with `INTERACT_ACROSS_USERS`, Google can list which packages are installed in the bubble (verified with a probe app holding the same permissions). Notification events and other privileged channels may also reveal activity; complete isolation has not been demonstrated.
+- **The usage-statistics restriction**: on the Pixel 9a tested (2026-10-18) every holder of `DUMP` + `PACKAGE_USAGE_STATS` takes the `GET_USAGE_STATS` app-op set to `ignore`. `com.google.android.apps.restore` did **not** hold those permissions on this build, so it is not a reader here; the earlier "exception" was not reproduced. As a safeguard, if it ever appears as a holder that accepts the op but keeps `default`, the engine disables it in user 0 and *Remove everything* re-enables it.
 - **Apps you copy from the normal phone**: the Play Store knows you downloaded them. It does not know they are in the bubble.
 - **Your own traffic**: an app you allow online talks to its servers like anywhere else; your network provider sees destinations. Use a VPN on the normal phone or encrypted DNS if that matters.
 - **What you do inside an app**: Meta sees what you do in Instagram, in the bubble or anywhere. Bubble isolates apps from your phone and from Google, not from their own servers.

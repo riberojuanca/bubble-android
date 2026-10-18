@@ -16,7 +16,7 @@ These cannot be removed without root because:
 - user enumeration lives in `UserManagerService`, inside `system_server`; changing its answers means injecting code;
 - SELinux (enforcing) forbids `untrusted_app` from injecting into another domain.
 
-In practice: Google can know "there is a locked room and what kind of furniture it has", as on millions of phones with Private Space, a Google feature. It does not see when the apps are used, their data, accounts or traffic.
+In practice: Google can know "there is a locked room and what kind of furniture it has", as on millions of phones with Private Space, a Google feature. An open profile can additionally expose activity and content through notifications. Complete isolation from privileged host services has not been demonstrated; see [notification access](notification-access.md).
 
 ## What root would take
 

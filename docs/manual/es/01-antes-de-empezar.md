@@ -7,7 +7,7 @@ Bubble te da un segundo espacio en el teléfono, la **burbuja**, para las apps q
 - **No hay servicios de Google**: ni Google Play Services, ni Play Store, ni cuenta de Google. Las apps que usan las bibliotecas de rastreo de Google a través de Play Services no obtienen nada.
 - Las apps tienen **sus propios datos**, separados de la misma app en tu teléfono normal.
 - Las apps **no tienen internet hasta que lo permitas**, por separado para Wi-Fi y datos móviles.
-- La burbuja está **oculta**: las otras apps de tu teléfono no pueden listar sus apps.
+- La burbuja está **oculta**: las apps comunes tienen visibilidad restringida, pero los servicios privilegiados del teléfono pueden enumerar sus paquetes.
 
 La burbuja es la función *Espacio privado* del propio Android, armada de forma más estricta. Las apps corren de verdad, igual de rápido que en cualquier otro lado; no se emula nada.
 
@@ -41,7 +41,8 @@ La burbuja es la función *Espacio privado* del propio Android, armada de forma 
 - Crea la burbuja (un espacio privado) y, si lo pedís, el espacio Meta (un perfil de trabajo).
 - Prende la depuración inalámbrica solo mientras trabaja y la deja como estaba.
 - Silencia unos 66 eventos del sistema que revelarían el uso de la burbuja (también dejan de escribirse para el teléfono normal; son solo de diagnóstico).
-- Les niega el «volcado de estadísticas de uso» a las apps de Google que podrían leerlo.
+- Intenta restringir los volcados de estadísticas de uso y avisa si alguna restricción no se aplica.
+- Revoca los lectores externos de notificaciones y el asistente del teléfono normal, y restringe las consultas privilegiadas. Esto afecta las respuestas sugeridas, el envío de notificaciones a accesorios y los indicadores del launcher. Los cambios del asistente también pueden afectar otros perfiles activos. Estos controles todavía requieren validación en Android 17.
 - Pone el bloqueo automático del espacio privado en «solo al reiniciar» y bloquea la burbuja ella misma (ver el [capítulo 6](06-bloqueo.md)).
 - Solo si usás el firewall del teléfono: corta la red de las apps que elijas en el teléfono normal.
 

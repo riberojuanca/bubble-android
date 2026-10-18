@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="notification_restore_failed">No se pudo restaurar parte del acceso a notificaciones. Se conservaron los datos de recuperación. Revisá el registro técnico y volvé a intentar Quitar todo.</string>
+    <string name="notification_privacy_failed">Bubble no pudo verificar sus restricciones de privacidad. Se mantiene el requisito de bloqueo con la pantalla. Revisá el registro técnico para ver el acceso pendiente.</string>
     <string name="error_profile_unavailable">No se pudo comunicar con el perfil. Desbloquealo y volvé a intentar.</string>
     <string name="error_profile_app_missing">Esta app no está disponible en el perfil.</string>
     <string name="error_profile_setup">Abrí Bubble una vez con su conexión de configuración para terminar de preparar este perfil.</string>

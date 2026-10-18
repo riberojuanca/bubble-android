@@ -4,7 +4,7 @@
 Bubble necesita permisos del sistema para armar y gobernar la burbuja, que ninguna app común puede obtener, así que toma prestada la identidad `shell` de Android a través de la depuración inalámbrica. Se la das una vez, con un código, a propósito: ninguna app puede obtener esa identidad sin vos. Bubble es de código abierto para que cualquiera pueda revisar qué hace con ella. [SECURITY.md](../../../SECURITY.md) (en inglés) lista cada permiso y por qué.
 
 **¿Google igual sabe algo?**
-Los servicios de Google del teléfono pueden saber que existe un perfil privado y qué apps tiene instaladas. No pueden ver cuándo las usás, tus datos, tus cuentas ni tu tráfico. Ver el [modelo de privacidad](../../privacy-model.md) (en inglés).
+Los servicios de Google del teléfono pueden saber que existe un perfil privado y qué apps tiene instaladas. Las notificaciones de un perfil abierto también pueden exponer actividad y contenido. Las nuevas restricciones de acceso a notificaciones todavía requieren validación en el dispositivo; no se demostró un aislamiento completo frente a Google. Ver el [modelo de privacidad](../../privacy-model.md) (en inglés).
 
 **¿Por qué no usar directamente el espacio privado normal de Android?**
 Un espacio privado normal viene con Google Play Services y Play Store adentro, que te siguen entre apps. La burbuja los deja afuera desde el primer arranque, filtra internet de cada app, oculta su uso del registro del sistema y mantiene afuera a Google con un guardián.

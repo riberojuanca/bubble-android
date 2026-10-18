@@ -1,5 +1,10 @@
 # What Google can see
 
+**Scope correction:** the probes below cover specific APIs, not every way to observe the profile.
+Open-profile notifications expose an additional path; see [notification access](notification-access.md).
+The usage-dump restriction is not complete while any reader remains authorized. Shared UIDs and
+the system-UID exemptions in DumpUtils also require validation.
+
 The permissions of the phone's Google services, and what each one actually allows over the bubble, tested rather than assumed.
 
 ## Separate processes, separate SELinux domains
@@ -42,9 +47,9 @@ The dump also requires the `GET_USAGE_STATS` app-op (`DumpUtils.checkDumpAndUsag
 
 On the phone that is 10 apps: `com.google.android.gms`, `com.android.vending`, `com.google.android.odad`, `com.google.android.pixelsystemservice`, `com.google.android.apps.restore`, `com.google.android.apps.carrier.log`, `com.google.android.apps.internal.betterbug`, `com.google.android.as`, `com.google.android.googlequicksearchbox`, `com.google.android.aicore`.
 
-- **Exception:** `com.google.android.apps.restore` accepts `appops set` (exit 0) but stays at `default`, with or without `--uid`.
+- **Earlier "exception" not reproduced:** a prior note said `com.google.android.apps.restore` accepts `appops set` (exit 0) but stays at `default`. On the Pixel 9a tested on 2026-10-18 that package did **not** hold `DUMP` + `PACKAGE_USAGE_STATS`, so it is not a usage-dump reader on this build, and every real holder took the op in `ignore`. As a safeguard the engine still handles a reader that accepts the op but keeps `default`: it disables only `com.google.android.apps.restore` in user 0 (`pm disable-user --user 0`), and `undo-tweaks` re-enables it. Any other reader that resists the op stays a reported failure, never disabled blind. The `disable-user`/`enable` mechanism itself was verified reversible on the Android 17 emulator.
 - **Cost:** those apps also lose the usage statistics of the main phone.
-- The engine stores the effective list and repeats the full search (`dumpsys package`, about 1.7 s) at most once a day, or when an app has lost the app-op.
+- The engine now repeats the full search during maintenance, records failed targets as well, and reports an incomplete restriction as an error. The previous successful-only daily cache could conceal known failures.
 - Rejected: `cmd usagestats delete-package-data <pkg> --user 10` returns 0 but the dump still shows the events (it does not clear what is in memory).
 
 ## Conclusion

@@ -19,6 +19,7 @@ Transaction numbers, constants and method names below are for the build tested. 
 | [Shell identity and adb](shell-identity-and-adb.md) | How an app gets `shell` power without root and keeps it across reboots |
 | [Pairing protocol](pairing-protocol.md) | The wireless-debugging pairing (SPAKE2 + TLS 1.3), implemented without libraries |
 | [What Google can see](google-visibility.md) | The permissions of the phone's Google services, tested one by one against the bubble |
+| [Notification access](notification-access.md) | Open-profile exposure, implemented restrictions, and outstanding Android 17 validation |
 | [System logs](system-logs.md) | What the log daemon exposes and how events are kept from being written |
 | [Quiet mode and smart lock](quiet-mode-and-smart-lock.md) | Why music stops when a Private Space locks, and how Bubble locks it itself |
 | [Cross-profile access](cross-profile.md) | Opening bubble apps from outside, and the Binder bridge between Bubble's copies |

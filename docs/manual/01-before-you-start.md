@@ -7,7 +7,7 @@ Bubble gives you a second space on your phone, the **bubble**, for apps you do n
 - There are **no Google services**: no Google Play Services, no Play Store, no Google account. Apps that use Google's tracking libraries through Play Services get nothing from them.
 - Apps have **their own data**, separate from the same app on your normal phone.
 - Apps have **no internet until you allow it**, separately for Wi-Fi and mobile data.
-- The bubble is **hidden**: other apps on your phone cannot list its apps.
+- The bubble is **hidden**: ordinary apps have restricted visibility, but privileged host services can enumerate its packages.
 
 The bubble is Android's own *Private Space* feature, built in a stricter way. Apps run natively, as fast as anywhere else; nothing is emulated.
 
@@ -41,7 +41,8 @@ You do **not** need root, an unlocked bootloader, a custom ROM or a computer.
 - Creates the bubble (a Private Space) and, if you ask, the Meta space (a work profile).
 - Turns on wireless debugging only while it works, and leaves it as it found it.
 - Silences around 66 system events that would reveal your use of the bubble (they stop being written for the normal phone too; they are diagnostics only).
-- Denies the "usage statistics dump" to the Google apps that could read it.
+- Attempts to deny usage-statistics dumps and reports any restriction that does not take effect.
+- Revokes external notification listeners and the notification assistant on the normal phone, and restricts privileged notification queries. This affects suggested replies, notification forwarding to accessories and launcher badges. Assistant changes can also affect other enabled profiles. These controls still require Android 17 device validation.
 - Sets the Private Space auto-lock to "only after restart" and locks the bubble itself instead (see [chapter 6](06-locking.md)).
 - Only if you use the phone's firewall: blocks the network of the apps you choose on the normal phone.
 

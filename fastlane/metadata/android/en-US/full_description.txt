@@ -4,6 +4,7 @@
 <ul>
 <li>Creates the bubble: a minimal Private Space with Google Play Services, the Play Store and their plumbing left out from the first boot.</li>
 <li>Keeps Google out: a guard disables any Google service that shows up inside.</li>
+<li>Shields notifications: revokes the phone's Google notification listeners and assistant so they cannot read the bubble's notifications.</li>
 <li>Filters the network: every app inside starts without internet; you allow each one on Wi-Fi, on mobile data, or both.</li>
 <li>Adds apps your way: copy apps you already have, install APK files, or use F-Droid inside the bubble.</li>
 <li>Locks itself: the bubble closes when the screen turns off, unless one of its apps is playing music.</li>

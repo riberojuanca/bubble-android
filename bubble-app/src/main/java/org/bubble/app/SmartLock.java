@@ -23,7 +23,7 @@ import java.util.List;
  * would stop the whole profile with the screen, music included. Started by the bubble's always-on
  * VPN, which lives as long as the bubble is unlocked. Reading the sessions needs the approved
  * {@link BubbleMediaWatcher}; locking needs MODIFY_QUIET_MODE (both set by bubble-smart-lock).
- * Without them it does nothing and Android's auto-lock stays as it was.
+ * Missing media access must never disable screen locking: it only removes the music exception.
  */
 final class SmartLock {
 
@@ -55,7 +55,7 @@ final class SmartLock {
             running = new SmartLock(app);
             android.util.Log.i("Bubble", "smart lock on");
         } catch (SecurityException e) {
-            // Not approved (yet): Android's own auto-lock applies meanwhile.
+            // Initialization failed: retry. Do not claim that OS auto-lock is necessarily active.
             android.util.Log.w("Bubble", "smart lock not ready: " + e.getMessage());
         }
     }
@@ -64,12 +64,16 @@ final class SmartLock {
         this.context = context;
         key = new ComponentName(context, BubbleMediaWatcher.class);
         sessions = context.getSystemService(MediaSessionManager.class);
-        sessions.addOnActiveSessionsChangedListener(this::track, key, handler);
-        track(sessions.getActiveSessions(key));
         screenOff = !context.getSystemService(PowerManager.class).isInteractive();
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_SCREEN_ON);
         context.registerReceiver(screen, filter, Context.RECEIVER_NOT_EXPORTED);
+        try {
+            sessions.addOnActiveSessionsChangedListener(this::track, key, handler);
+            track(sessions.getActiveSessions(key));
+        } catch (RuntimeException e) {
+            android.util.Log.w("Bubble", "media access unavailable; locking without a music exception");
+        }
         if (screenOff) scheduleLock();
     }
 
@@ -94,12 +98,22 @@ final class SmartLock {
     private final Runnable lockIfIdle = this::lockIfIdle;
 
     private void lockIfIdle() {
-        if (!screenOff || playing()) return;
+        if (!screenOff) return;
+        if (playing()) {
+            // Revocation or a dead media service may never deliver a playback callback.
+            handler.removeCallbacks(lockIfIdle);
+            handler.postDelayed(lockIfIdle, GRACE_MS);
+            return;
+        }
         try {
-            context.getSystemService(UserManager.class).requestQuietModeEnabled(true, Process.myUserHandle());
+            if (context.getSystemService(UserManager.class)
+                    .requestQuietModeEnabled(true, Process.myUserHandle())) return;
+            android.util.Log.w("Bubble", "quiet mode was not accepted; retrying");
         } catch (RuntimeException e) {
             android.util.Log.w("Bubble", "could not lock the bubble", e);
         }
+        handler.removeCallbacks(lockIfIdle);
+        handler.postDelayed(lockIfIdle, GRACE_MS);
     }
 
     private void track(List<MediaController> active) {
@@ -121,12 +135,16 @@ final class SmartLock {
 
     /** Asked of Android each time: a destroyed session keeps its last state in its controller. */
     private boolean playing() {
-        for (MediaController c : sessions.getActiveSessions(key)) {
-            PlaybackState state = c.getPlaybackState();
-            if (state == null) continue;
-            int s = state.getState();
-            if (s == PlaybackState.STATE_PLAYING || s == PlaybackState.STATE_BUFFERING
-                    || s == PlaybackState.STATE_CONNECTING) return true;
+        try {
+            for (MediaController c : sessions.getActiveSessions(key)) {
+                PlaybackState state = c.getPlaybackState();
+                if (state == null) continue;
+                int s = state.getState();
+                if (s == PlaybackState.STATE_PLAYING || s == PlaybackState.STATE_BUFFERING
+                        || s == PlaybackState.STATE_CONNECTING) return true;
+            }
+        } catch (RuntimeException e) {
+            return false;
         }
         return false;
     }

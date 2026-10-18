@@ -238,7 +238,13 @@ final class Engine {
 
     /** The bubble locks itself unless an app inside plays (BubbleEngine.bubbleSmartLock). */
     String smartLock(int user) throws Exception {
-        return run("bubble-smart-lock " + user + " " + context.getPackageName());
+        String result = run("bubble-smart-lock " + user + " " + context.getPackageName());
+        if (!result.contains("smart lock: on") || !result.contains("notification_privacy=restricted")
+                || result.contains("bubble-shell:")) {
+            new Store(context).setLog(result);
+            throw new IllegalStateException(context.getString(R.string.notification_privacy_failed));
+        }
+        return result;
     }
 
     /** Stop Facebook and Instagram from opening Play Services' App info in the Meta space. */

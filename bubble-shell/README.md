@@ -34,11 +34,11 @@ It references no Android framework classes: it orchestrates the system's command
 `host-block <pkg>…` · `host-unblock <pkg>…` · `host-apply <rules-file>` · `host-bgdata-off <pkg>…` · `host-metered` · `host-status [rules-file]`. Rules file: one package per line, `#` comments.
 
 **System and maintenance**
-`quiet-logs` · `undo-tweaks` · `launcher-icons` · `persist-access` · `watch <rules-file> [seconds] [bubble-user]` (the guard) · `status <id>` · `firewall-on <id>` / `firewall-off <id>` (legacy kernel-chain firewall for a profile)
+`notification-privacy` · `quiet-logs` · `undo-tweaks` · `launcher-icons` · `persist-access` · `watch <rules-file> [seconds] [bubble-user]` (the guard) · `status <id>` · `firewall-on <id>` / `firewall-off <id>` (legacy kernel-chain firewall for a profile)
 
 ## Safety rules in the code
 
-- Profile commands refuse to operate on user 0. The `host-*` commands are the only exception, and they only deny network or mark Wi-Fi as metered; they never install, remove, disable or suspend packages.
+- Profile commands refuse to operate on user 0. Host controls include chosen network rules, log/usage restrictions and notification access hardening. They never install, remove, disable or suspend host packages. Notification hardening affects host listeners and the assistant; see [scope and pending validation](../docs/reverse-engineering/notification-access.md).
 - `bubble-create` builds a minimal Private Space: Google and every non-required system package are excluded at creation ([Private Space](../docs/reverse-engineering/private-space.md)). A profile it just created is removed at once if `system_server` or user 0's SystemUI restarts.
 - If a Private Space already exists, `bubble-create` changes nothing and reports `bubble_decision=needed`. `bubble-adopt` uses it only if it has no Google services; `bubble-recreate <id>` deletes it (data lost) and creates a new one.
-- The guard only touches the bubble and the Meta space that Bubble created. Any other profile (an employer's work profile, a Private Space with Google) is left alone.
+- Profile package maintenance only touches spaces Bubble manages. Android propagates notification-assistant revocation to enabled child profiles; the recovery journal preserves their approvals. This may affect an unrelated work profile and requires emulator validation.

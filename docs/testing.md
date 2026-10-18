@@ -60,6 +60,12 @@ Static review missed these; testing found them:
 - **Key generation on the main thread** (phone only): StrongBox takes about 10 s; moved off the UI thread.
 - **Share sheet missing**: an app crashed with `ActivityNotFoundException … CHOOSER`; `com.android.intentresolver` added to the profiles.
 
+## Notification hardening (initial emulator validation)
+
+The Android 17 emulator checks passed listener revocation, the Play Services-UID dump restriction, reboot persistence and synthetic music/pause locking. The full enforce → undo-tweaks cycle restores user 0's listeners and assistant identically (the assistant approval is shared parent↔profiles, so only the parent's baseline is restored). The empirical leak→cut delivery test passed on both the emulator and the Pixel 9a. The privileged query path is covered by the notification-dump result (denied once the app-op is set to ignore); re-running the standalone query probe under an app UID aborts in ART in the test bench, a tooling limitation rather than a gap. See the [recorded results](reverse-engineering/notification-access.md#emulator-results-2026-10-18).
+
+Host-only checks cover malformed command output, ignored mutations, repeated enforcement, recovery and journal-write failure (`tools/tests/NotificationPrivacyTest.java`). Java type checking does not establish Android permission behavior. See the [required emulator/Pixel matrix](reverse-engineering/notification-access.md#required-validation-before-release).
+
 ## Still open
 
 - Phones other than the Pixel 9a, and Android versions other than 17.

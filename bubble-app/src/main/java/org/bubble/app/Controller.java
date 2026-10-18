@@ -94,7 +94,12 @@ final class Controller {
             if (store.bubbleUser() > 0 && !startersChecked && !quick) {
                 ensureStarters(store.bubbleUser());
                 Progress.step(context, R.string.step_quiet);
-                engine.run("quiet-logs");
+                String privacy = engine.run("quiet-logs");
+                if (privacy.contains("bubble-shell:")) {
+                    startersChecked = false;
+                    store.setLog(privacy);
+                    throw new IllegalStateException(context.getString(R.string.notification_privacy_failed));
+                }
             }
             if (!launcherChecked) {
                 launcherChecked = true;
@@ -341,8 +346,13 @@ final class Controller {
             if (!store.applied().isEmpty()) log.append(engine.applyFirewall(new TreeSet<>(), store.applied()));
             store.setApplied(new TreeSet<>());
             store.setPhoneFirewallOn(false);
-            log.append(engine.run("undo-tweaks"));
             engine.stopWatcher();
+            String restored = engine.run("undo-tweaks");
+            log.append(restored);
+            if (restored.contains("bubble-shell:")) {
+                store.setLog(log.toString());
+                throw new IllegalStateException(context.getString(R.string.notification_restore_failed));
+            }
             return keepLog(log.toString());
         });
     }
@@ -527,7 +537,6 @@ final class Controller {
      * Gboard. A failed download is reported and retried next time.
      */
     private String ensureStarters(int user) throws Exception {
-        startersChecked = true;
         StringBuilder log = new StringBuilder();
         // The bubble locks itself unless something plays. Before the firewall: sending the list
         // starts the VPN, which starts the smart lock, and that needs this approval first.
@@ -552,6 +561,7 @@ final class Controller {
                 store.addNotice(context.getString(R.string.notice_keyboard_heliboard));
             }
         }
+        startersChecked = true;
         return log.toString();
     }
 

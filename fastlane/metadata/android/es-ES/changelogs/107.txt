@@ -1,0 +1,1 @@
+- Impide que los listeners y el assistant de Google del teléfono lean las notificaciones de la burbuja
