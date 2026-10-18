@@ -9,7 +9,7 @@
 <li>Se bloquea sola: la burbuja se cierra al apagar la pantalla, salvo que una de sus apps esté sonando.</li>
 <li>Espacio Meta (opcional): un perfil aparte para Facebook e Instagram, con Google instalado pero apagado.</li>
 <li>Bubble Apps, íconos y un widget: abrí las apps de la burbuja desde la pantalla de inicio.</li>
-<li>Fotos de la burbuja: elegí una foto guardada en la burbuja desde el selector de archivos del teléfono, por ejemplo como fondo de pantalla, sin copiar las demás.</li>
+<li>Fotos y archivos de la burbuja: elegí una foto guardada en la burbuja como fondo de pantalla (también desde Fondo de pantalla y estilo, con un botón opcional sobre Google Fotos) o dásela a cualquier app que pida una imagen, y explorá los archivos de la burbuja. Solo sale lo que elegís.</li>
 <li>Se quita en un paso y el teléfono queda como estaba.</li>
 </ul>
 

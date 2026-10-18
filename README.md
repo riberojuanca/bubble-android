@@ -17,7 +17,8 @@ Bubble turns Android's own *Private Space* into a "bubble": a separate, hidden p
 - **Adds apps your way**: copy apps you already have, install APK files, or use F-Droid inside the bubble.
 - **Locks itself smartly**: the bubble closes when the screen turns off, unless one of its apps is playing music.
 - **Meta space** (optional): a separate work profile for Facebook and Instagram, which crash without Google; Google is installed there but turned off.
-- **Bubble Apps and a widget**: all your bubble and Meta apps in one grid, and on your home screen. Bubble Apps is not a separate download: installing Bubble adds two icons to the app drawer, **Bubble** to set things up and **Bubble Apps** to open apps and place them on the home screen (also reachable from Bubble's home).
+- **Bubble Apps and a widget**: all your bubble and Meta apps in one grid, and on your home screen as real icons (in the launcher's shape, with Bubble's small mark) or a widget. Bubble Apps is not a separate download: installing Bubble adds two icons to the app drawer, **Bubble** to set things up and **Bubble Apps** to open apps and place them on the home screen (also reachable from Bubble's home).
+- **Bubble photos and files**: pick a photo saved in the bubble as your wallpaper (also from Wallpaper & style, through an optional button over Google Photos) or give it to any app that asks for an image, and browse the bubble's own files. Only what you pick leaves the bubble, and a locked bubble asks for your fingerprint right there.
 - **Removes everything** in one step, leaving the phone as it was.
 
 ## What Bubble does not do

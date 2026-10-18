@@ -1,0 +1,1 @@
+- Each release publishes its version for F-Droid's update check

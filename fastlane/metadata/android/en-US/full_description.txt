@@ -9,7 +9,7 @@
 <li>Locks itself: the bubble closes when the screen turns off, unless one of its apps is playing music.</li>
 <li>Meta space (optional): a separate profile for Facebook and Instagram, with Google installed but turned off.</li>
 <li>Bubble Apps, icons and a widget: open bubble apps from your home screen.</li>
-<li>Bubble photos: pick a photo saved in the bubble from the phone's file picker, for example as wallpaper, without copying the rest.</li>
+<li>Bubble photos and files: pick a photo saved in the bubble as your wallpaper (also from Wallpaper &amp; style, with an optional button over Google Photos) or give it to any app that asks for an image, and browse the bubble's own files. Only what you pick leaves the bubble.</li>
 <li>Removes everything in one step, leaving the phone as it was.</li>
 </ul>
 

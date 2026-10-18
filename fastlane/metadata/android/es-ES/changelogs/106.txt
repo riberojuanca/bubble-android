@@ -1,0 +1,1 @@
+- Las fotos de la burbuja ya no fallan justo después de desbloquearla

@@ -1,0 +1,3 @@
+- Bubble photos: pick a photo from the bubble as your wallpaper or for any app, unlocking the bubble right there
+- Bubble files: browse the bubble's own files
+- Optional "Bubble photos" button when choosing a wallpaper in Wallpaper & style

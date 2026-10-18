@@ -1,0 +1,1 @@
+- Cada versión publica su número para que F-Droid detecte las actualizaciones
