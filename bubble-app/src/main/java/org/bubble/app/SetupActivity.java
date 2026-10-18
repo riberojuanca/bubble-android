@@ -46,11 +46,9 @@ public final class SetupActivity extends Activity {
         page.addView(Ui.title(this, getString(R.string.setup_pair_title)));
         page.addView(Ui.body(this, getString(R.string.setup_pair_why)));
         page.addView(Ui.body(this, getString(R.string.setup_pair_steps)));
-        page.addView(Ui.button(this, getString(R.string.setup_open_developer),
-                v -> startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS))));
         page.addView(Ui.button(this, getString(R.string.setup_pair_action), v -> {
             startForegroundService(new Intent(this, PairingService.class));
-            Ui.alert(this, getString(R.string.setup_pair_title), getString(R.string.setup_pair_next));
+            startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
         }));
     }
 

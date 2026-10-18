@@ -11,7 +11,7 @@ Wireless debugging only works on Wi-Fi. Connect to Wi-Fi and try again. On a new
 Creating spaces, installing and the maintenance use wireless debugging. Opening apps and changing their internet access do not.
 
 **The pairing code is rejected.**
-Open *Pair device with pairing code* again (the code changes each time), keep the dialog open, tap **Pair** in Bubble and type the new code in Bubble's notification.
+Open *Pair device with pairing code* again (the code changes each time). Keep the dialog open, tap **Pair** in Bubble's notification and send the new code.
 
 **Bubble paired once but now cannot connect.**
 If you revoked debugging authorizations or reset the phone, use **Settings → Pair again**.

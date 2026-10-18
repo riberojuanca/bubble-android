@@ -47,8 +47,7 @@
     <string name="setup_step">Paso %1$d de %2$d</string>
     <string name="setup_pair_title">Vincular Bubble</string>
     <string name="setup_pair_why">Bubble usa la depuración inalámbrica del teléfono para crear y proteger la burbuja, sin root. Se vincula una sola vez con un código; después Bubble prende la depuración solo mientras trabaja.</string>
-    <string name="setup_pair_steps">1. Activá las Opciones de desarrollador: Ajustes → Información del teléfono → tocá 7 veces Número de compilación.\n2. En Opciones de desarrollador, activá Depuración inalámbrica y abrí «Vincular dispositivo con código de vinculación».\n3. Tocá Vincular acá, bajá la barra de notificaciones y escribí el código de 6 dígitos en la notificación de Bubble.</string>
-    <string name="setup_open_developer">Abrir Opciones de desarrollador</string>
+    <string name="setup_pair_steps">1. Activá las Opciones de desarrollador: Ajustes → Información del teléfono → tocá 7 veces Número de compilación.\n2. Volvé a Bubble y tocá Vincular. Se inicia la notificación y se abren las Opciones de desarrollador.\n3. Conectate a Wi-Fi, activá Depuración inalámbrica y abrí «Vincular dispositivo con código de vinculación».\n4. Sin cerrar ese diálogo, abrí la notificación de Bubble, tocá Vincular, escribí los 6 dígitos y enviá. Volvé a Bubble cuando termine.</string>
     <string name="setup_pair_action">Vincular</string>
     <string name="setup_pair_next">Ahora abrí «Vincular dispositivo con código de vinculación» en Depuración inalámbrica, bajá la barra de notificaciones y escribí el código en la notificación de Bubble. Después volvé acá.</string>
     <string name="setup_create_title">Crear la burbuja</string>
@@ -139,10 +138,10 @@
     <string name="pair_wrong_code">El código no coincide o se cerró el diálogo de vinculación. Probá de nuevo.</string>
     <string name="pair_not_connected_yet">Vinculado, pero Bubble todavía no pudo conectarse. Reintentá en unos segundos.</string>
     <string name="pairing_channel">Vinculación de Bubble</string>
-    <string name="pairing_waiting_title">Esperando el diálogo de vinculación…</string>
-    <string name="pairing_waiting_body">Abrí Ajustes → Depuración inalámbrica → Vincular con código, bajá esta barra y escribí el código.</string>
-    <string name="pairing_found_title">Dispositivo detectado</string>
-    <string name="pairing_found_body">Bajá esta barra y escribí el código de 6 dígitos.</string>
+    <string name="pairing_waiting_title">Esperando…</string>
+    <string name="pairing_waiting_body">Abrí «Vincular con código».</string>
+    <string name="pairing_found_title">Vincular</string>
+    <string name="pairing_found_body">Escribí los 6 dígitos.</string>
     <string name="pairing_missing_title">No apareció el diálogo de vinculación</string>
     <string name="pairing_missing_body">Abrí la vinculación y volvé a tocar Vincular.</string>
     <string name="pairing_not_found">No se encontró el servidor de vinculación. ¿Está abierto el diálogo?</string>

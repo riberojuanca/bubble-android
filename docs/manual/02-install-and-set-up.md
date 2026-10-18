@@ -12,13 +12,13 @@
 
 Bubble needs Android's `shell` identity to build the bubble. It gets it through **wireless debugging**, which you allow once with a pairing code. After this step Bubble turns wireless debugging on only while it works and off again.
 
-1. **Turn on Developer options**: Settings → About phone → tap **Build number** seven times. Enter your PIN if asked. Bubble has a button, **Open Developer options**, to get there once they exist.
-2. Make sure you are on **Wi-Fi**. Wireless debugging only starts on Wi-Fi.
+1. **Turn on Developer options**: Settings → About phone → tap **Build number** seven times. Enter your PIN if asked.
+2. Make sure you are on **Wi-Fi**. In Bubble, tap **Pair**. This starts the pairing notification and opens Developer options.
 3. In Developer options, turn on **Wireless debugging**. If Android asks *"Allow wireless debugging on this network?"*, tick **Always allow on this network** and accept.
 4. Tap **Wireless debugging** (the name, not the switch) and open **Pair device with pairing code**. A 6-digit code appears. **Leave this dialog open.**
-5. Go back to Bubble and tap **Pair**.
-6. Pull down the notification shade. Bubble's notification says *Device found*. Type the **6-digit code** into it.
-7. Bubble shows *Paired*.
+5. Keep the dialog open and stay in Settings. Open Bubble's notification and tap **Pair**.
+6. Enter the **6-digit code** there and send the reply.
+7. When the notification shows *Paired*, return to Bubble.
 
 If the code is rejected (*"The code does not match or the pairing dialog closed"*), open the pairing dialog again (the code changes each time) and repeat steps 4 to 6.
 

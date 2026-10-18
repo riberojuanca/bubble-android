@@ -12,13 +12,13 @@
 
 Bubble necesita la identidad `shell` de Android para armar la burbuja. La obtiene por la **depuración inalámbrica**, que autorizás una vez con un código de vinculación. Después de este paso, Bubble prende la depuración inalámbrica solo mientras trabaja y la vuelve a apagar.
 
-1. **Activá las Opciones para desarrolladores**: Ajustes → Acerca del teléfono → tocá **Número de compilación** siete veces. Poné tu PIN si lo pide. Bubble tiene un botón, **Abrir Opciones de desarrollador**, para llegar ahí una vez activadas.
-2. Asegurate de estar conectado a **Wi-Fi**. La depuración inalámbrica solo arranca con Wi-Fi.
+1. **Activá las Opciones para desarrolladores**: Ajustes → Acerca del teléfono → tocá **Número de compilación** siete veces. Poné tu PIN si lo pide.
+2. Asegurate de estar conectado a **Wi-Fi**. En Bubble, tocá **Vincular**. Se inicia la notificación de vinculación y se abren las Opciones de desarrollador.
 3. En Opciones para desarrolladores, prendé **Depuración inalámbrica**. Si Android pregunta *«¿Permitir la depuración inalámbrica en esta red?»*, marcá **Permitir siempre en esta red** y aceptá.
 4. Tocá **Depuración inalámbrica** (el nombre, no el interruptor) y abrí **Vincular dispositivo con código de vinculación**. Aparece un código de 6 dígitos. **Dejá ese diálogo abierto.**
-5. Volvé a Bubble y tocá **Vincular**.
-6. Bajá la barra de notificaciones. La notificación de Bubble dice *Dispositivo detectado*. Escribí ahí el **código de 6 dígitos**.
-7. Bubble muestra *Vinculado*.
+5. Sin volver a Bubble ni cerrar el diálogo, abrí la notificación de Bubble y tocá **Vincular**.
+6. Escribí ahí el **código de 6 dígitos** y enviá la respuesta.
+7. Cuando la notificación muestre *Vinculado*, volvé a Bubble.
 
 Si rechaza el código (*«El código no coincide o se cerró el diálogo de vinculación»*), abrí de nuevo el diálogo de vinculación (el código cambia cada vez) y repetí los pasos 4 a 6.
 

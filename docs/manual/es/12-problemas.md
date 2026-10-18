@@ -11,7 +11,7 @@ La depuración inalámbrica solo funciona con Wi-Fi. Conectate a un Wi-Fi y prob
 Crear espacios, instalar y el mantenimiento usan la depuración inalámbrica. Abrir apps y cambiar su acceso a internet, no.
 
 **Rechaza el código de vinculación.**
-Abrí de nuevo *Vincular dispositivo con código de vinculación* (el código cambia cada vez), dejá el diálogo abierto, tocá **Vincular** en Bubble y escribí el código nuevo en la notificación de Bubble.
+Abrí de nuevo *Vincular dispositivo con código de vinculación* (el código cambia cada vez). Dejá el diálogo abierto, tocá **Vincular** en la notificación de Bubble y enviá el código nuevo.
 
 **Bubble se vinculó una vez pero ahora no puede conectarse.**
 Si revocaste las autorizaciones de depuración o restableciste el teléfono, usá **Ajustes → Volver a vincular**.

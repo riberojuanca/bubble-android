@@ -49,8 +49,7 @@
     <string name="setup_step">Step %1$d of %2$d</string>
     <string name="setup_pair_title">Pair Bubble</string>
     <string name="setup_pair_why">Bubble uses your phone\'s wireless debugging to build and protect the bubble, without root. You pair it once with a code; after that Bubble turns debugging on only while it works.</string>
-    <string name="setup_pair_steps">1. Turn on Developer options: Settings → About phone → tap Build number 7 times.\n2. In Developer options, turn on Wireless debugging and open «Pair device with pairing code».\n3. Tap Pair here, pull down the notification shade and type the 6-digit code into Bubble\'s notification.</string>
-    <string name="setup_open_developer">Open Developer options</string>
+    <string name="setup_pair_steps">1. Turn on Developer options: Settings → About phone → tap Build number 7 times.\n2. Return to Bubble and tap Pair. This starts the notification and opens Developer options.\n3. Connect to Wi-Fi, turn on Wireless debugging and open “Pair device with pairing code”.\n4. Keep that dialog open, open Bubble\'s notification, tap Pair, enter the 6 digits and send. Return to Bubble when pairing finishes.</string>
     <string name="setup_pair_action">Pair</string>
     <string name="setup_pair_next">Now open «Pair device with pairing code» in Wireless debugging, pull down the notification shade and type the code into Bubble\'s notification. Then come back here.</string>
     <string name="setup_create_title">Create the bubble</string>
@@ -141,10 +140,10 @@
     <string name="pair_wrong_code">The code does not match or the pairing dialog closed. Try again.</string>
     <string name="pair_not_connected_yet">Paired, but Bubble could not connect yet. Try again in a few seconds.</string>
     <string name="pairing_channel">Bubble pairing</string>
-    <string name="pairing_waiting_title">Waiting for the pairing dialog…</string>
-    <string name="pairing_waiting_body">Open Settings → Wireless debugging → Pair with code, pull down this shade and type the code.</string>
-    <string name="pairing_found_title">Device found</string>
-    <string name="pairing_found_body">Pull down this shade and type the 6-digit code.</string>
+    <string name="pairing_waiting_title">Waiting…</string>
+    <string name="pairing_waiting_body">Open “Pair with code”.</string>
+    <string name="pairing_found_title">Pair</string>
+    <string name="pairing_found_body">Enter the 6 digits.</string>
     <string name="pairing_missing_title">The pairing dialog did not appear</string>
     <string name="pairing_missing_body">Open the pairing dialog and tap Pair again.</string>
     <string name="pairing_not_found">The pairing server was not found. Is the dialog open?</string>
