@@ -31,12 +31,32 @@ final class BubblePhotos {
         if (c.checkSelfPermission(android.Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
             throw new SecurityException(c.getString(R.string.photos_no_access));
         }
+        waitForStorage(c);
         switch (what) {
             case ProfileBridge.PHOTO_FOLDERS: return folders(c);
             case ProfileBridge.PHOTOS: return photos(c, args.getString(ProfileBridge.ID));
             case ProfileBridge.PHOTO_THUMB: return thumb(c, args.getLong(ProfileBridge.ID), args.getInt(ProfileBridge.BYTES));
             case ProfileBridge.PHOTO_OPEN: return open(c, args.getLong(ProfileBridge.ID));
             default: throw new IllegalArgumentException("Unknown photo operation");
+        }
+    }
+
+    /**
+     * Right after the bubble is unlocked its media provider is still attaching the storage (seen on
+     * the Pixel: the query 60 ms too early failed with "Volume external_primary not found"). Wait for
+     * it, within the bridge's 10 s answer time, instead of failing.
+     */
+    private static void waitForStorage(Context c) throws InterruptedException {
+        for (int i = 0; i < 25; i++) {
+            if (MediaStore.getExternalVolumeNames(c).contains(MediaStore.VOLUME_EXTERNAL_PRIMARY)) {
+                try (Cursor probe = c.getContentResolver().query(IMAGES, new String[]{MediaStore.Images.Media._ID},
+                        null, null, null)) {
+                    return;
+                } catch (IllegalArgumentException notYet) {
+                    // "Volume external_primary not found": attached a moment later.
+                }
+            }
+            Thread.sleep(300);
         }
     }
 
