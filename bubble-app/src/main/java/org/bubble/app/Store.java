@@ -23,6 +23,20 @@ final class Store {
         prefs = context.getSharedPreferences("bubble", Context.MODE_PRIVATE);
     }
 
+    /** The app an icon widget shows, as "space:package"; null when that widget is not Bubble's. */
+    String iconWidget(int id) { return prefs.getString("icon_widget_" + id, null); }
+
+    /** Remember (or, with null, forget) the app an icon widget shows. */
+    void setIconWidget(int id, String app) {
+        if (app == null) prefs.edit().remove("icon_widget_" + id).apply();
+        else prefs.edit().putString("icon_widget_" + id, app).apply();
+    }
+
+    /** The launcher's icon shape as the user chose it in Bubble (IconShape); the rounded square by default. */
+    String iconShape() { return prefs.getString("icon_shape", IconShape.SQUARE); }
+
+    void setIconShape(String shape) { prefs.edit().putString("icon_shape", shape).apply(); }
+
     boolean paired() { return prefs.getBoolean("paired", false); }
 
     void setPaired(boolean v) { prefs.edit().putBoolean("paired", v).apply(); }

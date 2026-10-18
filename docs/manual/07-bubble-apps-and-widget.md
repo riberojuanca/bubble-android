@@ -13,9 +13,11 @@ It shows a grid with two sections:
 
 Tap an app to open it. If the bubble is locked, Android asks you to unlock it first; if you cancel, nothing opens.
 
-**Press and hold** an app to add a shortcut to your home screen; Android asks you to confirm.
+**Press and hold** an app to add its icon to your home screen; Android asks you to confirm.
 
-Shortcuts are currently added one at a time. Their icons are saved images: changing the system theme does not regenerate already pinned shortcut icons.
+The icon is a one-cell widget, not a shortcut: the launcher puts the icon of the app that made a shortcut on its corner (Bubble's, in a circle) and only system apps can change that. The widget shows the app's real icon with its name; bubble apps carry Bubble's small mark, which follows the light or dark theme, and Meta apps carry the work badge. Icons are added one at a time.
+
+Shortcuts made by older versions still work. Bubble redraws them with the app's real icon each time it starts, but the launcher keeps its own mark on them: remove them and add the icon again to get rid of it. On launchers that do not accept widgets from apps, Bubble adds a shortcut instead.
 
 The button at the bottom, **Add the widget to the home screen**, places the widget (below).
 

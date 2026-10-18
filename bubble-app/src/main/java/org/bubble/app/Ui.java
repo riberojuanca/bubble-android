@@ -374,22 +374,19 @@ final class Ui {
     }
 
     /**
-     * An app icon as a rounded square, the buttons' rounding scaled to the icon (14dp on a 52dp
-     * button is about a quarter of the height). Adaptive icons are drawn like a launcher does (their
-     * layers are 1.5 times the visible size) but clipped to this shape instead of the system's.
+     * An app icon in the launcher's shape as chosen in Bubble's settings (IconShape; the rounded
+     * square by default). Adaptive icons are drawn like a launcher does (their layers are 1.5
+     * times the visible size) but clipped to this shape instead of the system's.
      */
     static android.graphics.drawable.Drawable roundedIcon(Context c, android.graphics.drawable.Drawable d) {
         return roundedIcon(c, d, dp(c, 24) * 2); // drawn at 2x for sharpness, shown at 24dp
     }
 
-    /** The same rounded square, {@code size} pixels wide (the widget draws bigger icons). */
+    /** The same shape, {@code size} pixels wide (the widgets draw bigger icons). */
     static android.graphics.drawable.Drawable roundedIcon(Context c, android.graphics.drawable.Drawable d, int size) {
         android.graphics.Bitmap bmp = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888);
         android.graphics.Canvas canvas = new android.graphics.Canvas(bmp);
-        android.graphics.Path clip = new android.graphics.Path();
-        float r = size * 0.27f;
-        clip.addRoundRect(0, 0, size, size, r, r, android.graphics.Path.Direction.CW);
-        canvas.clipPath(clip);
+        canvas.clipPath(IconShape.path(c, size));
         if (d instanceof android.graphics.drawable.AdaptiveIconDrawable) {
             android.graphics.drawable.AdaptiveIconDrawable ad = (android.graphics.drawable.AdaptiveIconDrawable) d;
             int extra = size / 4;

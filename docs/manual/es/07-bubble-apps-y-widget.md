@@ -13,9 +13,11 @@ Muestra una cuadrícula con dos secciones:
 
 Tocá una app para abrirla. Si la burbuja está bloqueada, Android te pide desbloquearla primero; si cancelás, no se abre nada.
 
-**Mantené apretada** una app para agregar un acceso directo a la pantalla de inicio; Android te pide confirmar.
+**Mantené apretada** una app para agregar su ícono a la pantalla de inicio; Android te pide confirmar.
 
-Por ahora los accesos se agregan de a uno. Sus íconos se guardan como imágenes: cambiar el tema del sistema no vuelve a generar los íconos de accesos ya agregados.
+El ícono es un widget de una celda, no un acceso directo: el lanzador pone en la esquina de cada acceso el ícono de la app que lo creó (el de Bubble, en un círculo) y solo las apps del sistema pueden cambiarlo. El widget muestra el ícono real de la app con su nombre; las apps de la burbuja llevan la marca chica de Bubble, que sigue el tema claro u oscuro, y las de Meta llevan el maletín. Los íconos se agregan de a uno.
+
+Los accesos directos hechos con versiones anteriores siguen funcionando. Bubble los vuelve a dibujar con el ícono real de la app cada vez que arranca, pero el lanzador les deja su marca: borralos y agregá el ícono de nuevo para sacarla. En lanzadores que no aceptan widgets de apps, Bubble agrega un acceso directo.
 
 El botón de abajo, **Agregar el widget a la pantalla de inicio**, coloca el widget (ver abajo).
 

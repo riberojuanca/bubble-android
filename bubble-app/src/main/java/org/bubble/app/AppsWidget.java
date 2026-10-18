@@ -61,6 +61,7 @@ public final class AppsWidget extends AppWidgetProvider {
 
     /** Redraw every placed widget, after the apps of the Meta space or of the bubble change. */
     static void refresh(Context context) {
+        AppIconWidget.refresh(context);
         AppWidgetManager manager = AppWidgetManager.getInstance(context);
         int[] ids = manager.getAppWidgetIds(new ComponentName(context, AppsWidget.class));
         if (ids.length == 0) return;
@@ -116,7 +117,7 @@ public final class AppsWidget extends AppWidgetProvider {
     private static final float ICON_SCALE = 0.93f;
 
     /** The launcher's icon size in dp, as the engine last read it, scaled by ICON_SCALE. */
-    private static int launcherIconDp(Context context) {
+    static int launcherIconDp(Context context) {
         int px = new Store(context).launcherIconPx();
         float dp = px > 0 ? px / context.getResources().getDisplayMetrics().density : ICON_DEFAULT;
         return Math.round(dp * ICON_SCALE);

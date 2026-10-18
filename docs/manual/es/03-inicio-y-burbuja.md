@@ -26,7 +26,7 @@ Deslizá la pantalla hacia abajo para revisar de nuevo. Bubble revisa solo al ab
 | Atención: servicios de Google activos en la burbuja: N | Abrí Bubble de nuevo para que el guardián los desactive |
 | Hay un espacio privado sin servicios de Google que todavía no es la burbuja | Existe un espacio privado que Bubble no administra; abrí Bubble → Burbuja para decidir |
 
-Mientras la burbuja está bloqueada, Bubble muestra el último estado que leyó; dentro de una burbuja bloqueada no se puede preguntar nada.
+Mientras la burbuja está bloqueada, Bubble muestra el último estado que leyó; dentro de una burbuja bloqueada no se puede preguntar nada. Cuando dice **La burbuja está bloqueada**, el botón **Desbloquear** de abajo muestra el pedido de huella o PIN de Android.
 
 ## La pantalla Burbuja
 

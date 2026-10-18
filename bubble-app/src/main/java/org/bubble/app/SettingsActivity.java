@@ -18,10 +18,31 @@ public final class SettingsActivity extends Activity {
             Ui.alert(this, getString(R.string.setup_pair_title), getString(R.string.setup_pair_next));
         });
         Ui.row(page, getString(R.string.settings_log), getString(R.string.settings_log_sub), v -> showLog());
+        Ui.Row shape = Ui.row(page, getString(R.string.settings_icon_shape),
+                getString(IconShape.title(new Store(this).iconShape())), null);
+        shape.view.setOnClickListener(v -> pickShape(shape));
         Ui.row(page, getString(R.string.settings_updates), getString(R.string.settings_updates_sub),
                 v -> startActivity(new Intent(this, UpdateActivity.class)));
         Ui.row(page, getString(R.string.settings_remove_all), getString(R.string.settings_remove_all_sub), v -> explainRemoveAll());
         Ui.row(page, getString(R.string.settings_about), version(), v -> { });
+    }
+
+    /**
+     * The same shape as the launcher's (Wallpaper & style): the launcher does not tell other apps
+     * which one it uses. Every icon Bubble draws, and the ones already on the home screen, follow it.
+     */
+    private void pickShape(Ui.Row row) {
+        Store store = new Store(this);
+        Ui.Sheet sheet = new Ui.Sheet(this).title(R.string.settings_icon_shape).message(R.string.shape_body);
+        for (String s : IconShape.ALL) {
+            sheet.choice(getString(IconShape.title(s)), s.equals(store.iconShape()) ? getString(R.string.shape_current) : null, () -> {
+                store.setIconShape(s);
+                row.setSubtitle(getString(IconShape.title(s)));
+                BubbleCache.clear();
+                AppsWidget.refresh(this);
+            });
+        }
+        sheet.cancel().show();
     }
 
     /** What goes and what stays first, then a second confirmation: apps and data are lost. */

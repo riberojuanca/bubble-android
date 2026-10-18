@@ -17,6 +17,7 @@ public final class MainActivity extends Activity {
 
     private Store store;
     private TextView status;
+    private android.widget.Button unlock;
     private Ui.Row bubbleRow;
     private Ui.Row appsRow;
     private Ui.Row firewallRow;
@@ -26,6 +27,9 @@ public final class MainActivity extends Activity {
     /** Last check, shared by every home instance in this process; the summary shown meanwhile. */
     private static long lastCheck;
     private static String lastSummary;
+    private static boolean lastLocked;
+    /** Once per process: redraw the bubble shortcuts on the home screen with the current icons. */
+    private static boolean shortcutsRefreshed;
     private static final long RECHECK_MS = 10 * 60 * 1000;
     private static final long REOPEN_MS = 2 * 60 * 1000;
 
@@ -64,6 +68,10 @@ public final class MainActivity extends Activity {
         status = Ui.body(this, "");
         status.setGravity(Gravity.CENTER_HORIZONTAL);
         page.addView(status);
+        // Right where it says the bubble is locked: Android's own fingerprint / PIN prompt.
+        unlock = Ui.button(this, getString(R.string.action_unlock), v -> unlockBubble());
+        unlock.setVisibility(android.view.View.GONE);
+        page.addView(unlock);
         // The bar runs right under the status line it belongs to ("Checking the bubble…").
         LoadingBar bar = Ui.loadingBar(this);
         page.addView(bar);
@@ -89,6 +97,8 @@ public final class MainActivity extends Activity {
 
     @Override protected void onResume() {
         super.onResume();
+        // Back from Android's unlock screen: a cancel must not leave Bubble waiting a minute.
+        if (unlocking) Controller.unlockPromptClosed();
         if (BootReceiver.insideBubble()) return;
         if (!store.paired() || store.bubbleUser() < 0) {
             startActivity(new Intent(this, SetupActivity.class));
@@ -96,6 +106,17 @@ public final class MainActivity extends Activity {
             return;
         }
         Updates.checkAutomatically(this);
+        if (!shortcutsRefreshed) {
+            shortcutsRefreshed = true;
+            android.content.Context app = getApplicationContext();
+            new Thread(() -> {
+                try {
+                    AppsGridActivity.refreshPinned(app);
+                } catch (Exception e) {
+                    android.util.Log.w("Bubble", "could not redraw the shortcuts: " + e);
+                }
+            }, "bubble-shortcuts").start();
+        }
         firewallRow.setSubtitle(store.phoneFirewallOn()
                 ? getString(R.string.firewall_phone_on, store.applied().size()) : getString(R.string.firewall_phone_off));
         appsRow.setSubtitle(bubbleCounts());
@@ -103,6 +124,7 @@ public final class MainActivity extends Activity {
         // Bubble opens, then only if the last check is old, not on every return from a screen.
         if (lastSummary != null && System.currentTimeMillis() - lastCheck < RECHECK_MS) {
             bubbleRow.setSubtitle(lastSummary);
+            unlock.setVisibility(lastLocked ? android.view.View.VISIBLE : android.view.View.GONE);
             String notice = store.takeNotice();
             status.setText(notice.isEmpty() ? lastSummary : lastSummary + "\n" + notice);
             return;
@@ -152,6 +174,24 @@ public final class MainActivity extends Activity {
         startedScreens = 0; // this home is about to start and will be counted
     }
 
+    /** Android's unlock screen was asked for; it covers this one until confirmed or cancelled. */
+    private boolean unlocking;
+
+    @Override protected void onPause() {
+        super.onPause();
+        if (unlocking) Controller.unlockPromptOpened();
+    }
+
+    private void unlockBubble() {
+        unlocking = true;
+        Ui.work(this, getString(R.string.working_unlocking), () -> new Controller(this).unlockBubble(), unlocked -> {
+            unlocking = false;
+            if (!unlocked) return;
+            unlock.setVisibility(android.view.View.GONE);
+            check();
+        });
+    }
+
     private void check() {
         if (checking) return;
         checking = true;
@@ -173,7 +213,10 @@ public final class MainActivity extends Activity {
                 Ui.refreshSpy(this, spy);
                 if (isFinishing()) return;
                 String summary = BubbleFlow.summary(this, store, report);
+                boolean locked = BubbleFlow.locked(report);
+                unlock.setVisibility(locked ? android.view.View.VISIBLE : android.view.View.GONE);
                 if (report.connected) {
+                    lastLocked = locked;
                     lastSummary = summary;
                     lastCheck = System.currentTimeMillis();
                 }

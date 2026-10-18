@@ -203,8 +203,9 @@
     <string name="error_no_meta">There is no Meta space yet.</string>
     <!-- Bubble Apps -->
     <string name="grid_label">Bubble Apps</string>
-    <string name="grid_hint">Press and hold an app to add a shortcut to the home screen.</string>
+    <string name="grid_hint">Press and hold an app to add its icon to the home screen.</string>
     <string name="grid_meta_paused">The Meta space is paused. Resume it from the Work tab of the app drawer.</string>
+    <string name="bubble_locked">The bubble is locked.</string>
     <string name="grid_still_locked">The bubble is still locked.</string>
     <string name="working_opening">Opening…</string>
     <string name="widget_title">Bubble</string>
@@ -243,4 +244,13 @@
         <item quantity="one">%d photo</item>
         <item quantity="other">%d photos</item>
     </plurals>
+    <string name="icon_widget_description">An app of the bubble or the Meta space, as an icon</string>
+    <string name="settings_icon_shape">Icon shape</string>
+    <string name="shape_body">Choose the same shape as your home screen (Wallpaper &amp; style → Icons). Android does not let Bubble read it.</string>
+    <string name="shape_current">In use</string>
+    <string name="shape_square">Square</string>
+    <string name="shape_circle">Circle</string>
+    <string name="shape_arch">Arch</string>
+    <string name="shape_four_sided_cookie">4-sided cookie</string>
+    <string name="shape_seven_sided_cookie">7-sided cookie</string>
 </resources>

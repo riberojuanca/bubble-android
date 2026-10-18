@@ -118,8 +118,7 @@ public final class AppsGridActivity extends Activity {
             LinearLayout cell = cell(app.label, v -> openInBubble(this, app.pkg));
             ImageView icon = (ImageView) cell.getChildAt(0);
             // The app's own icon as an adaptive bitmap: the launcher gives it its shape, not a frame.
-            cell.setOnLongClickListener(v -> pin(SPACE_BUBBLE, app.pkg, app.label,
-                    Icon.createWithAdaptiveBitmap(Ui.adaptiveBitmap(this, app.icon(this)))));
+            cell.setOnLongClickListener(v -> pin(SPACE_BUBBLE, app.pkg, app.label, shortcutIcon(this, app)));
             bubbleGrid.addView(cell);
             icons.add(icon);
             shown.add(app);
@@ -180,8 +179,36 @@ public final class AppsGridActivity extends Activity {
         return cell;
     }
 
-    /** Ask the launcher to add a home-screen shortcut; Android shows its own confirmation. */
+    /** A bubble app's own icon as an adaptive bitmap: the launcher gives it its shape, not a frame. */
+    static Icon shortcutIcon(android.content.Context c, AppInfo app) {
+        return Icon.createWithAdaptiveBitmap(Ui.adaptiveBitmap(c, app.icon(c)));
+    }
+
+    /**
+     * Redraw the icons of the bubble shortcuts already on the home screen. The launcher keeps the
+     * image each one was pinned with, so shortcuts made by an older Bubble keep the old framed icon
+     * until they are republished. Off the main thread: it reads every app's icon.
+     */
+    static void refreshPinned(android.content.Context c) {
+        ShortcutManager shortcuts = c.getSystemService(ShortcutManager.class);
+        if (shortcuts == null) return;
+        java.util.Map<String, AppInfo> apps = new java.util.HashMap<>();
+        for (AppInfo app : AppInfo.inside(c, new Store(c).lastBubbleApps())) apps.put(app.pkg, app);
+        List<ShortcutInfo> updated = new ArrayList<>();
+        for (ShortcutInfo pinned : shortcuts.getPinnedShortcuts()) {
+            String id = pinned.getId();
+            AppInfo app = id.startsWith(SPACE_BUBBLE + ":") ? apps.get(id.substring(SPACE_BUBBLE.length() + 1)) : null;
+            if (app != null) updated.add(new ShortcutInfo.Builder(c, id).setIcon(shortcutIcon(c, app)).build());
+        }
+        if (!updated.isEmpty()) shortcuts.updateShortcuts(updated);
+    }
+
+    /**
+     * Put the app on the home screen; Android shows its own confirmation. As an icon widget
+     * (AppIconWidget: no launcher badge), or as a shortcut on launchers that take no widgets.
+     */
     private boolean pin(String space, String pkg, CharSequence label, Icon icon) {
+        if (AppIconWidget.requestPin(this, space, pkg)) return true;
         ShortcutManager shortcuts = getSystemService(ShortcutManager.class);
         if (shortcuts == null || !shortcuts.isRequestPinShortcutSupported() || icon == null) return true;
         Intent open = new Intent(this, ShortcutActivity.class)

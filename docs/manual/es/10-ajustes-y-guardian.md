@@ -6,6 +6,7 @@
 |---|---|
 | **Volver a vincular** | Repite la vinculación ([capítulo 2](02-instalar-y-configurar.md)). Solo hace falta si Bubble ya no puede conectarse, por ejemplo después de revocar las autorizaciones de depuración |
 | **Registro técnico** | Muestra la última salida del motor. Sirve cuando algo falla; se puede seleccionar y copiar |
+| **Forma de los íconos** | La forma de los íconos de apps que dibuja Bubble (sus pantallas, el widget y los íconos de la pantalla de inicio). Elegí la misma que en Fondo de pantalla y estilo → Íconos; Android no deja que Bubble la lea. Cuadrado de entrada |
 | **Buscar actualizaciones** | Busca una versión nueva en GitHub y permite descargarla e instalarla |
 | **Quitar todo** | Deja el teléfono como estaba antes de Bubble ([capítulo 11](11-quitar.md)) |
 | **Acerca de** | La versión de Bubble |

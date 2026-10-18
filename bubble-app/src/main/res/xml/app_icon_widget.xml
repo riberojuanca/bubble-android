@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One cell, placed only from Bubble Apps (press and hold an app), never from the widget list. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/icon_widget_description"
+    android:initialLayout="@layout/widget_app_icon"
+    android:minWidth="40dp"
+    android:minHeight="40dp"
+    android:previewLayout="@layout/widget_app_icon"
+    android:resizeMode="none"
+    android:targetCellWidth="1"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen"
+    android:widgetFeatures="hide_from_picker" />

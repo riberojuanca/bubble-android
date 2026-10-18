@@ -201,8 +201,9 @@
     <string name="error_no_meta">Todavía no hay espacio Meta.</string>
     <!-- Bubble Apps -->
     <string name="grid_label">Bubble Apps</string>
-    <string name="grid_hint">Mantené apretada una app para agregar un acceso directo a la pantalla de inicio.</string>
+    <string name="grid_hint">Mantené apretada una app para agregar su ícono a la pantalla de inicio.</string>
     <string name="grid_meta_paused">El espacio Meta está pausado. Reanudalo desde la pestaña Trabajo del cajón de apps.</string>
+    <string name="bubble_locked">La burbuja está bloqueada.</string>
     <string name="grid_still_locked">La burbuja sigue bloqueada.</string>
     <string name="working_opening">Abriendo…</string>
     <string name="widget_title">Bubble</string>
@@ -242,4 +243,13 @@
         <item quantity="other">%d fotos</item>
         <item quantity="many">%d fotos</item>
     </plurals>
+    <string name="icon_widget_description">Una app de la burbuja o del espacio Meta, como ícono</string>
+    <string name="settings_icon_shape">Forma de los íconos</string>
+    <string name="shape_body">Elegí la misma forma que tu pantalla de inicio (Fondo de pantalla y estilo → Íconos). Android no deja que Bubble la lea.</string>
+    <string name="shape_current">En uso</string>
+    <string name="shape_square">Cuadrado</string>
+    <string name="shape_circle">Círculo</string>
+    <string name="shape_arch">Arco</string>
+    <string name="shape_four_sided_cookie">Galleta de 4 lados</string>
+    <string name="shape_seven_sided_cookie">Galleta de 7 lados</string>
 </resources>

@@ -65,7 +65,7 @@ final class BubbleFlow {
     static String summary(Context c, Store store, Controller.BubbleReport r) {
         if (!r.connected) return c.getString(R.string.bubble_unknown);
         if (r.user < 0) return c.getString(R.string.bubble_none);
-        if (r.log.contains("bubble_locked=true")) return c.getString(R.string.grid_still_locked);
+        if (locked(r)) return c.getString(R.string.bubble_locked);
         if (r.user != store.bubbleUser()) {
             return r.googleServices > 0 ? c.getString(R.string.bubble_other_with_google)
                     : c.getString(R.string.bubble_other_clean);
@@ -73,6 +73,11 @@ final class BubbleFlow {
         if (r.googleActive > 0) return c.getString(R.string.bubble_google_active, r.googleActive);
         if (r.googleServices > 0) return c.getString(R.string.bubble_google_disabled, r.googleServices);
         return c.getString(R.string.bubble_ready);
+    }
+
+    /** The bubble exists and is locked (its apps stopped, its storage encrypted). */
+    static boolean locked(Controller.BubbleReport r) {
+        return r.connected && r.user > 0 && r.log.contains("bubble_locked=true");
     }
 
     private static String problem(Context c, Controller.BubbleReport r) {

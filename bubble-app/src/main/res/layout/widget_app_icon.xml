@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One app as a home-screen icon: the app's own icon with Bubble's small mark (no tile behind it,
+     light or dark with the theme) and its name, like the launcher's. A widget, not a shortcut: the
+     launcher badges every shortcut with the icon of the app that made it, widgets it leaves alone. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_icon_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/app_icon_frame"
+        android:layout_width="56dp"
+        android:layout_height="56dp">
+
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/app_icon_mark"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_bubble"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/app_icon_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:shadowColor="#99000000"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:text="@string/app_name"
+        android:textColor="#FFFFFFFF"
+        android:textSize="12sp" />
+</LinearLayout>
