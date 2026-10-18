@@ -15,6 +15,9 @@ No. Bubble works on a stock phone with a locked bootloader.
 **Do I need a computer?**
 No. Pairing happens on the phone itself.
 
+**How do I update Bubble?**
+Bubble checks GitHub when you open it, at most once every six hours, and offers **Update** when a newer release is available. You can also use **Settings → Check for updates**. Android may ask you to allow installations from Bubble the first time, then asks you to confirm the update. Your data and pairing are kept; do not uninstall the previous version.
+
 **Does it drain the battery?**
 The bubble's apps use what they would use anywhere. Bubble itself only works briefly when you use it; the guard checks once a minute while it is alive.
 

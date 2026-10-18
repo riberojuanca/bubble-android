@@ -15,6 +15,9 @@ No. Bubble funciona en un teléfono de fábrica con el bootloader bloqueado.
 **¿Necesito una computadora?**
 No. La vinculación se hace en el propio teléfono.
 
+**¿Cómo actualizo Bubble?**
+Bubble consulta GitHub al abrirlo, como máximo una vez cada seis horas, y ofrece **Actualizar** si hay una versión nueva. También podés usar **Ajustes → Buscar actualizaciones**. La primera vez Android puede pedirte permitir instalaciones desde Bubble y después te pide confirmar la actualización. Se conservan tus datos y la vinculación; no desinstales la versión anterior.
+
 **¿Gasta batería?**
 Las apps de la burbuja usan lo mismo que usarían en cualquier lado. Bubble solo trabaja un momento cuando lo usás; el guardián revisa una vez por minuto mientras está vivo.
 

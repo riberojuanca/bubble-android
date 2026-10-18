@@ -34,6 +34,8 @@ Creating a profile without Google, filtering its network and managing its apps n
 2. Open Bubble and follow the two setup steps: **pair** (turn on Developer options and Wireless debugging, type the 6-digit code) and **create the bubble** (about a minute).
 3. Open the app drawer and unlock the **Private** section at the bottom: that is your bubble.
 
+Bubble checks for new releases when you open it, at most once every six hours. Tap **Update** when offered, or use **Settings → Check for updates**. Android confirms the installation; your data and pairing are kept.
+
 The [user manual](docs/manual/README.md) explains every screen, every option and what to do when something goes wrong.
 
 ## Documentation
