@@ -15,6 +15,8 @@ Tap an app to open it. If the bubble is locked, Android asks you to unlock it fi
 
 **Press and hold** an app to add a shortcut to your home screen; Android asks you to confirm.
 
+Shortcuts are currently added one at a time. Their icons are saved images: changing the system theme does not regenerate already pinned shortcut icons.
+
 The button at the bottom, **Add the widget to the home screen**, places the widget (below).
 
 ## The widget

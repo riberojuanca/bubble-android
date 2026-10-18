@@ -30,4 +30,8 @@ dumpsys activity <home activity> → iconSizePx
 
 ## Light and dark
 
-Resources in `drawable/` and `drawable-night/` let Android pick a light or dark version of the icons, logo and widget background. The launcher caches icons, so it may take a while to show the other version after switching modes.
+Resources in `drawable/` and `drawable-night/` let Android pick a light or dark version of Bubble's logo, adaptive launcher icon and widget background. The launcher caches app icons, so a theme change may not appear immediately there.
+
+Pinned app shortcuts are different: `AppsGridActivity.pin()` passes an image, not a reference to a theme-aware resource. A bubble app's shortcut uses the app's own icon drawn edge to edge on the 108dp adaptive canvas (`Ui.adaptiveBitmap()` → `Icon.createWithAdaptiveBitmap()`), so the launcher masks it to its own shape instead of framing it. A Meta app's shortcut is still a plain bitmap with the work badge (`Icon.createWithBitmap()`). No current code regenerates those images on theme changes; waiting for the launcher cache alone does not fix that. Updating them would require republishing their icons with `ShortcutManager.updateShortcuts()`.
+
+The launcher badges every shortcut with the icon of the app that pinned it. Bubble's launcher icon therefore has no background layer, so the badge shows only the bubbles (light or dark version) without a tile.

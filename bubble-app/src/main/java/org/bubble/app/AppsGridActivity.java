@@ -92,7 +92,7 @@ public final class AppsGridActivity extends Activity {
             Drawable icon = getPackageManager().getUserBadgedIcon(Ui.roundedIcon(this, info.getIcon(0), Ui.dp(this, 48)), meta);
             LinearLayout cell = cell(info.getLabel(), v -> launcher.startMainActivity(info.getComponentName(), meta, null, null));
             ((ImageView) cell.getChildAt(0)).setImageDrawable(icon);
-            cell.setOnLongClickListener(v -> pin(SPACE_META, pkg, info.getLabel(), icon));
+            cell.setOnLongClickListener(v -> pin(SPACE_META, pkg, info.getLabel(), Icon.createWithBitmap(AppsWidget.bitmap(this, icon))));
             metaGrid.addView(cell);
         }
         if (metaGrid.getChildCount() == 0) metaGrid.addView(Ui.body(this, getString(R.string.apps_none)));
@@ -117,7 +117,9 @@ public final class AppsGridActivity extends Activity {
             if (!AppsWidget.openable(app.pkg)) continue;
             LinearLayout cell = cell(app.label, v -> openInBubble(this, app.pkg));
             ImageView icon = (ImageView) cell.getChildAt(0);
-            cell.setOnLongClickListener(v -> pin(SPACE_BUBBLE, app.pkg, app.label, icon.getDrawable()));
+            // The app's own icon as an adaptive bitmap: the launcher gives it its shape, not a frame.
+            cell.setOnLongClickListener(v -> pin(SPACE_BUBBLE, app.pkg, app.label,
+                    Icon.createWithAdaptiveBitmap(Ui.adaptiveBitmap(this, app.icon(this)))));
             bubbleGrid.addView(cell);
             icons.add(icon);
             shown.add(app);
@@ -179,7 +181,7 @@ public final class AppsGridActivity extends Activity {
     }
 
     /** Ask the launcher to add a home-screen shortcut; Android shows its own confirmation. */
-    private boolean pin(String space, String pkg, CharSequence label, Drawable icon) {
+    private boolean pin(String space, String pkg, CharSequence label, Icon icon) {
         ShortcutManager shortcuts = getSystemService(ShortcutManager.class);
         if (shortcuts == null || !shortcuts.isRequestPinShortcutSupported() || icon == null) return true;
         Intent open = new Intent(this, ShortcutActivity.class)
@@ -188,7 +190,7 @@ public final class AppsGridActivity extends Activity {
                 .putExtra(ShortcutActivity.EXTRA_PACKAGE, pkg);
         shortcuts.requestPinShortcut(new ShortcutInfo.Builder(this, space + ":" + pkg)
                 .setShortLabel(label)
-                .setIcon(Icon.createWithBitmap(AppsWidget.bitmap(this, icon)))
+                .setIcon(icon)
                 .setIntent(open)
                 .build(), null);
         return true;

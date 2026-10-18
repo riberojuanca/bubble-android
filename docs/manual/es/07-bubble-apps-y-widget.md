@@ -15,6 +15,8 @@ Tocá una app para abrirla. Si la burbuja está bloqueada, Android te pide desbl
 
 **Mantené apretada** una app para agregar un acceso directo a la pantalla de inicio; Android te pide confirmar.
 
+Por ahora los accesos se agregan de a uno. Sus íconos se guardan como imágenes: cambiar el tema del sistema no vuelve a generar los íconos de accesos ya agregados.
+
 El botón de abajo, **Agregar el widget a la pantalla de inicio**, coloca el widget (ver abajo).
 
 ## El widget

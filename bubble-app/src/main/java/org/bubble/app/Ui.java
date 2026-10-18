@@ -405,6 +405,30 @@ final class Ui {
         return new android.graphics.drawable.BitmapDrawable(c.getResources(), bmp);
     }
 
+    /**
+     * An app icon for {@code Icon.createWithAdaptiveBitmap}: the full 108dp adaptive canvas with
+     * its layers edge to edge, so the launcher masks it to its own shape like an installed app's
+     * icon. A legacy icon goes inside the 66dp safe zone on a transparent canvas.
+     */
+    static android.graphics.Bitmap adaptiveBitmap(Context c, android.graphics.drawable.Drawable d) {
+        int size = dp(c, 108);
+        android.graphics.Bitmap bmp = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888);
+        android.graphics.Canvas canvas = new android.graphics.Canvas(bmp);
+        if (d instanceof android.graphics.drawable.AdaptiveIconDrawable) {
+            android.graphics.drawable.AdaptiveIconDrawable ad = (android.graphics.drawable.AdaptiveIconDrawable) d;
+            for (android.graphics.drawable.Drawable layer : new android.graphics.drawable.Drawable[]{ad.getBackground(), ad.getForeground()}) {
+                if (layer == null) continue;
+                layer.setBounds(0, 0, size, size);
+                layer.draw(canvas);
+            }
+        } else {
+            int inset = size * 21 / 108;
+            d.setBounds(inset, inset, size - inset, size - inset);
+            d.draw(canvas);
+        }
+        return bmp;
+    }
+
     /** Load icons off the main thread (hundreds of system apps would stall the screen). */
     static void loadIcons(Activity a, List<AppInfo> apps, List<ImageView> views) {
         new Thread(() -> {
