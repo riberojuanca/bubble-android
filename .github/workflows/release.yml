@@ -1,18 +1,35 @@
 name: Release
 
-# Push a tag such as v0.1.0 to build, sign and publish the APK.
+# A normal push to main builds, signs, versions and publishes the APK.
 on:
   push:
-    tags: ["v*.*.*"]
+    branches: [main]
 
 permissions:
   contents: write
 
+concurrency:
+  group: android-release
+  queue: max
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check release numbering
+        run: python3 -B tools/test_release_version.py
+
+      - name: Select the release version
+        run: |
+          VERSION="$(python3 tools/release-version.py)"
+          echo "BUBBLE_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=v$VERSION" >> "$GITHUB_ENV"
 
       - uses: actions/setup-java@v4
         with:
@@ -20,7 +37,7 @@ jobs:
           java-version: "17"
 
       - name: Install Android SDK packages
-        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" > /dev/null
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" > /dev/null'
 
       - name: Restore the signing key
         env:
@@ -31,23 +48,26 @@ jobs:
 
       - name: Build the release APK
         env:
-          BUBBLE_VERSION: ${{ github.ref_name }}
           BUBBLE_KEYSTORE: ${{ runner.temp }}/bubble.jks
           BUBBLE_KEYSTORE_PASSWORD: ${{ secrets.BUBBLE_KEYSTORE_PASSWORD }}
           BUBBLE_KEY_ALIAS: ${{ secrets.BUBBLE_KEY_ALIAS }}
           BUBBLE_KEY_PASSWORD: ${{ secrets.BUBBLE_KEY_PASSWORD }}
-        run: |
-          export BUBBLE_VERSION="${BUBBLE_VERSION#v}"
-          ./gradlew --no-daemon :bubble-app:assembleRelease
+        run: ./gradlew --no-daemon :bubble-app:assembleRelease
 
       - name: Verify the signature and prepare the files
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
-          APK="bubble-$VERSION.apk"
+          APK="bubble-$BUBBLE_VERSION.apk"
           cp bubble-app/build/outputs/apk/release/bubble-app-release.apk "$APK"
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --print-certs "$APK" | tee certificate.txt
           sha256sum "$APK" > "$APK.sha256"
           echo "APK=$APK" >> "$GITHUB_ENV"
+
+      - name: Tag the verified commit
+        run: |
+          if ! git show-ref --verify --quiet "refs/tags/$RELEASE_TAG"; then
+            git tag "$RELEASE_TAG" "$GITHUB_SHA"
+            git push origin "$RELEASE_TAG"
+          fi
 
       - name: Publish the release
         env:
@@ -63,5 +83,18 @@ jobs:
             grep -E "SHA-256 digest" certificate.txt
             echo '```'
           } > notes.md
-          gh release create "$GITHUB_REF_NAME" "$APK" "$APK.sha256" \
-            --title "Bubble ${GITHUB_REF_NAME#v}" --notes-file notes.md --generate-notes
+          if STATUS="$(gh release view "$RELEASE_TAG" --json isDraft --jq '.isDraft')"; then
+            if [ "$STATUS" = false ]; then
+              echo "Release $RELEASE_TAG is already published."
+              exit 0
+            fi
+          else
+            gh release create "$RELEASE_TAG" --verify-tag --draft \
+              --title "Bubble $BUBBLE_VERSION" --notes-file notes.md --generate-notes
+          fi
+          gh release upload "$RELEASE_TAG" "$APK" "$APK.sha256" --clobber
+          gh release edit "$RELEASE_TAG" --draft=false --latest
+
+      - name: Remove the signing key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/bubble.jks"

@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
 }
 
-// Release builds take their version from the tag (BUBBLE_VERSION=0.1.0 → versionCode 100) and their
+// Release builds take their version from CI (BUBBLE_VERSION=0.1.0 → versionCode 100) and their
 // signing key from the environment, so no secret lives in the repository. Without them, a local
 // release build is simply left unsigned.
 val releaseVersion = System.getenv("BUBBLE_VERSION") ?: "0.1.0"

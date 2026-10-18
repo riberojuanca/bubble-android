@@ -33,10 +33,12 @@ Release builds must be signed with your own key; never commit keystores (`*.jks`
 
 ## Releasing (maintainers)
 
-Pushing a tag `vMAJOR.MINOR.PATCH` runs [`release.yml`](.github/workflows/release.yml): it builds the APK, signs it with the key stored in the repository secrets (`BUBBLE_KEYSTORE_BASE64`, `BUBBLE_KEYSTORE_PASSWORD`, `BUBBLE_KEY_ALIAS`, `BUBBLE_KEY_PASSWORD`), verifies the signature and publishes a GitHub release with the APK and its SHA-256. `versionCode` is `MAJOR×10000 + MINOR×100 + PATCH`.
+Every push to `main` runs [`release.yml`](.github/workflows/release.yml). No manual tag or version edit is needed: the workflow selects the next patch version, builds the APK, signs it with the existing repository secrets (`BUBBLE_KEYSTORE_BASE64`, `BUBBLE_KEYSTORE_PASSWORD`, `BUBBLE_KEY_ALIAS`, `BUBBLE_KEY_PASSWORD`), verifies the signature, tags the exact commit and publishes a GitHub release with the APK and its SHA-256. The website's download button points to the latest release.
+
+Release runs are queued to avoid version collisions. Retrying a tagged commit reuses its version and leaves an already published release unchanged; a partial draft can be completed. `versionCode` remains `MAJOR×10000 + MINOR×100 + PATCH`. Patch and minor components roll over at 100 to keep that code increasing (for example, `0.1.99` becomes `0.2.0`).
 
 ```sh
-git tag v0.1.0 && git push origin v0.1.0
+git push origin main
 ```
 
 The signing key must never change: Android refuses to update an app signed with a different key, and uninstalling Bubble deletes nothing but would force users to set it up again.
