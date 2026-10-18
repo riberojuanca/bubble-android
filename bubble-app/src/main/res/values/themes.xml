@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The system theme with Bubble's black instead of the wallpaper colour (Material You), so
+         checkboxes, switches, text cursors and progress follow the logo, like the buttons. -->
+    <style name="Theme.Bubble" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="android:colorAccent">#FF1C1F23</item>
+    </style>
+</resources>

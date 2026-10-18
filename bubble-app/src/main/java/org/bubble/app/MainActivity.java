@@ -82,6 +82,15 @@ public final class MainActivity extends Activity {
                 v -> startActivity(new Intent(this, BubbleActivity.class)));
         appsRow = Ui.row(page, getString(R.string.home_apps), getString(R.string.home_apps_sub),
                 v -> startActivity(new Intent(this, AppsActivity.class)));
+        // The second launcher icon, also from here: placing apps on the home screen starts there.
+        // With its own bubbles (no tile; light or dark with the theme), so it reads as that app.
+        Ui.Row grid = new Ui.Row(this, true, getString(R.string.grid_label), getString(R.string.home_grid_sub),
+                v -> startActivity(new Intent(this, AppsGridActivity.class)));
+        // The adaptive foreground keeps a margin for the launcher's mask: zoom past it.
+        grid.icon.setImageDrawable(new android.graphics.drawable.InsetDrawable(
+                getDrawable(R.drawable.ic_launcher_apps_foreground), -0.3f));
+        page.addView(grid.view);
+        page.addView(Ui.divider(this));
         Ui.row(page, getString(R.string.home_meta), getString(R.string.home_meta_sub),
                 v -> startActivity(new Intent(this, MetaActivity.class)));
         firewallRow = Ui.row(page, getString(R.string.home_firewall), "",

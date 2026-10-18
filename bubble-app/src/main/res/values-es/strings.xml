@@ -10,6 +10,8 @@
     <string name="home_apps_sub">Apps dentro de la burbuja</string>
     <string name="home_firewall">Firewall</string>
     <string name="home_settings">Ajustes</string>
+    <string name="settings_updates_store">Instalada desde F-Droid: las actualizaciones llegan por F-Droid.</string>
+    <string name="home_grid_sub">Poner apps y el widget en la pantalla de inicio</string>
     <string name="home_settings_sub">Vinculación, registro técnico</string>
     <string name="inside_bubble_note">Esta copia de Bubble mantiene el firewall de la burbuja. Bubble se maneja desde la app de afuera del espacio privado.</string>
 

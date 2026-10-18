@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- At night the accent is white: Bubble's black would vanish on the dark background. -->
+    <style name="Theme.Bubble" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="android:colorAccent">#FFFFFFFF</item>
+    </style>
+</resources>

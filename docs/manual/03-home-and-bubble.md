@@ -8,6 +8,7 @@ At the top there is a status line, for example **Ready · no Google services**, 
 |---|---|
 | **Bubble** | The state of the bubble, checking it, its fingerprint lock, deleting it |
 | **Apps** | The apps inside the bubble, with their internet access ([chapter 4](04-apps.md), [chapter 5](05-internet.md)) |
+| **Bubble Apps** | Opens the grid to place apps and the widget on the home screen ([chapter 7](07-bubble-apps-and-widget.md)) |
 | **Meta space** | The optional space for Facebook and Instagram ([chapter 8](08-meta-space.md)) |
 | **Firewall** | The firewall of your normal phone ([chapter 9](09-phone-firewall.md)) |
 | **Settings** | Pairing again, the technical log, removing everything, the version |

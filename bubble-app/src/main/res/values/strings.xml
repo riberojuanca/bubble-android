@@ -12,6 +12,8 @@
     <string name="home_apps_sub">Apps inside the bubble</string>
     <string name="home_firewall">Firewall</string>
     <string name="home_settings">Settings</string>
+    <string name="settings_updates_store">Installed from F-Droid: updates arrive through F-Droid.</string>
+    <string name="home_grid_sub">Put apps and the widget on the home screen</string>
     <string name="home_settings_sub">Pairing, technical log</string>
     <string name="inside_bubble_note">This copy of Bubble runs the bubble\'s firewall. Manage Bubble from the app outside the private space.</string>
 

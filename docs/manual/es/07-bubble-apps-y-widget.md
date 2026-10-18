@@ -4,7 +4,7 @@ Android esconde las apps de la burbuja dentro de la sección *Privado* y las del
 
 ## Bubble Apps
 
-**Bubble Apps** es un segundo ícono de Bubble en tu cajón de apps (el logo de las burbujas con cuatro puntos lila). No es una app aparte: es parte de Bubble y se va con ella.
+**Bubble Apps** es un segundo ícono de Bubble en tu cajón de apps (el logo de las burbujas con cuatro puntos lila). No es una app aparte: viene con Bubble, es parte de ella y se va con ella. También se abre desde la pantalla de inicio de Bubble (fila **Bubble Apps**).
 
 Muestra una cuadrícula con dos secciones:
 

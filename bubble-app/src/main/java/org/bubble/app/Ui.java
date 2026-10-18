@@ -206,24 +206,27 @@ final class Ui {
     }
 
     /**
-     * A full-width button in the logo's black: rounded, white text, one fixed height for all, no
-     * elevation and no border.
+     * A full-width button in the logo's black by day and white by night (black would vanish on the
+     * dark background): rounded, one fixed height for all, no elevation, no border and no tint from
+     * the system theme (on the Pixel it tinted the button with the wallpaper colour at night).
      */
     static Button button(Context c, CharSequence label, View.OnClickListener onClick) {
         Button b = new Button(c);
         b.setText(label);
         b.setAllCaps(false);
-        b.setTextColor(0xFFFFFFFF);
+        boolean night = night(c);
+        b.setTextColor(night ? INK : 0xFFFFFFFF);
         b.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 16);
         b.setStateListAnimator(null);
         b.setMinHeight(0);
         b.setMinimumHeight(0);
         b.setPadding(dp(c, 20), 0, dp(c, 20), 0);
         android.graphics.drawable.GradientDrawable shape = new android.graphics.drawable.GradientDrawable();
-        shape.setColor(INK);
+        shape.setColor(night ? 0xFFFFFFFF : INK);
         shape.setCornerRadius(dp(c, RADIUS_DP));
         b.setBackground(new android.graphics.drawable.RippleDrawable(
-                android.content.res.ColorStateList.valueOf(0x33FFFFFF), shape, null));
+                android.content.res.ColorStateList.valueOf(night ? 0x33000000 : 0x33FFFFFF), shape, null));
+        b.setBackgroundTintList(null);
         b.setOnClickListener(onClick);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, dp(c, 52));

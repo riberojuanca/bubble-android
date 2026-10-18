@@ -4,7 +4,7 @@ Android hides the bubble's apps inside the *Private* section and the Meta space'
 
 ## Bubble Apps
 
-**Bubble Apps** is a second icon of Bubble in your app drawer (the bubble logo with four lilac dots). It is not a separate app: it belongs to Bubble and goes away with it.
+**Bubble Apps** is a second icon of Bubble in your app drawer (the bubble logo with four lilac dots). It is not a separate app: it comes with Bubble, belongs to it and goes away with it. You can also open it from Bubble's home screen (**Bubble Apps** row).
 
 It shows a grid with two sections:
 

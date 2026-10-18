@@ -8,6 +8,7 @@ Arriba hay una línea de estado, por ejemplo **Lista · sin servicios de Google*
 |---|---|
 | **Burbuja** | El estado de la burbuja, revisarla, su bloqueo con huella, borrarla |
 | **Apps** | Las apps dentro de la burbuja, con su acceso a internet ([capítulo 4](04-apps.md), [capítulo 5](05-internet.md)) |
+| **Bubble Apps** | Abre la cuadrícula para poner apps y el widget en la pantalla de inicio ([capítulo 7](07-bubble-apps-y-widget.md)) |
 | **Espacio Meta** | El espacio opcional para Facebook e Instagram ([capítulo 8](08-espacio-meta.md)) |
 | **Firewall** | El firewall de tu teléfono normal ([capítulo 9](09-firewall-del-telefono.md)) |
 | **Ajustes** | Volver a vincular, el registro técnico, quitar todo, la versión |
