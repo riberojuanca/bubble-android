@@ -1,0 +1,51 @@
+# Private Space: packages to KEEP (allowlist). Everything else is excluded at creation.
+# Pixel 9a, Android 17 (API 37, CP3A.260905.009): 9 packages + 34 overlays
+# (enabled RROs whose target is one of the required packages; resources only, no code).
+# Minimum validated on the Android 17 emulator on 2026-10-16: see
+# docs/reverse-engineering/private-space.md ("The minimal profile").
+# Reference only: the engine computes the real list on the phone at creation time.
+#   disallow = (standard profile packages) - (this list)
+# NEVER drop com.android.systemui: without it user 0's SystemUI crashes (boot loop, 2026-10-16).
+android
+android.auto_generated_rro_product__
+android.auto_generated_rro_vendor__
+com.android.providers.media.overlay.pixel
+com.android.providers.settings
+com.android.providers.settings.auto_generated_rro_product__
+com.android.providers.settings.auto_generated_rro_vendor__
+com.android.providers.userdictionary
+com.android.server.telecom
+com.android.settings
+com.android.settings.auto_generated_rro_product__
+com.android.settings.auto_generated_rro_vendor__
+com.android.settings.overlay.tegu
+com.android.settings.tegu
+com.android.systemui
+com.android.systemui.auto_generated_rro_product__
+com.android.systemui.auto_generated_rro_vendor__
+com.google.android.overlay.gazeoverlay
+com.google.android.overlay.glanceablehubconfig
+com.google.android.overlay.glanceablehubsettings
+com.google.android.overlay.glanceablehubsettings2022
+com.google.android.overlay.googleconfig
+com.google.android.overlay.googlewebview
+com.google.android.overlay.messagingreadrestrictionallowlist
+com.google.android.overlay.permissioncontroller
+com.google.android.overlay.permissioncontroller.safetycenter
+com.google.android.overlay.pixelconfig2018
+com.google.android.overlay.pixelconfig2019
+com.google.android.overlay.pixelconfig2019midyear
+com.google.android.overlay.pixelconfig2021
+com.google.android.overlay.pixelconfigcommon
+com.google.android.overlay.trafficlightfaceoverlay
+com.google.android.overlay.udfpsoverlay
+com.google.android.permissioncontroller
+com.google.android.providers.media.module
+com.google.android.settings.overlay.pixelvpnconfig
+com.google.android.systemui.gxoverlay
+com.google.android.systemui.overlay.glanceablehubconfig
+com.google.android.systemui.overlay.pixelbatteryhealthconfig
+com.google.android.systemui.overlay.pixelbatterylotxconfig
+com.google.android.systemui.overlay.pixelvpnconfig
+com.google.android.verifier.overlay
+com.google.android.webview
