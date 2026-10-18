@@ -1,0 +1,35 @@
+# Recipe for F-Droid's fdroiddata repository (metadata/org.bubble.app.yml).
+# The APK is a reproducible build: F-Droid builds the tag, checks it is identical to the APK
+# published on GitHub and ships that one, signed with Bubble's own key, so GitHub and F-Droid
+# installs update each other. The in-app GitHub updater turns itself off when F-Droid installed
+# Bubble (Updates.fromStore). Without BUBBLE_VERSION, Gradle reads the version from the vX.Y.Z tag.
+Categories:
+  - Security
+  - System
+License: MIT
+AuthorName: Bubble contributors
+WebSite: https://riberojuanca.github.io/bubble-android/
+SourceCode: https://github.com/riberojuanca/bubble-android
+IssueTracker: https://github.com/riberojuanca/bubble-android/issues
+Changelog: https://github.com/riberojuanca/bubble-android/releases
+
+AutoName: Bubble
+
+RepoType: git
+Repo: https://github.com/riberojuanca/bubble-android.git
+Binaries: https://github.com/riberojuanca/bubble-android/releases/download/v%v/bubble-%v.apk
+
+Builds:
+  - versionName: 0.1.3
+    versionCode: 103
+    commit: v0.1.3
+    subdir: bubble-app
+    gradle:
+      - yes
+
+AllowedAPKSigningKeys: 1aa7f8990a322c9c14ff9fb985ebbc36f27704b1746a3c6700307a6db3e90d31
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.[0-9]+$
+CurrentVersion: 0.1.3
+CurrentVersionCode: 103

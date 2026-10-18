@@ -21,8 +21,13 @@ public final class SettingsActivity extends Activity {
         Ui.Row shape = Ui.row(page, getString(R.string.settings_icon_shape),
                 getString(IconShape.title(new Store(this).iconShape())), null);
         shape.view.setOnClickListener(v -> pickShape(shape));
-        Ui.row(page, getString(R.string.settings_updates), getString(R.string.settings_updates_sub),
-                v -> startActivity(new Intent(this, UpdateActivity.class)));
+        if (Updates.fromStore(this)) {
+            Ui.row(page, getString(R.string.settings_updates), getString(R.string.settings_updates_store),
+                    v -> Ui.alert(this, getString(R.string.settings_updates), getString(R.string.settings_updates_store)));
+        } else {
+            Ui.row(page, getString(R.string.settings_updates), getString(R.string.settings_updates_sub),
+                    v -> startActivity(new Intent(this, UpdateActivity.class)));
+        }
         Ui.row(page, getString(R.string.settings_remove_all), getString(R.string.settings_remove_all_sub), v -> explainRemoveAll());
         Ui.row(page, getString(R.string.settings_about), version(), v -> { });
     }

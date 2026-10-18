@@ -1,0 +1,4 @@
+- Botones y controles en blanco y negro de Bubble también en modo oscuro
+- Bubble Apps se abre desde la pantalla principal de Bubble
+- Los nombres largos de los íconos terminan en «…»
+- Instalada desde F-Droid: las actualizaciones llegan solo por F-Droid

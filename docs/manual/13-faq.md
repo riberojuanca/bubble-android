@@ -16,7 +16,7 @@ No. Bubble works on a stock phone with a locked bootloader.
 No. Pairing happens on the phone itself.
 
 **How do I update Bubble?**
-Bubble checks GitHub when you open it, at most once every six hours, and offers **Update** when a newer release is available. You can also use **Settings → Check for updates**. Android may ask you to allow installations from Bubble the first time, then asks you to confirm the update. Your data and pairing are kept; do not uninstall the previous version.
+Bubble checks GitHub when you open it, at most once every six hours, and offers **Update** when a newer release is available. You can also use **Settings → Check for updates**. Android may ask you to allow installations from Bubble the first time, then asks you to confirm the update. Your data and pairing are kept; do not uninstall the previous version. If you installed Bubble from F-Droid, F-Droid delivers the updates and Bubble does not check GitHub. It is the same APK with the same signature, so you can move between GitHub and F-Droid without uninstalling.
 
 **Does it drain the battery?**
 The bubble's apps use what they would use anywhere. Bubble itself only works briefly when you use it; the guard checks once a minute while it is alive.

@@ -1,0 +1,22 @@
+<p>Bubble convierte el <i>Espacio privado</i> de Android en una «burbuja»: un perfil aparte y oculto donde las apps que elijas corren de forma nativa, con sus propios datos, <b>sin servicios de Google adentro</b> y detrás de un firewall que bloquea todo de entrada. Tu teléfono normal sigue funcionando igual que antes, con bancos y apps de Google incluidos.</p>
+
+<p><b>Qué hace Bubble</b></p>
+<ul>
+<li>Crea la burbuja: un Espacio privado mínimo, sin Google Play Services, sin Play Store y sin sus piezas desde el primer arranque.</li>
+<li>Mantiene afuera a Google: un guardián apaga cualquier servicio de Google que aparezca adentro.</li>
+<li>Filtra la red: cada app de adentro empieza sin internet; vos le das Wi-Fi, datos móviles o ambos.</li>
+<li>Agrega apps como quieras: copiá apps que ya tenés, instalá archivos APK o usá F-Droid dentro de la burbuja.</li>
+<li>Se bloquea sola: la burbuja se cierra al apagar la pantalla, salvo que una de sus apps esté sonando.</li>
+<li>Espacio Meta (opcional): un perfil aparte para Facebook e Instagram, con Google instalado pero apagado.</li>
+<li>Bubble Apps, íconos y un widget: abrí las apps de la burbuja desde la pantalla de inicio.</li>
+<li>Fotos de la burbuja: elegí una foto guardada en la burbuja desde el selector de archivos del teléfono, por ejemplo como fondo de pantalla, sin copiar las demás.</li>
+<li>Se quita en un paso y el teléfono queda como estaba.</li>
+</ul>
+
+<p><b>Cómo funciona</b></p>
+<p>Crear un perfil sin Google, filtrar su red y manejar sus apps necesita permisos de sistema que ninguna app común puede tener. Bubble los toma de la identidad <i>shell</i> de Android, a través de la depuración inalámbrica de tu propio teléfono, vinculada una sola vez con un código y sin computadora. Lo del día a día va directo de Bubble a su copia dentro de cada perfil.</p>
+
+<p><b>Qué no hace Bubble</b></p>
+<p>Android igual puede saber que existe un perfil privado y qué apps tiene instaladas; no puede ver cuándo las usás, tus datos, tus cuentas ni tu tráfico. Las apps que exigen la verificación Play Integrity de Google (muchos bancos, algunos juegos) no funcionan dentro de la burbuja.</p>
+
+<p><b>Estado: experimental.</b> Hecha y probada en un Pixel 9a con Android 17 (de fábrica, con el bootloader bloqueado). Otros teléfonos y versiones de Android no están probados.</p>

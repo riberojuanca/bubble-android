@@ -58,9 +58,28 @@ final class Updates {
 
     private Updates() {}
 
+    /** F-Droid and the clients of its repositories: they deliver Bubble's updates themselves. */
+    private static final java.util.Set<String> STORES = new java.util.HashSet<>(Arrays.asList(
+            "org.fdroid.fdroid", "org.fdroid.basic", "com.looker.droidify", "com.machiav3lli.fdroid"));
+
+    /**
+     * Installed from F-Droid: then the store updates Bubble, and Bubble neither checks nor downloads
+     * from GitHub. Decided at run time, so F-Droid ships the very APK published on GitHub (a
+     * reproducible build, signed with Bubble's own key) instead of a separate build.
+     */
+    static boolean fromStore(Context context) {
+        try {
+            String installer = context.getPackageManager()
+                    .getInstallSourceInfo(context.getPackageName()).getInstallingPackageName();
+            return installer != null && STORES.contains(installer);
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
     /** Only the main-profile copy checks, at most once every six hours. Offline failures stay quiet. */
     static void checkAutomatically(Activity activity) {
-        if (BootReceiver.insideBubble() || checking) return;
+        if (BootReceiver.insideBubble() || checking || fromStore(activity)) return;
         SharedPreferences prefs = activity.getSharedPreferences("updates", Context.MODE_PRIVATE);
         long now = System.currentTimeMillis();
         long last = prefs.getLong("last_attempt", 0);

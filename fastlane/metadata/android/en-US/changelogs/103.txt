@@ -1,0 +1,4 @@
+- Buttons and controls follow Bubble's black and white in dark mode
+- Bubble Apps is reachable from Bubble's home screen
+- Long app names on home-screen icons end in "…"
+- Installed from F-Droid: updates come from F-Droid only

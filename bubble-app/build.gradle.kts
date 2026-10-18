@@ -5,7 +5,17 @@ plugins {
 // Release builds take their version from CI (BUBBLE_VERSION=0.1.0 → versionCode 100) and their
 // signing key from the environment, so no secret lives in the repository. Without them, a local
 // release build is simply left unsigned.
-val releaseVersion = System.getenv("BUBBLE_VERSION") ?: "0.1.0"
+// Without the variable (F-Droid builds a release tag), the version is the vX.Y.Z tag on HEAD, so
+// both builds carry the same version and F-Droid can reproduce the published APK.
+fun headTagVersion(): String? = try {
+    val git = ProcessBuilder("git", "describe", "--tags", "--exact-match", "--match", "v[0-9]*", "HEAD")
+        .directory(rootDir).redirectErrorStream(true).start()
+    val out = git.inputStream.bufferedReader().readText().trim()
+    if (git.waitFor() == 0 && Regex("v\\d+\\.\\d+\\.\\d+").matches(out)) out.substring(1) else null
+} catch (e: Exception) {
+    null
+}
+val releaseVersion = System.getenv("BUBBLE_VERSION") ?: headTagVersion() ?: "0.1.0"
 val releaseCode = releaseVersion.split(".").map { it.toInt() }.let { (major, minor, patch) ->
     major * 10000 + minor * 100 + patch
 }
