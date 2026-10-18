@@ -254,4 +254,20 @@
     <string name="shape_arch">Arco</string>
     <string name="shape_four_sided_cookie">Galleta de 4 lados</string>
     <string name="shape_seven_sided_cookie">Galleta de 7 lados</string>
+    <string name="bubble_files">Archivos de la burbuja</string>
+    <string name="photos_pick_hint">Elegí una foto guardada en la burbuja. Solo se comparte esa foto.</string>
+    <string name="photos_wallpaper_hint">Tocá una foto para ponerla de fondo de pantalla. Solo esa foto sale de la burbuja.</string>
+    <string name="photos_locked_here">La burbuja sigue bloqueada.</string>
+    <string name="photos_none">No hay fotos en la burbuja.</string>
+    <string name="assist_label">Bubble: fondos con fotos de la burbuja</string>
+    <string name="assist_description">Agrega un botón «Fotos de la burbuja» al elegir un fondo de pantalla, para usar una foto de la burbuja. Solo detecta cuándo estás eligiendo un fondo; no lee nada de la pantalla.</string>
+    <string name="settings_assist">Fondos con fotos de la burbuja</string>
+    <string name="settings_assist_on">Activado</string>
+    <string name="settings_assist_off">Desactivado</string>
+    <string name="assist_explain">Cuando elegís un fondo de pantalla, el teléfono abre Google Fotos, que no puede ver la burbuja. Si activás esto, ahí va a aparecer un botón «Fotos de la burbuja» para elegir una foto de la burbuja.\n\nPara eso Bubble necesita el permiso de accesibilidad de Android. Solo lo usa para saber cuándo estás eligiendo un fondo. No lee nada de la pantalla.</string>
+    <string name="assist_turn_on">Activar</string>
+    <string name="settings_assist_lost">Se desactivó. Tocá para activarlo de nuevo</string>
+    <string name="assist_lost_title">Las fotos de la burbuja ya no aparecen al elegir un fondo</string>
+    <string name="assist_lost_body">Tocá para volver a activarlo.</string>
+    <string name="assist_manual">Activá «Bubble: fondos con fotos de la burbuja» en esta lista.</string>
 </resources>

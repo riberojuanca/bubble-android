@@ -688,7 +688,10 @@ final class Controller {
             }
             for (int i = 0; i < 60; i++) {
                 if (!users.isQuietModeEnabled(handle) && users.isUserUnlocked(handle)) return true;
-                if (unlockCancelledAt > 0 && System.currentTimeMillis() - unlockCancelledAt > 3000) return false;
+                // The prompt closed: cancelled if the bubble is still in quiet mode. Confirmed, it
+                // leaves quiet mode at once but needs a few more seconds to finish unlocking.
+                if (unlockCancelledAt > 0 && System.currentTimeMillis() - unlockCancelledAt > 3000
+                        && users.isQuietModeEnabled(handle)) return false;
                 // Seen on the Pixel: a request answered with no prompt at all. If Android's unlock
                 // screen has not come up after 3 s (nothing covered Bubble), ask once more.
                 if (i == 3 && !unlockPromptShown && users.isQuietModeEnabled(handle)) {
@@ -726,6 +729,15 @@ final class Controller {
     /** The unlock prompt is gone (cancelled, or confirmed): stop waiting for it soon. */
     static void unlockPromptClosed() {
         unlockCancelledAt = System.currentTimeMillis();
+    }
+
+    /** The bubble's file browser; when it is locked, Android's unlock prompt comes first. */
+    String openBubbleFiles() throws Exception {
+        int user = bubbleUserOrThrow();
+        if (!ProfileBridge.available(context)) throw new IllegalStateException(context.getString(R.string.error_profile_setup));
+        if (ProfileBridge.locked(context, user) && !unlockBubble()) return context.getString(R.string.grid_still_locked);
+        ProfileBridge.files(context, user);
+        return "";
     }
 
     /** Open an app of the bubble; when it is locked, Android's unlock prompt comes first. */

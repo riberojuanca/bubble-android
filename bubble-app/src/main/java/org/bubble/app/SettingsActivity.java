@@ -10,6 +10,9 @@ import android.widget.TextView;
 /** Rarely needed things: pairing again, the technical log, removing everything, version. */
 public final class SettingsActivity extends Activity {
 
+    /** Opened from the "turned off" notification: offer to turn the Wallpaper button back on. */
+    static final String EXTRA_ASSIST = "assist";
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LinearLayout page = Ui.screen(this, getString(R.string.home_settings), null, null);
@@ -18,6 +21,9 @@ public final class SettingsActivity extends Activity {
             Ui.alert(this, getString(R.string.setup_pair_title), getString(R.string.setup_pair_next));
         });
         Ui.row(page, getString(R.string.settings_log), getString(R.string.settings_log_sub), v -> showLog());
+        assist = Ui.row(page, getString(R.string.settings_assist), "", null);
+        assist.view.setOnClickListener(v -> toggleAssist(assist));
+        if (getIntent().getBooleanExtra(EXTRA_ASSIST, false) && !PhotosAssistService.enabled(this)) toggleAssist(assist);
         Ui.Row shape = Ui.row(page, getString(R.string.settings_icon_shape),
                 getString(IconShape.title(new Store(this).iconShape())), null);
         shape.view.setOnClickListener(v -> pickShape(shape));
@@ -30,6 +36,39 @@ public final class SettingsActivity extends Activity {
         }
         Ui.row(page, getString(R.string.settings_remove_all), getString(R.string.settings_remove_all_sub), v -> explainRemoveAll());
         Ui.row(page, getString(R.string.settings_about), version(), v -> { });
+    }
+
+    private Ui.Row assist;
+
+    /** Also after coming back from Android's accessibility settings. */
+    @Override protected void onResume() {
+        super.onResume();
+        assist.setSubtitle(getString(PhotosAssistService.enabled(this) ? R.string.settings_assist_on
+                : PhotosAssistService.lost(this) ? R.string.settings_assist_lost : R.string.settings_assist_off));
+        PhotosAssistService.checkLost(this);
+    }
+
+    /** On: explain what the accessibility service sees first. Off: at once. */
+    private void toggleAssist(Ui.Row row) {
+        if (PhotosAssistService.enabled(this)) {
+            if (!PhotosAssistService.setEnabled(this, false)) {
+                startActivity(new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS));
+                return;
+            }
+            row.setSubtitle(getString(R.string.settings_assist_off));
+            return;
+        }
+        new Ui.Sheet(this).title(R.string.settings_assist).message(R.string.assist_explain)
+                .action(getString(R.string.assist_turn_on), () -> {
+                    if (PhotosAssistService.setEnabled(this, true)) {
+                        row.setSubtitle(getString(R.string.settings_assist_on));
+                        return;
+                    }
+                    // Not paired yet: Android's own switch, under Accessibility → Bubble.
+                    android.widget.Toast.makeText(this, R.string.assist_manual, android.widget.Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS));
+                })
+                .cancel().show();
     }
 
     /**

@@ -255,4 +255,20 @@
     <string name="shape_arch">Arch</string>
     <string name="shape_four_sided_cookie">4-sided cookie</string>
     <string name="shape_seven_sided_cookie">7-sided cookie</string>
+    <string name="bubble_files">Bubble files</string>
+    <string name="photos_pick_hint">Choose a photo saved in the bubble. Only that photo is shared.</string>
+    <string name="photos_wallpaper_hint">Tap a photo to make it your wallpaper. Only that photo leaves the bubble.</string>
+    <string name="photos_locked_here">The bubble is still locked.</string>
+    <string name="photos_none">There are no photos in the bubble.</string>
+    <string name="assist_label">Bubble: wallpaper from the bubble</string>
+    <string name="assist_description">Adds a "Bubble photos" button when you choose a wallpaper, so you can use a photo from the bubble. It only notices when you are choosing a wallpaper; it does not read anything on the screen.</string>
+    <string name="settings_assist">Wallpapers with bubble photos</string>
+    <string name="settings_assist_on">On</string>
+    <string name="settings_assist_off">Off</string>
+    <string name="assist_explain">When you choose a wallpaper, the phone opens Google Photos, which cannot see the bubble. Turn this on and a "Bubble photos" button will appear there, so you can pick a photo from the bubble.\n\nBubble needs Android\'s accessibility permission for this. It only uses it to notice when you are choosing a wallpaper. It does not read anything on the screen.</string>
+    <string name="assist_turn_on">Turn on</string>
+    <string name="settings_assist_lost">It turned off. Tap to turn it on again</string>
+    <string name="assist_lost_title">Bubble photos no longer appear when choosing a wallpaper</string>
+    <string name="assist_lost_body">Tap to turn it on again.</string>
+    <string name="assist_manual">Turn on "Bubble: wallpaper from the bubble" in this list.</string>
 </resources>

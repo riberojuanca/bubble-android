@@ -47,10 +47,13 @@ When the bubble is locked, Android stops all its apps and keeps its storage encr
 
 The Private section only appears in the app drawer when the bubble has at least one app. Bubble always keeps F-Droid there for this reason.
 
-## Using bubble photos on the phone
+## Using bubble photos and files on the phone
 
-Photos saved inside the bubble (downloaded with Immich or a browser there) stay in the bubble. To use one on the phone, for example as wallpaper, pick it from **Bubble photos** in Android's file picker: Wallpaper & style → My photos → menu → **Browse** → **Bubble photos**. The same source appears in any phone app that asks you to choose a file.
+Photos and downloads saved inside the bubble (with Immich or a browser there) stay in the bubble. Bubble lets you reach them from the normal phone without moving the rest:
 
-- It shows the bubble's photo folders, newest first, with thumbnails.
-- Only the photo you choose is read, and Bubble keeps no copy. The app you give it to may keep its own (Android stores the wallpaper image, for example).
-- It works only while the bubble is unlocked. Locked, the folder says so: unlock the bubble and open it again.
+- **Wallpaper from Wallpaper & style**: turn on Bubble → Settings → **Wallpapers with bubble photos**. Then Wallpaper & style → *Choose a photo* still opens Google Photos, with a **Bubble photos** button on top: tap it, open a folder and tap a photo. Android's own wallpaper screen opens to crop it and set it on the home screen, the lock screen or both. The Pixel's wallpaper app always asks Google Photos by name, and Google Photos only shows the normal phone's photos, so the button is how the bubble's photos get there. It uses an accessibility service that only sees which screen of those two apps is open, never what is on it.
+- **Wallpaper from Bubble**: Bubble → Bubble → **Bubble photos**, then the same steps.
+- **Any app that asks for an image** can choose **Bubble photos** among the apps it offers, or in Android's file picker (menu → **Browse** → **Bubble photos**).
+- **Bubble files**: Bubble → Bubble → **Bubble files** opens Android's file browser inside the bubble, on the bubble's own storage (its Downloads and folders, apart from the phone's).
+
+If the bubble is locked, Android asks for your fingerprint or PIN right there and the photos or files open after it. Only the photo you choose leaves the bubble, and Bubble keeps no copy; the app you give it to may keep its own (Android stores the wallpaper image, for example).

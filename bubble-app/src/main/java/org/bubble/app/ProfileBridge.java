@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 /** Local, signature-protected Binder calls between Bubble's copies. No network transport. */
 final class ProfileBridge {
     static final int APPS = 1, OPEN = 2, NETWORK = 3, RULES = 4, STATUS = 5,
-            PHOTO_FOLDERS = 6, PHOTOS = 7, PHOTO_THUMB = 8, PHOTO_OPEN = 9;
+            PHOTO_FOLDERS = 6, PHOTOS = 7, PHOTO_THUMB = 8, PHOTO_OPEN = 9, FILES = 10;
     static final String ERROR = "error", ALLOWED = "allowed", PACKAGE = "package",
             ID = "id", IDS = "ids", NAMES = "names", MIMES = "mimes", SIZES = "sizes", DATES = "dates",
             COUNTS = "counts", BYTES = "bytes", FILE = "file";
@@ -154,7 +154,16 @@ final class ProfileBridge {
     static void open(Context c, int user, String pkg) throws Exception {
         Bundle request = new Bundle();
         request.putString(PACKAGE, pkg);
-        PendingIntent launch = call(c, user, OPEN, request).getParcelable("launch", PendingIntent.class);
+        launch(c, call(c, user, OPEN, request));
+    }
+
+    /** Android's file browser inside the profile, on its own storage (the bubble's files only). */
+    static void files(Context c, int user) throws Exception {
+        launch(c, call(c, user, FILES, null));
+    }
+
+    private static void launch(Context c, Bundle response) throws Exception {
+        PendingIntent launch = response.getParcelable("launch", PendingIntent.class);
         if (launch == null) throw new IOException(c.getString(R.string.error_profile_unavailable));
         android.app.ActivityOptions options = android.app.ActivityOptions.makeBasic();
         options.setPendingIntentBackgroundActivityStartMode(android.os.Build.VERSION.SDK_INT >= 36

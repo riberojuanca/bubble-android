@@ -22,7 +22,7 @@ Hay tres formas, y se pueden combinar.
 - **De las Descargas de la burbuja**: un APK que bajaste con un navegador dentro de la burbuja. Si la burbuja está bloqueada, Bubble te pide desbloquearla primero.
 - **De los archivos del teléfono**: un APK de tu teléfono normal. Se instala solo dentro de la burbuja.
 
-Los archivos y las fotos que descargan las apps de la burbuja pertenecen a su almacenamiento separado. No aparecen automáticamente en las Descargas ni en la galería del teléfono normal. Bubble conserva el selector de documentos de Android dentro del perfil para que las apps puedan elegir archivos allí; el selector de APK de arriba solo muestra APK, no fotos ni otras descargas. Para usar una foto de la burbuja en el teléfono normal, elegila desde **Fotos de la burbuja** en el selector de archivos del teléfono ([capítulo 3](03-inicio-y-burbuja.md#usar-fotos-de-la-burbuja-en-el-teléfono)).
+Los archivos y las fotos que descargan las apps de la burbuja pertenecen a su almacenamiento separado. No aparecen automáticamente en las Descargas ni en la galería del teléfono normal. Bubble conserva el selector de documentos de Android dentro del perfil para que las apps puedan elegir archivos allí; el selector de APK de arriba solo muestra APK, no fotos ni otras descargas. Para usar una foto de la burbuja en el teléfono normal, elegila desde **Fotos de la burbuja** en el selector de archivos del teléfono ([capítulo 3](03-inicio-y-burbuja.md#usar-fotos-y-archivos-de-la-burbuja-en-el-teléfono)).
 
 ### Usar F-Droid dentro de la burbuja
 

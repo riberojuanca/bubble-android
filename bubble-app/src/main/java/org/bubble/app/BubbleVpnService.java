@@ -266,7 +266,7 @@ public final class BubbleVpnService extends VpnService {
         return context.getSharedPreferences(PREFS, MODE_PRIVATE);
     }
 
-    private static final String ALERTS = "bubble-alerts";
+    static final String ALERTS = "bubble-alerts";
     private static final int RULES_MISSING = 4;
 
     /**

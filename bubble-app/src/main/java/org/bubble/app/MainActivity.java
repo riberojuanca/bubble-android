@@ -115,6 +115,7 @@ public final class MainActivity extends Activity {
             return;
         }
         Updates.checkAutomatically(this);
+        PhotosAssistService.checkLost(this);
         if (!shortcutsRefreshed) {
             shortcutsRefreshed = true;
             android.content.Context app = getApplicationContext();

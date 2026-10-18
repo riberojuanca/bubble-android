@@ -23,6 +23,11 @@ final class Store {
         prefs = context.getSharedPreferences("bubble", Context.MODE_PRIVATE);
     }
 
+    /** The user turned on "Bubble photos in Wallpaper & style": if Android turns it off, Bubble says so. */
+    boolean assistWanted() { return prefs.getBoolean("assist_wanted", false); }
+
+    void setAssistWanted(boolean on) { prefs.edit().putBoolean("assist_wanted", on).apply(); }
+
     /** The app an icon widget shows, as "space:package"; null when that widget is not Bubble's. */
     String iconWidget(int id) { return prefs.getString("icon_widget_" + id, null); }
 

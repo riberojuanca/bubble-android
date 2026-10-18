@@ -22,7 +22,7 @@ There are three ways, and you can mix them.
 - **From the bubble's Downloads**: an APK you downloaded with a browser inside the bubble. If the bubble is locked, Bubble asks you to unlock it first.
 - **From the phone's files**: an APK on your normal phone. It is installed only inside the bubble.
 
-Files and photos downloaded by apps inside the bubble belong to its separate storage. They do not automatically appear in the normal phone's Downloads or photo gallery. Bubble keeps Android's document picker inside the profile so apps can choose files there; the APK selector above only lists APKs, not photos or other downloads. To use a bubble photo on the normal phone, pick it from **Bubble photos** in the phone's file picker ([chapter 3](03-home-and-bubble.md#using-bubble-photos-on-the-phone)).
+Files and photos downloaded by apps inside the bubble belong to its separate storage. They do not automatically appear in the normal phone's Downloads or photo gallery. Bubble keeps Android's document picker inside the profile so apps can choose files there; the APK selector above only lists APKs, not photos or other downloads. To use a bubble photo on the normal phone, pick it from **Bubble photos** in the phone's file picker ([chapter 3](03-home-and-bubble.md#using-bubble-photos-and-files-on-the-phone)).
 
 ### Use F-Droid inside the bubble
 

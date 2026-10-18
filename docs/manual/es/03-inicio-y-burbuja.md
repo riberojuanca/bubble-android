@@ -47,10 +47,13 @@ Con la burbuja bloqueada, Android detiene todas sus apps y mantiene su almacenam
 
 La sección Privado solo aparece en el cajón de apps si la burbuja tiene al menos una app. Por eso Bubble siempre deja F-Droid ahí.
 
-## Usar fotos de la burbuja en el teléfono
+## Usar fotos y archivos de la burbuja en el teléfono
 
-Las fotos guardadas dentro de la burbuja (bajadas con Immich o con un navegador de ahí) se quedan en la burbuja. Para usar una en el teléfono, por ejemplo como fondo de pantalla, elegila desde **Fotos de la burbuja** en el selector de archivos de Android: Fondo de pantalla y estilo → Mis fotos → menú → **Explorar** → **Fotos de la burbuja**. La misma fuente aparece en cualquier app del teléfono que te pida elegir un archivo.
+Las fotos y descargas guardadas dentro de la burbuja (con Immich o con un navegador de ahí) se quedan en la burbuja. Bubble te deja llegar a ellas desde el teléfono normal sin mover lo demás:
 
-- Muestra las carpetas de fotos de la burbuja, las más nuevas primero, con miniaturas.
-- Solo se lee la foto que elegís, y Bubble no guarda ninguna copia. La app a la que se la das puede guardar la suya (Android guarda la imagen del fondo, por ejemplo).
-- Funciona solo con la burbuja desbloqueada. Si está bloqueada, la carpeta lo avisa: desbloqueala y volvé a abrirla.
+- **Fondo desde Fondo de pantalla y estilo**: activá Bubble → Ajustes → **Fondos con fotos de la burbuja**. Después, Fondo de pantalla y estilo → *Elegir una foto* sigue abriendo Google Fotos, con un botón **Fotos de la burbuja** encima: tocalo, abrí una carpeta y tocá una foto. Se abre la pantalla de fondo de pantalla de Android para recortarla y ponerla en la pantalla de inicio, la de bloqueo o las dos. La app de fondos del Pixel siempre le pide la foto a Google Fotos por nombre, y Google Fotos solo muestra las fotos del teléfono normal; por eso las de la burbuja llegan con ese botón. Usa un servicio de accesibilidad que solo ve qué pantalla de esas dos apps está abierta, nunca lo que muestra.
+- **Fondo desde Bubble**: Bubble → Burbuja → **Fotos de la burbuja**, y los mismos pasos.
+- **Cualquier app que pida una imagen** puede elegir **Fotos de la burbuja** entre las apps que ofrece, o en el selector de archivos de Android (menú → **Explorar** → **Fotos de la burbuja**).
+- **Archivos de la burbuja**: Bubble → Burbuja → **Archivos de la burbuja** abre el explorador de archivos de Android dentro de la burbuja, en su propio almacenamiento (sus Descargas y carpetas, aparte de las del teléfono).
+
+Si la burbuja está bloqueada, Android te pide la huella o el PIN ahí mismo y después se abren las fotos o los archivos. Solo sale de la burbuja la foto que elegís, y Bubble no guarda ninguna copia; la app a la que se la das puede guardar la suya (Android guarda la imagen del fondo, por ejemplo).

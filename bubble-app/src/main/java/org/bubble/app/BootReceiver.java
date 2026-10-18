@@ -24,6 +24,7 @@ public final class BootReceiver extends BroadcastReceiver {
             }
         } else {
             context.startForegroundService(new Intent(context, GuardService.class));
+            PhotosAssistService.checkLost(context);
         }
     }
 
