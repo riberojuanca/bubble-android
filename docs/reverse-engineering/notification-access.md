@@ -43,7 +43,8 @@ the existing guard. It:
 4. Discovers installed parent packages with granted `ACCESS_NOTIFICATIONS`, including shared-UID
    grants. Sets the app-op to `ignore` for non-exempt readers and reads it back. A UID override or
    unknown response is a failure. UID 1000 is reported as an OS exemption: a real probe bypassed
-   its `ignore` setting. A Google package sharing that exempt UID produces an error.
+   its `ignore` setting. Every package sharing that UID is reported, including Google code the
+   Pixel ships there (face enrollment): it runs as the OS, so no app-op can restrict it.
 5. Reports `notification_privacy=restricted` only after those configuration checks pass.
 
 Android, SystemUI, shell and Bubble remain trusted and are excluded from notification query

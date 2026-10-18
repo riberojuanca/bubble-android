@@ -71,9 +71,8 @@ final class NotificationPrivacy {
             if (uids.get(pkg) == 1000) {
                 // A real Android 17 probe still reads notifications as UID 1000 with this
                 // app-op at ignore. Do not mutate it or report that configuration as a block.
-                if (pkg.startsWith("com.google.")) {
-                    throw new IllegalStateException("Google notification reader shares the exempt system UID: " + pkg);
-                }
+                // Every member of that UID is the OS itself (the Pixel ships Google code there, e.g.
+                // face enrollment), so it is reported as an exemption whatever its package name.
                 systemQueryExemptions.add(pkg);
                 continue;
             }
