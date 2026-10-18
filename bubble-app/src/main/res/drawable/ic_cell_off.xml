@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mobile data off: the same bars, crossed out like the Wi-Fi icon. Tinted in code. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="#FF000000"
+        android:pathData="M17,4h3v11.17l-3,-3zM11,9h1.17L14,10.83L14,20h-3zM5,14h3v6L5,20z" />
+    <path android:fillColor="#FF000000"
+        android:pathData="M2,3.05L3.29,1.79 20.25,18.74 18.98,20z" />
+</vector>

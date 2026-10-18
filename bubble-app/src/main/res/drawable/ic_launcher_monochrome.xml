@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed (monochrome) launcher icon: bubble outlines. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:pathData="M25.02,53.08a23.43,23.43 0 1,0 46.86,0a23.43,23.43 0 1,0 -46.86,0z" android:strokeColor="#FFFFFFFF" android:strokeWidth="2.90" android:fillColor="#00000000" />
+    <path android:pathData="M59.79,68.59a10.18,10.18 0 1,0 20.36,0a10.18,10.18 0 1,0 -20.36,0z" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.26" android:fillColor="#00000000" />
+    <path android:pathData="M74.66,54.59a4.42,4.42 0 1,0 8.83,0a4.42,4.42 0 1,0 -8.83,0z" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.20" android:fillColor="#00000000" />
+</vector>

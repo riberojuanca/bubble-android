@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The same grid for the themed (monochrome) icon. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#FFFFFFFF" android:pathData="M39.25,47a3.25,3.25 0 1,0 6.5,0a3.25,3.25 0 1,0 -6.5,0z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M51.15,47a3.25,3.25 0 1,0 6.5,0a3.25,3.25 0 1,0 -6.5,0z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M39.25,58.9a3.25,3.25 0 1,0 6.5,0a3.25,3.25 0 1,0 -6.5,0z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M51.15,58.9a3.25,3.25 0 1,0 6.5,0a3.25,3.25 0 1,0 -6.5,0z" />
+</vector>

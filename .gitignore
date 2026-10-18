@@ -1,0 +1,13 @@
+.gradle/
+.cxx/
+**/build/
+local.properties
+*.jks
+*.keystore
+
+# Local working notes (Spanish), experiments and leftovers: never published
+notes/
+
+# Emulator harness scratch files
+tools/emulator/.keep
+tools/emulator/.disallow

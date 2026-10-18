@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_profile_unavailable">No se pudo comunicar con el perfil. Desbloquealo y volvé a intentar.</string>
+    <string name="error_profile_app_missing">Esta app no está disponible en el perfil.</string>
+    <string name="error_profile_setup">Abrí Bubble una vez con su conexión de configuración para terminar de preparar este perfil.</string>
+    <string name="error_setup_wifi">Esta operación de configuración necesita Wi-Fi. Abrir apps y cambiar sus permisos de red funciona sin él.</string>
+    <!-- Inicio -->
+    <string name="home_bubble">Burbuja</string>
+    <string name="home_apps">Apps</string>
+    <string name="home_apps_sub">Apps dentro de la burbuja</string>
+    <string name="home_firewall">Firewall</string>
+    <string name="home_settings">Ajustes</string>
+    <string name="home_settings_sub">Vinculación, registro técnico</string>
+    <string name="inside_bubble_note">Esta copia de Bubble mantiene el firewall de la burbuja. Bubble se maneja desde la app de afuera del espacio privado.</string>
+
+    <!-- Estado de la burbuja -->
+    <string name="bubble_checking">Revisando la burbuja…</string>
+    <string name="bubble_ready">Lista · sin servicios de Google</string>
+    <string name="bubble_none">Todavía no hay burbuja</string>
+    <string name="bubble_unknown">No se pudo revisar la burbuja ahora</string>
+    <string name="bubble_other_clean">Hay un espacio privado sin servicios de Google que todavía no es la burbuja</string>
+    <string name="bubble_other_with_google">Hay un espacio privado con servicios de Google: no puede ser la burbuja</string>
+    <string name="bubble_google_disabled">Atención: metieron servicios de Google en la burbuja (%1$d). El guardián los desactivó; para sacarlos del todo, reemplazá la burbuja.</string>
+    <string name="bubble_google_active">Atención: servicios de Google activos en la burbuja: %1$d. Abrí Bubble de nuevo para que el guardián los desactive.</string>
+    <string name="bubble_details">Espacio privado usuario %1$d · Servicios de Google: %2$d (activos: %3$d)</string>
+    <string name="bubble_how_to_enter">Para entrar a la burbuja, abrí el cajón de apps y desbloqueá la sección Privado, al final.</string>
+    <string name="bubble_check_now">Revisar ahora</string>
+    <string name="bubble_replace">Eliminar y crear una burbuja nueva</string>
+
+    <!-- Decisiones -->
+    <string name="decision_google_title">Ya hay un espacio privado con Google</string>
+    <string name="decision_google_body">Tiene servicios de Google adentro (%1$d), así que no puede ser la burbuja. Para crear la burbuja hay que eliminarlo, con sus apps y datos.</string>
+    <string name="decision_clean_title">Ya hay un espacio privado</string>
+    <string name="decision_clean_body">No tiene servicios de Google. Podés usarlo como burbuja tal como está, con sus apps y datos, o eliminarlo y crear uno nuevo.</string>
+    <string name="confirm_replace_title">¿Eliminar el espacio privado?</string>
+    <string name="confirm_replace_body">Se pierden sus apps y datos. No se puede deshacer.</string>
+    <string name="action_use_this">Usar este</string>
+    <string name="action_replace">Eliminar y crear</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_remove">Quitar</string>
+    <string name="action_unlock">Desbloquear</string>
+    <string name="action_add">Agregar</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_back">Atrás</string>
+
+    <!-- Asistente -->
+    <string name="setup_step">Paso %1$d de %2$d</string>
+    <string name="setup_pair_title">Vincular Bubble</string>
+    <string name="setup_pair_why">Bubble usa la depuración inalámbrica del teléfono para crear y proteger la burbuja, sin root. Se vincula una sola vez con un código; después Bubble prende la depuración solo mientras trabaja.</string>
+    <string name="setup_pair_steps">1. Activá las Opciones de desarrollador: Ajustes → Información del teléfono → tocá 7 veces Número de compilación.\n2. En Opciones de desarrollador, activá Depuración inalámbrica y abrí «Vincular dispositivo con código de vinculación».\n3. Tocá Vincular acá, bajá la barra de notificaciones y escribí el código de 6 dígitos en la notificación de Bubble.</string>
+    <string name="setup_open_developer">Abrir Opciones de desarrollador</string>
+    <string name="setup_pair_action">Vincular</string>
+    <string name="setup_pair_next">Ahora abrí «Vincular dispositivo con código de vinculación» en Depuración inalámbrica, bajá la barra de notificaciones y escribí el código en la notificación de Bubble. Después volvé acá.</string>
+    <string name="setup_create_title">Crear la burbuja</string>
+    <string name="setup_create_body">La burbuja es un espacio privado sin Google, aparte del resto del teléfono. Viene con F-Droid para instalar apps y un teclado sin acceso a internet. Tarda alrededor de un minuto.</string>
+    <string name="setup_create_action">Crear la burbuja</string>
+    <string name="setup_done_title">La burbuja está lista</string>
+    <string name="setup_done_body">Para entrar, abrí el cajón de apps y desbloqueá la sección Privado, al final. Agregá apps desde Bubble o instalalas con F-Droid adentro.</string>
+    <string name="setup_done_action">Empezar</string>
+
+    <!-- Apps -->
+    <string name="apps_hint">Adentro las apps empiezan sin datos, sin servicios de Google y sin internet: tocá el ícono de Wi-Fi o el de datos móviles para prenderlos. Las que copiás del teléfono siguen actualizándose por Play mientras estén instaladas afuera.</string>
+    <string name="apps_add_from_phone">Agregar apps del teléfono</string>
+    <string name="apps_add_apk">Instalar un archivo APK</string>
+    <string name="apk_from_bubble">De las Descargas de la burbuja</string>
+    <string name="apk_from_phone">De los archivos del teléfono</string>
+    <string name="apk_bubble_none">No hay archivos APK en las Descargas de la burbuja. Descargalo con un navegador dentro de la burbuja y volvé a intentar.</string>
+    <string name="apk_bubble_locked">La burbuja está bloqueada. Desbloqueala para ver sus Descargas.</string>
+    <string name="apps_inside">En la burbuja</string>
+    <string name="apps_none">Todavía no hay apps.</string>
+    <string name="apps_remove_title">¿Quitar %1$s de la burbuja?</string>
+    <string name="apps_remove_body">Se borran sus datos dentro de la burbuja. Afuera no cambia nada.</string>
+
+    <!-- Firewall -->
+    <string name="firewall_intro">Apps de afuera de la burbuja que pierden el Wi-Fi y los datos móviles. Dentro de la burbuja es al revés: ninguna app tiene internet salvo que lo prendas en Apps.</string>
+
+    <string name="firewall_bubble_counts">Con internet: %1$d · Sin internet: %2$d</string>
+    <string name="step_debug_on">Prendiendo la depuración inalámbrica…</string>
+    <string name="step_find_port">Buscando el puerto de depuración…</string>
+    <string name="step_connect">Conectando de forma segura…</string>
+    <string name="step_engine">Instalando el motor…</string>
+    <string name="step_check">Revisando la burbuja…</string>
+    <string name="step_read_apps">Leyendo las apps de la burbuja…</string>
+    <string name="step_firewall">Aplicando el firewall de la burbuja…</string>
+    <string name="step_apply_phone">Aplicando el firewall del teléfono…</string>
+    <string name="step_creating">Creando la burbuja…</string>
+    <string name="step_adding">Agregando apps…</string>
+    <string name="step_removing">Quitando apps…</string>
+    <string name="step_download">Bajando %1$s…</string>
+    <string name="step_install">Instalando %1$s…</string>
+    <string name="step_copy">Copiando %1$s…</string>
+    <string name="step_keyboard">Configurando el teclado…</string>
+    <string name="step_quiet">Silenciando los registros del sistema…</string>
+    <string name="step_guard">Arrancando el guardián…</string>
+    <string name="step_debug_off">Apagando la depuración inalámbrica…</string>
+
+    <string name="firewall_phone_switch">Firewall del teléfono</string>
+    <string name="firewall_phone_on">Prendido · sin internet: %1$d</string>
+    <string name="firewall_phone_off">Apagado</string>
+    <string name="section_user_apps">Tus apps</string>
+    <string name="section_system_apps">Apps del sistema</string>
+    <string name="firewall_locked_auto">La burbuja está bloqueada: el cambio se aplica cuando la desbloquees.</string>
+    <string name="firewall_locked_open">La burbuja está bloqueada: el cambio se aplica cuando la desbloquees y abras Bubble.</string>
+
+    <!-- Selector -->
+    <string name="picker_add_title">Agregar a la burbuja</string>
+    <string name="picker_add_hint">Apps que instalaste en el teléfono. Adentro empiezan sin datos.</string>
+    <string name="picker_search">Buscar</string>
+    <string name="picker_empty">No hay nada para mostrar.</string>
+
+    <!-- Ajustes -->
+    <string name="settings_repair">Volver a vincular</string>
+    <string name="settings_repair_sub">Solo si Bubble ya no puede conectarse</string>
+    <string name="settings_log">Registro técnico</string>
+    <string name="settings_log_sub">La última salida del motor</string>
+    <string name="settings_about">Acerca de</string>
+    <string name="settings_version">Versión %1$s</string>
+
+    <!-- Trabajo y errores -->
+    <string name="working">Trabajando</string>
+    <string name="working_bubble">Trabajando en la burbuja…</string>
+    <string name="working_reading">Leyendo la burbuja…</string>
+    <string name="working_unlocking">Esperando el desbloqueo…</string>
+    <string name="working_applying">Aplicando…</string>
+    <string name="working_installing">Instalando…</string>
+    <string name="error_title">Algo salió mal</string>
+    <string name="error_generic">El motor no terminó. Mirá Ajustes → Registro técnico.</string>
+    <string name="error_not_connected">No se pudo conectar a la depuración inalámbrica. Revisá que el Wi-Fi esté prendido.</string>
+    <string name="error_no_bubble">Todavía no hay burbuja.</string>
+    <string name="error_apk_unreadable">No se pudo leer el archivo.</string>
+
+    <!-- Avisos -->
+    <string name="notice_fdroid">Se instaló F-Droid en la burbuja.</string>
+    <string name="notice_keyboard_gboard">La burbuja no tenía teclado: se activó Gboard, sin acceso a internet.</string>
+    <string name="notice_keyboard_heliboard">La burbuja no tenía teclado: se activó HeliBoard.</string>
+
+    <!-- Vinculación -->
+    <string name="pair_done">Vinculado.</string>
+    <string name="pair_wrong_code">El código no coincide o se cerró el diálogo de vinculación. Probá de nuevo.</string>
+    <string name="pair_not_connected_yet">Vinculado, pero Bubble todavía no pudo conectarse. Reintentá en unos segundos.</string>
+    <string name="pairing_channel">Vinculación de Bubble</string>
+    <string name="pairing_waiting_title">Esperando el diálogo de vinculación…</string>
+    <string name="pairing_waiting_body">Abrí Ajustes → Depuración inalámbrica → Vincular con código, bajá esta barra y escribí el código.</string>
+    <string name="pairing_found_title">Dispositivo detectado</string>
+    <string name="pairing_found_body">Bajá esta barra y escribí el código de 6 dígitos.</string>
+    <string name="pairing_missing_title">No apareció el diálogo de vinculación</string>
+    <string name="pairing_missing_body">Abrí la vinculación y volvé a tocar Vincular.</string>
+    <string name="pairing_not_found">No se encontró el servidor de vinculación. ¿Está abierto el diálogo?</string>
+    <string name="pairing_result_title">Vinculación</string>
+    <string name="pairing_code_label">Código de 6 dígitos</string>
+    <string name="pairing_action">Vincular</string>
+    <string name="guard_title">Guardián</string>
+    <string name="guard_always">El guardián vigila la burbuja todo el tiempo: si aparecen servicios de Google adentro, los desactiva en menos de un minuto.</string>
+    <string name="guard_session">El guardián revisa la burbuja cada vez que Bubble se abre, hace algo o el teléfono arranca. No puede quedar corriendo porque la depuración USB está apagada; con todo apagado, nadie más puede meter servicios de Google en la burbuja.</string>
+    <string name="guard_off">El guardián no está corriendo. Abrí Bubble para que vuelva a arrancar.</string>
+    <string name="guard_restoring">Restaurando la protección…</string>
+    <!-- Espacio Meta -->
+    <string name="home_meta">Espacio Meta</string>
+    <string name="home_meta_sub">Para Facebook e Instagram, fuera de la burbuja</string>
+    <string name="meta_checking">Revisando el espacio Meta…</string>
+    <string name="meta_unknown">No se pudo revisar el espacio Meta ahora</string>
+    <string name="meta_none">Todavía no hay espacio Meta</string>
+    <string name="meta_intro">Facebook e Instagram se cierran solas dentro de la burbuja. El espacio Meta es un lugar aparte donde sí funcionan.</string>
+    <string name="meta_create">Crear espacio Meta</string>
+    <string name="meta_details_title">Antes de crear el espacio Meta</string>
+    <string name="meta_details_body">Por qué: Facebook e Instagram buscan Google al arrancar y, si no lo encuentran, se cierran. La burbuja no tiene Google, por eso ahí no andan.\n\nQué es: un espacio aparte de la burbuja, en la pestaña Trabajo del cajón de apps. Tiene Google instalado pero apagado: las apps lo encuentran y funcionan, sin notificaciones, y Google no corre.\n\nQué ganás: Facebook e Instagram no ven tus contactos, fotos ni el resto del teléfono, y la burbuja sigue sin Google.\n\nQué aceptás: Android deja volver a prender Google desde Ajustes. Si pasa, el guardián lo apaga, pero mientras tanto vería las apps de este espacio, nunca la burbuja. El Google del teléfono sabe que este espacio existe y qué apps tiene.\n\nSe puede borrar cuando quieras, sin tocar la burbuja.</string>
+    <string name="meta_action_create">Crear</string>
+    <string name="meta_ready">Listo · Google instalado y apagado</string>
+    <string name="meta_google_on">Atención: Google se prendió en el espacio Meta. Abrí Bubble de nuevo para que el guardián lo apague.</string>
+    <string name="meta_how_to_enter">Para entrar, abrí el cajón de apps y tocá la pestaña Trabajo.</string>
+    <string name="meta_hint">Las apps que agregás acá tienen internet; el teclado no. Tocá el ícono de Wi-Fi o el de datos móviles para cambiarlo.</string>
+    <string name="meta_add">Agregar apps del teléfono</string>
+    <string name="meta_inside">En el espacio Meta</string>
+    <string name="meta_delete">Borrar el espacio Meta</string>
+    <string name="meta_delete_title">¿Borrar el espacio Meta?</string>
+    <string name="meta_delete_body">Se pierden sus apps y datos. La burbuja y el resto del teléfono no cambian.</string>
+    <string name="meta_remove_title">¿Quitar %1$s del espacio Meta?</string>
+    <string name="meta_remove_body">Se borran sus datos en el espacio Meta. Afuera no cambia nada.</string>
+    <string name="picker_meta_title">Agregar al espacio Meta</string>
+    <string name="step_creating_meta">Creando el espacio Meta…</string>
+    <string name="working_meta">Trabajando en el espacio Meta…</string>
+    <string name="error_no_meta">Todavía no hay espacio Meta.</string>
+    <!-- Bubble Apps -->
+    <string name="grid_label">Bubble Apps</string>
+    <string name="grid_hint">Mantené apretada una app para agregar un acceso directo a la pantalla de inicio.</string>
+    <string name="grid_meta_paused">El espacio Meta está pausado. Reanudalo desde la pestaña Trabajo del cajón de apps.</string>
+    <string name="grid_still_locked">La burbuja sigue bloqueada.</string>
+    <string name="working_opening">Abriendo…</string>
+    <string name="widget_title">Bubble</string>
+    <string name="widget_description">Las apps del espacio Meta y la burbuja, juntas en la pantalla de inicio</string>
+    <string name="grid_add_widget">Agregar el widget a la pantalla de inicio</string>
+    <string name="grid_widget_unsupported">Este lanzador no permite agregar widgets desde una app. Agregalo desde la pantalla de inicio: mantené apretado un lugar vacío → Widgets → Bubble.</string>
+    <string name="shortcut_lock">Burbuja protegida</string>
+    <string name="step_launch">Abriendo la app en la burbuja…</string>
+    <string name="bubble_delete">Borrar la burbuja</string>
+    <string name="bubble_delete_title">¿Borrar la burbuja?</string>
+    <string name="bubble_delete_body">Se pierden sus apps y datos. No se puede deshacer. Después Bubble te ofrece crear una nueva.</string>
+    <string name="settings_remove_all">Quitar todo</string>
+    <string name="settings_remove_all_sub">Dejar el teléfono como estaba antes de Bubble</string>
+    <string name="remove_all_title">Quitar todo</string>
+    <string name="remove_all_body">Se borra:\n• La burbuja, con sus apps y datos.\n• El espacio Meta, con sus apps y datos.\n• El firewall del teléfono: las apps bloqueadas vuelven a tener internet.\n• Los ajustes que Bubble hizo en el sistema.\n\nQueda igual:\n• Las apps y los datos del teléfono normal.\n• Bubble instalada y vinculada, para que la desinstales o la vuelvas a usar.</string>
+    <string name="remove_all_confirm_title">¿Seguro?</string>
+    <string name="remove_all_confirm_body">Las apps y los datos de la burbuja y del espacio Meta se pierden. No se puede deshacer.</string>
+    <string name="remove_all_done_title">Listo</string>
+    <string name="remove_all_done_body">El teléfono quedó como antes de Bubble. Ya podés desinstalar Bubble.\n\nPara quitar también la vinculación: Ajustes → Sistema → Opciones de desarrollador → Revocar autorizaciones de depuración.</string>
+    <string name="action_continue">Continuar</string>
+    <string name="app_wifi_on">Con internet por Wi-Fi</string>
+    <string name="app_wifi_off">Sin internet por Wi-Fi</string>
+    <string name="app_mobile_on">Con datos móviles</string>
+    <string name="app_mobile_off">Sin datos móviles</string>
+    <string name="alerts_channel">Avisos de Bubble</string>
+    <string name="firewall_rules_missing_title">Apps de este espacio sin internet</string>
+    <string name="firewall_rules_missing_body">El firewall no pudo recibir la lista de apps con internet, así que por seguridad todas quedaron sin red. Abrí Bubble para que la vuelva a enviar.</string>
+    <string name="bubble_fingerprint_hint">Si una app de la burbuja te pide huella (por ejemplo un banco), dale a la burbuja su propio bloqueo: en Ajustes → Espacio privado → Bloqueo del espacio privado, elegí un PIN y agregá tu huella. Hacelo con la burbuja abierta.</string>
+    <string name="bubble_fingerprint_open">Abrir ajustes de seguridad</string>
+</resources>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Talks to the phone's own wireless-debugging daemon over the Wi-Fi interface. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Granted inside the bubble by the engine (development bit): the bubble locks itself
+         unless an app inside is playing. See BubbleMediaWatcher. -->
+    <uses-permission android:name="android.permission.MODIFY_QUIET_MODE"
+        tools:ignore="ProtectedPermissions" />
+    <!-- Granted once by the setup engine. Daily profile operations use Binder, not Wi-Fi/ADB. -->
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"
+        tools:ignore="ProtectedPermissions" />
+    <permission android:name="org.bubble.app.permission.PROFILE_CONTROL"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="org.bubble.app.permission.PROFILE_CONTROL" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <!-- Lists the apps the user can block on the primary Android. -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+    <!-- Granted once by the engine with `pm grant` (development bit); turns wireless debugging
+         back on if the user switched it off. -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault.DayNight">
+
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".SetupActivity" android:exported="false" />
+        <activity android:name=".BubbleActivity" android:exported="false" />
+        <activity android:name=".AppsActivity" android:exported="false" />
+        <activity android:name=".MetaActivity" android:exported="false" />
+
+        <!-- Bubble Apps: a second launcher icon with the Meta space and bubble apps in a grid. -->
+        <activity
+            android:name=".AppsGridActivity"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_apps"
+            android:label="@string/grid_label"
+            android:taskAffinity="org.bubble.app.grid">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- In Bubble's copy inside the bubble: opens an app there when the shell cannot. -->
+        <activity
+            android:name=".ProfileOpenActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:permission="android.permission.INTERACT_ACROSS_USERS"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <!-- Opened by pinned shortcuts only (the launcher starts them as Bubble). -->
+        <activity
+            android:name=".ShortcutActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity="org.bubble.app.shortcut" />
+        <activity android:name=".FirewallActivity" android:exported="false" />
+        <activity android:name=".SettingsActivity" android:exported="false" />
+        <activity android:name=".AppPickerActivity" android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name=".PairingService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Pairs with wireless debugging via a notification while the system dialog stays open" />
+        </service>
+
+        <service
+            android:name=".GuardService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Restores the on-device firewall after boot over local wireless debugging" />
+        </service>
+
+        <service android:name=".ProfileControlService"
+            android:exported="true"
+            android:permission="org.bubble.app.permission.PROFILE_CONTROL" />
+
+        <!-- The bubble's firewall: runs in Bubble's copy inside the bubble. Not exported: only the
+             system (VPN binding) and the shell (engine) can start it. -->
+        <service
+            android:name=".BubbleVpnService"
+            android:exported="false"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:foregroundServiceType="specialUse">
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Per-app firewall inside the private space: blocked apps get no network" />
+        </service>
+
+        <!-- Hides "Wireless debugging connected" only while Bubble itself is connected. -->
+        <service
+            android:name=".AdbNoticeListener"
+            android:exported="false"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <!-- In Bubble's copy inside the bubble: locks it with the screen unless something plays. -->
+        <service
+            android:name=".BubbleMediaWatcher"
+            android:exported="false"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".FirewallReceiver"
+            android:exported="true"
+            android:permission="android.permission.INTERACT_ACROSS_USERS" />
+
+        <!-- The home-screen widget: Meta space apps and a Bubble tile, like a named folder. -->
+        <receiver android:name=".AppsWidget" android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/apps_widget" />
+        </receiver>
+
+        <receiver android:name=".BootReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

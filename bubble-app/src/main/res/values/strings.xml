@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_profile_unavailable">Could not reach the profile. Unlock it and try again.</string>
+    <string name="error_profile_app_missing">This app is not available in the profile.</string>
+    <string name="error_profile_setup">Open Bubble with its setup connection once to finish configuring this profile.</string>
+    <string name="error_setup_wifi">This setup operation needs Wi-Fi. Opening apps and changing their network permissions work without it.</string>
+    <string name="app_name" translatable="false">Bubble</string>
+
+    <!-- Home -->
+    <string name="home_bubble">Bubble</string>
+    <string name="home_apps">Apps</string>
+    <string name="home_apps_sub">Apps inside the bubble</string>
+    <string name="home_firewall">Firewall</string>
+    <string name="home_settings">Settings</string>
+    <string name="home_settings_sub">Pairing, technical log</string>
+    <string name="inside_bubble_note">This copy of Bubble runs the bubble\'s firewall. Manage Bubble from the app outside the private space.</string>
+
+    <!-- Bubble state -->
+    <string name="bubble_checking">Checking the bubble…</string>
+    <string name="bubble_ready">Ready · no Google services</string>
+    <string name="bubble_none">There is no bubble yet</string>
+    <string name="bubble_unknown">Could not check the bubble right now</string>
+    <string name="bubble_other_clean">There is a private space without Google services that is not the bubble yet</string>
+    <string name="bubble_other_with_google">There is a private space with Google services: it cannot be the bubble</string>
+    <string name="bubble_google_disabled">Warning: Google services were put in the bubble (%1$d). The guard disabled them; to remove them for good, replace the bubble.</string>
+    <string name="bubble_google_active">Warning: Google services active in the bubble: %1$d. Open Bubble again so the guard disables them.</string>
+    <string name="bubble_details">Private space user %1$d · Google services: %2$d (active: %3$d)</string>
+    <string name="bubble_how_to_enter">To enter the bubble, open the app drawer and unlock the Private section at the bottom.</string>
+    <string name="bubble_check_now">Check now</string>
+    <string name="bubble_replace">Delete and create a new bubble</string>
+
+    <!-- Decisions -->
+    <string name="decision_google_title">A private space with Google already exists</string>
+    <string name="decision_google_body">It has Google services inside (%1$d), so it cannot be the bubble. To create the bubble it has to be deleted, with its apps and data.</string>
+    <string name="decision_clean_title">A private space already exists</string>
+    <string name="decision_clean_body">It has no Google services. Use it as the bubble as it is, with its apps and data, or delete it and create a new one.</string>
+    <string name="confirm_replace_title">Delete the private space?</string>
+    <string name="confirm_replace_body">Its apps and data are lost. This cannot be undone.</string>
+    <string name="action_use_this">Use this one</string>
+    <string name="action_replace">Delete and create</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_remove">Remove</string>
+    <string name="action_unlock">Unlock</string>
+    <string name="action_add">Add</string>
+    <string name="action_save">Save</string>
+    <string name="action_back">Back</string>
+
+    <!-- Setup -->
+    <string name="setup_step">Step %1$d of %2$d</string>
+    <string name="setup_pair_title">Pair Bubble</string>
+    <string name="setup_pair_why">Bubble uses your phone\'s wireless debugging to build and protect the bubble, without root. You pair it once with a code; after that Bubble turns debugging on only while it works.</string>
+    <string name="setup_pair_steps">1. Turn on Developer options: Settings → About phone → tap Build number 7 times.\n2. In Developer options, turn on Wireless debugging and open «Pair device with pairing code».\n3. Tap Pair here, pull down the notification shade and type the 6-digit code into Bubble\'s notification.</string>
+    <string name="setup_open_developer">Open Developer options</string>
+    <string name="setup_pair_action">Pair</string>
+    <string name="setup_pair_next">Now open «Pair device with pairing code» in Wireless debugging, pull down the notification shade and type the code into Bubble\'s notification. Then come back here.</string>
+    <string name="setup_create_title">Create the bubble</string>
+    <string name="setup_create_body">The bubble is a private space without Google, separate from the rest of the phone. It comes with F-Droid to install apps and a keyboard with no internet access. It takes about a minute.</string>
+    <string name="setup_create_action">Create the bubble</string>
+    <string name="setup_done_title">The bubble is ready</string>
+    <string name="setup_done_body">Open the app drawer and unlock the Private section at the bottom to enter. Add apps from Bubble or install them with F-Droid inside.</string>
+    <string name="setup_done_action">Start</string>
+
+    <!-- Apps -->
+    <string name="apps_hint">Apps start inside with no data, without Google services and without internet: tap the Wi-Fi or mobile data icon to turn them on. Apps copied from the phone keep being updated by Play while they stay installed outside.</string>
+    <string name="apps_add_from_phone">Add apps from the phone</string>
+    <string name="apps_add_apk">Install an APK file</string>
+    <string name="apk_from_bubble">From the bubble\'s Downloads</string>
+    <string name="apk_from_phone">From the phone\'s files</string>
+    <string name="apk_bubble_none">There are no APK files in the bubble\'s Downloads. Download it with a browser inside the bubble and try again.</string>
+    <string name="apk_bubble_locked">The bubble is locked. Unlock it to see its Downloads.</string>
+    <string name="apps_inside">In the bubble</string>
+    <string name="apps_none">No apps yet.</string>
+    <string name="apps_remove_title">Remove %1$s from the bubble?</string>
+    <string name="apps_remove_body">Its data inside the bubble is deleted. Outside nothing changes.</string>
+
+    <!-- Firewall -->
+    <string name="firewall_intro">Apps outside the bubble that lose Wi-Fi and mobile data. Inside the bubble it is the other way round: no app has internet unless you turn it on in Apps.</string>
+
+    <string name="firewall_bubble_counts">With internet: %1$d · Without internet: %2$d</string>
+    <string name="step_debug_on">Turning on wireless debugging…</string>
+    <string name="step_find_port">Finding the debugging port…</string>
+    <string name="step_connect">Connecting securely…</string>
+    <string name="step_engine">Installing the engine…</string>
+    <string name="step_check">Checking the bubble…</string>
+    <string name="step_read_apps">Reading the bubble\'s apps…</string>
+    <string name="step_firewall">Applying the bubble\'s firewall…</string>
+    <string name="step_apply_phone">Applying the phone\'s firewall…</string>
+    <string name="step_creating">Creating the bubble…</string>
+    <string name="step_adding">Adding apps…</string>
+    <string name="step_removing">Removing apps…</string>
+    <string name="step_download">Downloading %1$s…</string>
+    <string name="step_install">Installing %1$s…</string>
+    <string name="step_copy">Copying %1$s…</string>
+    <string name="step_keyboard">Setting up the keyboard…</string>
+    <string name="step_quiet">Silencing the system logs…</string>
+    <string name="step_guard">Starting the guard…</string>
+    <string name="step_debug_off">Turning off wireless debugging…</string>
+
+    <string name="firewall_phone_switch">Phone firewall</string>
+    <string name="firewall_phone_on">On · without internet: %1$d</string>
+    <string name="firewall_phone_off">Off</string>
+    <string name="section_user_apps">Your apps</string>
+    <string name="section_system_apps">System apps</string>
+    <string name="firewall_locked_auto">The bubble is locked: the change is applied when you unlock it.</string>
+    <string name="firewall_locked_open">The bubble is locked: the change is applied when you unlock it and open Bubble.</string>
+
+    <!-- Picker -->
+    <string name="picker_add_title">Add to the bubble</string>
+    <string name="picker_add_hint">Apps you installed on the phone. Inside they start with no data.</string>
+    <string name="picker_search">Search</string>
+    <string name="picker_empty">Nothing to show.</string>
+
+    <!-- Settings -->
+    <string name="settings_repair">Pair again</string>
+    <string name="settings_repair_sub">Only if Bubble cannot connect anymore</string>
+    <string name="settings_log">Technical log</string>
+    <string name="settings_log_sub">The last output of the engine</string>
+    <string name="settings_about">About</string>
+    <string name="settings_version">Version %1$s</string>
+
+    <!-- Work and errors -->
+    <string name="working">Working</string>
+    <string name="working_bubble">Working on the bubble…</string>
+    <string name="working_reading">Reading the bubble…</string>
+    <string name="working_unlocking">Waiting for the unlock…</string>
+    <string name="working_applying">Applying…</string>
+    <string name="working_installing">Installing…</string>
+    <string name="error_title">Something went wrong</string>
+    <string name="error_generic">The engine did not finish. See Settings → Technical log.</string>
+    <string name="error_not_connected">Could not connect to wireless debugging. Check that Wi-Fi is on.</string>
+    <string name="error_no_bubble">There is no bubble yet.</string>
+    <string name="error_apk_unreadable">Could not read the file.</string>
+
+    <!-- Notices -->
+    <string name="notice_fdroid">F-Droid was installed in the bubble.</string>
+    <string name="notice_keyboard_gboard">The bubble had no keyboard: Gboard was enabled, without internet access.</string>
+    <string name="notice_keyboard_heliboard">The bubble had no keyboard: HeliBoard was enabled.</string>
+
+    <!-- Pairing -->
+    <string name="pair_done">Paired.</string>
+    <string name="pair_wrong_code">The code does not match or the pairing dialog closed. Try again.</string>
+    <string name="pair_not_connected_yet">Paired, but Bubble could not connect yet. Try again in a few seconds.</string>
+    <string name="pairing_channel">Bubble pairing</string>
+    <string name="pairing_waiting_title">Waiting for the pairing dialog…</string>
+    <string name="pairing_waiting_body">Open Settings → Wireless debugging → Pair with code, pull down this shade and type the code.</string>
+    <string name="pairing_found_title">Device found</string>
+    <string name="pairing_found_body">Pull down this shade and type the 6-digit code.</string>
+    <string name="pairing_missing_title">The pairing dialog did not appear</string>
+    <string name="pairing_missing_body">Open the pairing dialog and tap Pair again.</string>
+    <string name="pairing_not_found">The pairing server was not found. Is the dialog open?</string>
+    <string name="pairing_result_title">Pairing</string>
+    <string name="pairing_code_label">6-digit code</string>
+    <string name="pairing_action">Pair</string>
+    <string name="guard_title">Guard</string>
+    <string name="guard_always">The guard is watching the bubble all the time: if Google services appear inside, it disables them within a minute.</string>
+    <string name="guard_session">The guard checks the bubble every time Bubble opens, does something or the phone starts. It cannot stay running because USB debugging is off; with everything off, no one else can put Google services in the bubble either.</string>
+    <string name="guard_off">The guard is not running. Open Bubble to start it again.</string>
+    <string name="guard_restoring">Restoring protection…</string>
+    <!-- Meta space -->
+    <string name="home_meta">Meta space</string>
+    <string name="home_meta_sub">For Facebook and Instagram, outside the bubble</string>
+    <string name="meta_checking">Checking the Meta space…</string>
+    <string name="meta_unknown">Could not check the Meta space now</string>
+    <string name="meta_none">There is no Meta space yet</string>
+    <string name="meta_intro">Facebook and Instagram close by themselves inside the bubble. The Meta space is a separate place where they work.</string>
+    <string name="meta_create">Create Meta space</string>
+    <string name="meta_details_title">Before creating the Meta space</string>
+    <string name="meta_details_body">Why: Facebook and Instagram look for Google when they start and close if they do not find it. The bubble has no Google, so they do not work there.\n\nWhat it is: a space apart from the bubble, in the Work tab of the app drawer. Google is installed there but turned off: the apps find it and work, without notifications, and Google does not run.\n\nWhat you gain: Facebook and Instagram cannot see your contacts, photos or the rest of the phone, and the bubble stays free of Google.\n\nWhat you accept: Android lets Google be turned back on from Settings. If that happens the guard turns it off, but meanwhile it would see this space\'s apps, never the bubble. The phone\'s Google knows this space exists and which apps it has.\n\nYou can delete it any time without touching the bubble.</string>
+    <string name="meta_action_create">Create</string>
+    <string name="meta_ready">Ready · Google installed and turned off</string>
+    <string name="meta_google_on">Warning: Google turned on in the Meta space. Open Bubble again so the guard turns it off.</string>
+    <string name="meta_how_to_enter">To enter, open the app drawer and tap the Work tab.</string>
+    <string name="meta_hint">Apps you add here have internet; the keyboard does not. Tap the Wi-Fi or mobile data icon to change it.</string>
+    <string name="meta_add">Add apps from the phone</string>
+    <string name="meta_inside">In the Meta space</string>
+    <string name="meta_delete">Delete the Meta space</string>
+    <string name="meta_delete_title">Delete the Meta space?</string>
+    <string name="meta_delete_body">Its apps and data are lost. The bubble and the rest of the phone do not change.</string>
+    <string name="meta_remove_title">Remove %1$s from the Meta space?</string>
+    <string name="meta_remove_body">Its data in the Meta space is deleted. Nothing changes outside.</string>
+    <string name="picker_meta_title">Add to the Meta space</string>
+    <string name="step_creating_meta">Creating the Meta space…</string>
+    <string name="working_meta">Working on the Meta space…</string>
+    <string name="error_no_meta">There is no Meta space yet.</string>
+    <!-- Bubble Apps -->
+    <string name="grid_label">Bubble Apps</string>
+    <string name="grid_hint">Press and hold an app to add a shortcut to the home screen.</string>
+    <string name="grid_meta_paused">The Meta space is paused. Resume it from the Work tab of the app drawer.</string>
+    <string name="grid_still_locked">The bubble is still locked.</string>
+    <string name="working_opening">Opening…</string>
+    <string name="widget_title">Bubble</string>
+    <string name="widget_description">The Meta space apps and the bubble, together on the home screen</string>
+    <string name="grid_add_widget">Add the widget to the home screen</string>
+    <string name="grid_widget_unsupported">This launcher does not let apps add widgets. Add it from the home screen: press and hold an empty spot → Widgets → Bubble.</string>
+    <string name="shortcut_lock">Bubble protected</string>
+    <string name="step_launch">Opening the app in the bubble…</string>
+    <string name="bubble_delete">Delete the bubble</string>
+    <string name="bubble_delete_title">Delete the bubble?</string>
+    <string name="bubble_delete_body">Its apps and data are lost. This cannot be undone. Bubble then offers to create a new one.</string>
+    <string name="settings_remove_all">Remove everything</string>
+    <string name="settings_remove_all_sub">Leave the phone as it was before Bubble</string>
+    <string name="remove_all_title">Remove everything</string>
+    <string name="remove_all_body">Removed:\n• The bubble, with its apps and data.\n• The Meta space, with its apps and data.\n• The phone\'s firewall: blocked apps get internet again.\n• The settings Bubble changed in the system.\n\nKept:\n• The apps and data of the normal phone.\n• Bubble, installed and paired, so you can uninstall it or use it again.</string>
+    <string name="remove_all_confirm_title">Are you sure?</string>
+    <string name="remove_all_confirm_body">The apps and data of the bubble and the Meta space are lost. This cannot be undone.</string>
+    <string name="remove_all_done_title">Done</string>
+    <string name="remove_all_done_body">The phone is as it was before Bubble. You can uninstall Bubble now.\n\nTo remove the pairing too: Settings → System → Developer options → Revoke debugging authorizations.</string>
+    <string name="action_continue">Continue</string>
+    <string name="app_wifi_on">Internet on Wi-Fi</string>
+    <string name="app_wifi_off">No internet on Wi-Fi</string>
+    <string name="app_mobile_on">Mobile data on</string>
+    <string name="app_mobile_off">Mobile data off</string>
+    <string name="alerts_channel">Bubble alerts</string>
+    <string name="firewall_rules_missing_title">Apps in this space have no internet</string>
+    <string name="firewall_rules_missing_body">The firewall could not get the list of apps with internet, so to be safe none has network. Open Bubble to send it again.</string>
+    <string name="bubble_fingerprint_hint">If an app in the bubble asks for your fingerprint (a bank, for example), give the bubble its own lock: in Settings → Private space → Private space lock, choose a PIN and add your fingerprint. Do it with the bubble open.</string>
+    <string name="bubble_fingerprint_open">Open security settings</string>
+</resources>
