@@ -21,7 +21,7 @@ Thanks for wanting to help. Bubble is small and deliberately simple; these notes
 
 ## Building
 
-Requirements: JDK 17, Android SDK with platform 36 and build-tools 36.0.0.
+Requirements: JDK 21 (the release and F-Droid builds use it; another JDK changes classes.dex), Android SDK with platform 36 and build-tools 36.0.0.
 
 ```sh
 ./gradlew :bubble-app:assembleDebug

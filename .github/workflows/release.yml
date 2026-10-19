@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"  # F-Droid builds with JDK 21; the same javac keeps classes.dex reproducible
 
       - name: Check update verification rules
         run: |
