@@ -35,12 +35,21 @@ public final class SettingsActivity extends Activity {
         } else {
             Ui.row(page, getString(R.string.settings_updates), getString(R.string.settings_updates_sub),
                     v -> startActivity(new Intent(this, UpdateActivity.class)));
+            Ui.Row auto = Ui.row(page, getString(R.string.settings_updates_auto), autoUpdates(), null);
+            auto.view.setOnClickListener(v -> {
+                Updates.setAutomatic(this, !Updates.automatic(this));
+                auto.setSubtitle(autoUpdates());
+            });
         }
         Ui.row(page, getString(R.string.settings_remove_all), getString(R.string.settings_remove_all_sub), v -> explainRemoveAll());
         Ui.row(page, getString(R.string.settings_about), version(), v -> { });
     }
 
     private Ui.Row assist;
+
+    private String autoUpdates() {
+        return getString(Updates.automatic(this) ? R.string.settings_updates_auto_on : R.string.settings_updates_auto_off);
+    }
 
     private String lockMode() {
         return getString(new Store(this).keepBubbleOpen() ? R.string.settings_lock_manual : R.string.settings_lock_screen);

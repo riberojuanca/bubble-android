@@ -12,7 +12,7 @@
 | **Remove everything** | Leaves the phone as it was before Bubble ([chapter 11](11-removing.md)) |
 | **About** | Bubble's version |
 
-Bubble also checks automatically when you open it, at most once every six hours. If a newer release is available, tap **Update** to download it and confirm the installation in Android. The first time, Android may ask you to allow installations from Bubble; after enabling that permission, return to Bubble to continue. Updates keep your data and pairing. Bubble verifies the download checksum, package version and signing certificate before installation. There is no need to uninstall the old version.
+With **Check for updates automatically** on (Settings; off on a new install), Bubble also checks when you open it, at most once every six hours; otherwise it only contacts GitHub when you tap **Check for updates**. If a newer release is available, tap **Update** to download it and confirm the installation in Android. The first time, Android may ask you to allow installations from Bubble; after enabling that permission, return to Bubble to continue. Updates keep your data and pairing. Bubble verifies the download checksum, package version and signing certificate before installation. There is no need to uninstall the old version.
 
 ## The guard
 

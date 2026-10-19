@@ -77,9 +77,23 @@ final class Updates {
         }
     }
 
+    /**
+     * Automatic checks are opt-in: a fresh install never contacts GitHub on its own (F-Droid's
+     * reviewers install the APK by hand, where fromStore cannot tell). Installs that already
+     * checked automatically before this choice existed keep doing so.
+     */
+    static boolean automatic(Context c) {
+        SharedPreferences prefs = c.getSharedPreferences("updates", Context.MODE_PRIVATE);
+        return prefs.getBoolean("automatic", prefs.contains("last_attempt"));
+    }
+
+    static void setAutomatic(Context c, boolean on) {
+        c.getSharedPreferences("updates", Context.MODE_PRIVATE).edit().putBoolean("automatic", on).apply();
+    }
+
     /** Only the main-profile copy checks, at most once every six hours. Offline failures stay quiet. */
     static void checkAutomatically(Activity activity) {
-        if (BootReceiver.insideBubble() || checking || fromStore(activity)) return;
+        if (BootReceiver.insideBubble() || checking || fromStore(activity) || !automatic(activity)) return;
         SharedPreferences prefs = activity.getSharedPreferences("updates", Context.MODE_PRIVATE);
         long now = System.currentTimeMillis();
         long last = prefs.getLong("last_attempt", 0);

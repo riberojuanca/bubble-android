@@ -12,7 +12,7 @@
 | **Quitar todo** | Deja el teléfono como estaba antes de Bubble ([capítulo 11](11-quitar.md)) |
 | **Acerca de** | La versión de Bubble |
 
-Bubble también busca actualizaciones al abrirlo, como máximo una vez cada seis horas. Si hay una versión nueva, tocá **Actualizar** para descargarla y confirmá la instalación en Android. La primera vez, Android puede pedirte permitir instalaciones desde Bubble; después de habilitar ese permiso, volvé a Bubble para continuar. Se conservan tus datos y la vinculación. Antes de instalar, Bubble verifica el SHA-256 de la descarga, la versión del paquete y la firma. No hace falta desinstalar la versión anterior.
+Con **Buscar actualizaciones automáticamente** activado (Ajustes; desactivado en una instalación nueva), Bubble también busca al abrirlo, como máximo una vez cada seis horas; si no, solo consulta GitHub cuando tocás **Buscar actualizaciones**. Si hay una versión nueva, tocá **Actualizar** para descargarla y confirmá la instalación en Android. La primera vez, Android puede pedirte permitir instalaciones desde Bubble; después de habilitar ese permiso, volvé a Bubble para continuar. Se conservan tus datos y la vinculación. Antes de instalar, Bubble verifica el SHA-256 de la descarga, la versión del paquete y la firma. No hace falta desinstalar la versión anterior.
 
 ## El guardián
 

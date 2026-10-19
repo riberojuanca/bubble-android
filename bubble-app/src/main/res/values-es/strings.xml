@@ -119,6 +119,9 @@
     <string name="settings_version">Versión %1$s</string>
     <string name="settings_updates">Buscar actualizaciones</string>
     <string name="settings_updates_sub">Nuevas versiones de Bubble desde GitHub</string>
+    <string name="settings_updates_auto">Buscar actualizaciones automáticamente</string>
+    <string name="settings_updates_auto_on">Activado · consulta GitHub como mucho cada seis horas</string>
+    <string name="settings_updates_auto_off">Desactivado · Bubble solo consulta GitHub cuando lo pedís</string>
     <string name="update_available_title">Actualización disponible</string>
     <string name="update_available_body">Bubble %1$s está disponible. Se conservan tus datos y la vinculación.</string>
     <string name="update_action">Actualizar</string>
