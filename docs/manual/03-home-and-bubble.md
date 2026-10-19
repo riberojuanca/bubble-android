@@ -27,7 +27,7 @@ Pull the screen down to check again. Bubble checks by itself when you open it (a
 | Warning: Google services active in the bubble: N | Open Bubble again so the guard disables them |
 | There is a private space … that is not the bubble yet | A Private Space exists but Bubble does not manage it; open Bubble → Bubble to decide |
 
-While the bubble is locked, Bubble shows the last state it read; nothing can be asked inside a locked bubble. When it says **The bubble is locked**, the **Unlock** button below it shows Android's own fingerprint or PIN prompt.
+While the bubble is locked, Bubble shows the last state it read; nothing can be asked inside a locked bubble. When it says **The bubble is locked**, there is nothing to press: anything that needs the bubble open (its apps, files, photos or Downloads) shows Android's fingerprint or PIN prompt by itself.
 
 ## The Bubble screen
 

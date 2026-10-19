@@ -211,7 +211,25 @@ public final class AppsActivity extends Activity {
         }
     }
 
+    /** Android's unlock screen was asked for; it covers this one until confirmed or cancelled. */
+    private boolean unlocking;
+
+    @Override protected void onPause() {
+        super.onPause();
+        if (unlocking) Controller.unlockPromptOpened();
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        if (unlocking) Controller.unlockPromptClosed();
+    }
+
     private void pickBubbleDownload() {
+        pickBubbleDownload(true);
+    }
+
+    /** A locked bubble brings up Android's unlock prompt at once, then the list (asked only once). */
+    private void pickBubbleDownload(boolean mayUnlock) {
         Ui.work(this, getString(R.string.working_reading), () -> {
             List<String[]> found = new Controller(this).bubbleDownloads();
             if (found == null) return null;
@@ -220,13 +238,16 @@ public final class AppsActivity extends Activity {
             return out;
         }, apks -> {
             if (apks == null) {
-                new Ui.Sheet(this)
-                        .title(R.string.apk_from_bubble)
-                        .message(R.string.apk_bubble_locked)
-                        .action(getString(R.string.action_unlock), () -> Ui.work(this, getString(R.string.working_unlocking),
-                                () -> new Controller(this).unlockBubble(), unlocked -> { if (unlocked) pickBubbleDownload(); }))
-                        .cancel()
-                        .show();
+                if (!mayUnlock) {
+                    android.widget.Toast.makeText(this, R.string.apk_bubble_locked, android.widget.Toast.LENGTH_LONG).show();
+                    return;
+                }
+                unlocking = true;
+                Ui.work(this, getString(R.string.working_unlocking), () -> new Controller(this).unlockBubble(), unlocked -> {
+                    unlocking = false;
+                    if (unlocked) pickBubbleDownload(false);
+                    else android.widget.Toast.makeText(this, R.string.grid_still_locked, android.widget.Toast.LENGTH_SHORT).show();
+                });
                 return;
             }
             if (apks.isEmpty()) {
