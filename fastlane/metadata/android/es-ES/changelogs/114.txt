@@ -1,0 +1,6 @@
+- El inicio muestra «Protegida y cerrada»: el escudo da el detalle, el candado desbloquea o bloquea
+- Nuevo ajuste: mantener la burbuja abierta para que sus apps (Signal) sigan avisando
+- El espacio Meta ya no se pausa al apagar la pantalla
+- Burbuja bloqueada: las acciones piden la huella directamente, sin botón Desbloquear
+- Bubble Apps primero en el inicio, «Gestionar apps» e íconos en cada fila
+- APK más chico (R8)

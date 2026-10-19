@@ -1,0 +1,6 @@
+- Home shows "Protected and locked": tap the shield for details, the padlock to unlock or lock
+- New setting: keep the bubble open so its apps (Signal) keep notifying
+- The Meta space is no longer paused when the screen turns off
+- Locked bubble: actions ask for the fingerprint directly, no extra Unlock button
+- Bubble Apps first on home, "Manage apps" and icons on every row
+- Smaller APK (R8)
