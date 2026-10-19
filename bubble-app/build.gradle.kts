@@ -24,6 +24,8 @@ val keystorePath: String? = System.getenv("BUBBLE_KEYSTORE")
 android {
     namespace = "org.bubble.app"
     compileSdk = 36
+    // Declared so that any builder (F-Droid included) installs the build-tools whose d8 dexes the engine.
+    buildToolsVersion = "36.0.0"
 
     defaultConfig {
         applicationId = "org.bubble.app"
@@ -68,7 +70,7 @@ val compileEngine by tasks.registering(JavaCompile::class) {
 }
 val dexEngine by tasks.registering(JavaExec::class) {
     dependsOn(compileEngine)
-    classpath = files("${android.sdkDirectory}/build-tools/36.0.0/lib/d8.jar")
+    classpath = files("${android.sdkDirectory}/build-tools/${android.buildToolsVersion}/lib/d8.jar")
     mainClass.set("com.android.tools.r8.D8")
     inputs.dir(engineClasses)
     outputs.dir(engineAssets)
