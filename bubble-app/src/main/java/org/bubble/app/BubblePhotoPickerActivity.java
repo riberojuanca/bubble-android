@@ -93,8 +93,9 @@ public final class BubblePhotoPickerActivity extends Activity {
                 if (unlocked) {
                     showFolders();
                 } else {
-                    list.addView(Ui.body(this, getString(R.string.photos_locked_here)));
-                    list.addView(Ui.button(this, getString(R.string.action_unlock), v -> showFolders()));
+                    // Cancelled: back to whoever asked for a photo, with nothing chosen.
+                    android.widget.Toast.makeText(this, R.string.grid_still_locked, android.widget.Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             });
             return;

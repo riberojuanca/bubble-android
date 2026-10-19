@@ -42,7 +42,6 @@
     <string name="action_replace">Eliminar y crear</string>
     <string name="action_delete">Eliminar</string>
     <string name="action_remove">Quitar</string>
-    <string name="action_unlock">Desbloquear</string>
     <string name="action_add">Agregar</string>
     <string name="action_save">Guardar</string>
     <string name="action_back">Atrás</string>
@@ -259,7 +258,6 @@
     <string name="bubble_files">Archivos de la burbuja</string>
     <string name="photos_pick_hint">Elegí una foto guardada en la burbuja. Solo se comparte esa foto.</string>
     <string name="photos_wallpaper_hint">Tocá una foto para ponerla de fondo de pantalla. Solo esa foto sale de la burbuja.</string>
-    <string name="photos_locked_here">La burbuja sigue bloqueada.</string>
     <string name="photos_none">No hay fotos en la burbuja.</string>
     <string name="assist_label">Bubble: fondos con fotos de la burbuja</string>
     <string name="assist_description">Agrega un botón «Fotos de la burbuja» al elegir un fondo de pantalla, para usar una foto de la burbuja. Solo detecta cuándo estás eligiendo un fondo; no lee nada de la pantalla.</string>

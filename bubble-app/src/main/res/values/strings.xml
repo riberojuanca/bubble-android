@@ -44,7 +44,6 @@
     <string name="action_replace">Delete and create</string>
     <string name="action_delete">Delete</string>
     <string name="action_remove">Remove</string>
-    <string name="action_unlock">Unlock</string>
     <string name="action_add">Add</string>
     <string name="action_save">Save</string>
     <string name="action_back">Back</string>
@@ -260,7 +259,6 @@
     <string name="bubble_files">Bubble files</string>
     <string name="photos_pick_hint">Choose a photo saved in the bubble. Only that photo is shared.</string>
     <string name="photos_wallpaper_hint">Tap a photo to make it your wallpaper. Only that photo leaves the bubble.</string>
-    <string name="photos_locked_here">The bubble is still locked.</string>
     <string name="photos_none">There are no photos in the bubble.</string>
     <string name="assist_label">Bubble: wallpaper from the bubble</string>
     <string name="assist_description">Adds a "Bubble photos" button when you choose a wallpaper, so you can use a photo from the bubble. It only notices when you are choosing a wallpaper; it does not read anything on the screen.</string>
