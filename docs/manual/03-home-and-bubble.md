@@ -7,7 +7,7 @@ At the top there is a status line, for example **Ready · no Google services**, 
 | Row | Opens |
 |---|---|
 | **Bubble** | The state of the bubble, checking it, its fingerprint lock, deleting it |
-| **Apps** | The apps inside the bubble, with their internet access ([chapter 4](04-apps.md), [chapter 5](05-internet.md)) |
+| **Manage apps** | The apps inside the bubble, with their internet access ([chapter 4](04-apps.md), [chapter 5](05-internet.md)) |
 | **Bubble Apps** | Opens the grid to place apps and the widget on the home screen ([chapter 7](07-bubble-apps-and-widget.md)) |
 | **Meta space** | The optional space for Facebook and Instagram ([chapter 8](08-meta-space.md)) |
 | **Firewall** | The firewall of your normal phone ([chapter 9](09-phone-firewall.md)) |
@@ -27,7 +27,7 @@ Pull the screen down to check again. Bubble checks by itself when you open it (a
 | Warning: Google services active in the bubble: N | Open Bubble again so the guard disables them |
 | There is a private space … that is not the bubble yet | A Private Space exists but Bubble does not manage it; open Bubble → Bubble to decide |
 
-While the bubble is locked, Bubble shows the last state it read; nothing can be asked inside a locked bubble. When it says **The bubble is locked**, there is nothing to press: anything that needs the bubble open (its apps, files, photos or Downloads) shows Android's fingerprint or PIN prompt by itself.
+While the bubble is locked, Bubble shows the last state it read; nothing can be asked inside a locked bubble. While nothing needs attention, home reads **Protected 🛡 and locked 🔒** (or **and open 🔓**). Tap the shield for the details of the protection; tap the padlock to unlock the bubble with Android's fingerprint or PIN prompt, or to lock it at once. Anything that needs the bubble open (its apps, files, photos or Downloads) also asks for the fingerprint by itself.
 
 ## The Bubble screen
 

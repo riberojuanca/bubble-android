@@ -7,7 +7,7 @@ Arriba hay una línea de estado, por ejemplo **Lista · sin servicios de Google*
 | Fila | Abre |
 |---|---|
 | **Burbuja** | El estado de la burbuja, revisarla, su bloqueo con huella, borrarla |
-| **Apps** | Las apps dentro de la burbuja, con su acceso a internet ([capítulo 4](04-apps.md), [capítulo 5](05-internet.md)) |
+| **Gestionar apps** | Las apps dentro de la burbuja, con su acceso a internet ([capítulo 4](04-apps.md), [capítulo 5](05-internet.md)) |
 | **Bubble Apps** | Abre la cuadrícula para poner apps y el widget en la pantalla de inicio ([capítulo 7](07-bubble-apps-y-widget.md)) |
 | **Espacio Meta** | El espacio opcional para Facebook e Instagram ([capítulo 8](08-espacio-meta.md)) |
 | **Firewall** | El firewall de tu teléfono normal ([capítulo 9](09-firewall-del-telefono.md)) |
@@ -27,7 +27,7 @@ Deslizá la pantalla hacia abajo para revisar de nuevo. Bubble revisa solo al ab
 | Atención: servicios de Google activos en la burbuja: N | Abrí Bubble de nuevo para que el guardián los desactive |
 | Hay un espacio privado sin servicios de Google que todavía no es la burbuja | Existe un espacio privado que Bubble no administra; abrí Bubble → Burbuja para decidir |
 
-Mientras la burbuja está bloqueada, Bubble muestra el último estado que leyó; dentro de una burbuja bloqueada no se puede preguntar nada. Cuando dice **La burbuja está bloqueada**, no hay nada que tocar: todo lo que necesita la burbuja abierta (sus apps, archivos, fotos o Descargas) muestra solo el pedido de huella o PIN de Android.
+Mientras la burbuja está bloqueada, Bubble muestra el último estado que leyó; dentro de una burbuja bloqueada no se puede preguntar nada. Mientras nada necesita atención, el inicio dice **Protegida 🛡 y cerrada 🔒** (o **y abierta 🔓**). Tocá el escudo para ver el detalle de la protección; tocá el candado para desbloquear la burbuja con el pedido de huella o PIN de Android, o para bloquearla al instante. Todo lo que necesita la burbuja abierta (sus apps, archivos, fotos o Descargas) también pide la huella solo.
 
 ## La pantalla Burbuja
 

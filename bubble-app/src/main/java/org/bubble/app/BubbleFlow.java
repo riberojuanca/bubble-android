@@ -75,6 +75,16 @@ final class BubbleFlow {
         return c.getString(R.string.bubble_ready);
     }
 
+    /**
+     * Our bubble, checked and free of Google services: what "Protected" on home means. While it
+     * is locked its contents cannot be read, so the last reading counts.
+     */
+    static boolean isProtected(Store store, Controller.BubbleReport r) {
+        if (!r.connected || r.user <= 0 || r.user != store.bubbleUser() || r.needsDecision) return false;
+        if (locked(r)) return store.lastBubbleGoogle(false) == 0;
+        return r.googleServices == 0 && r.googleActive == 0;
+    }
+
     /** The bubble exists and is locked (its apps stopped, its storage encrypted). */
     static boolean locked(Controller.BubbleReport r) {
         return r.connected && r.user > 0 && r.log.contains("bubble_locked=true");

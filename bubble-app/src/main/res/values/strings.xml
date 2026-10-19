@@ -10,7 +10,7 @@
 
     <!-- Home -->
     <string name="home_bubble">Bubble</string>
-    <string name="home_apps">Apps</string>
+    <string name="home_apps">Manage apps</string>
     <string name="home_apps_sub">Apps inside the bubble</string>
     <string name="home_firewall">Firewall</string>
     <string name="home_settings">Settings</string>
@@ -209,6 +209,19 @@
     <string name="grid_hint">Press and hold an app to add its icon to the home screen.</string>
     <string name="grid_meta_paused">The Meta space is paused. Resume it from the Work tab of the app drawer.</string>
     <string name="bubble_locked">The bubble is locked.</string>
+    <!-- Home state: "Protected 🛡 and locked 🔒"; the shield explains, the padlock locks or unlocks -->
+    <string name="state_protected">Protected</string>
+    <string name="state_locked">and locked</string>
+    <string name="state_open">and open</string>
+    <string name="state_shield_desc">Protection details</string>
+    <string name="state_lock_desc">Lock or unlock the bubble</string>
+    <string name="protection_title">Protection</string>
+    <string name="protection_google_none">Google services in the bubble: none</string>
+    <string name="protection_google_some">Google services in the bubble: %d</string>
+    <string name="protection_guard_always">Guard: watching all the time</string>
+    <string name="protection_guard_session">Guard: checks on every use</string>
+    <string name="protection_guard_off">Guard: not running</string>
+    <string name="protection_checked">Last check: %s</string>
     <string name="grid_still_locked">The bubble is still locked.</string>
     <string name="working_opening">Opening…</string>
     <string name="widget_title">Bubble</string>

@@ -8,7 +8,7 @@
     <string name="error_setup_wifi">Esta operación de configuración necesita Wi-Fi. Abrir apps y cambiar sus permisos de red funciona sin él.</string>
     <!-- Inicio -->
     <string name="home_bubble">Burbuja</string>
-    <string name="home_apps">Apps</string>
+    <string name="home_apps">Gestionar apps</string>
     <string name="home_apps_sub">Apps dentro de la burbuja</string>
     <string name="home_firewall">Firewall</string>
     <string name="home_settings">Ajustes</string>
@@ -207,6 +207,19 @@
     <string name="grid_hint">Mantené apretada una app para agregar su ícono a la pantalla de inicio.</string>
     <string name="grid_meta_paused">El espacio Meta está pausado. Reanudalo desde la pestaña Trabajo del cajón de apps.</string>
     <string name="bubble_locked">La burbuja está bloqueada.</string>
+    <!-- Estado en el inicio: «Protegida 🛡 y cerrada 🔒» -->
+    <string name="state_protected">Protegida</string>
+    <string name="state_locked">y cerrada</string>
+    <string name="state_open">y abierta</string>
+    <string name="state_shield_desc">Detalle de la protección</string>
+    <string name="state_lock_desc">Bloquear o desbloquear la burbuja</string>
+    <string name="protection_title">Protección</string>
+    <string name="protection_google_none">Servicios de Google en la burbuja: ninguno</string>
+    <string name="protection_google_some">Servicios de Google en la burbuja: %d</string>
+    <string name="protection_guard_always">Guardián: vigila todo el tiempo</string>
+    <string name="protection_guard_session">Guardián: revisa en cada uso</string>
+    <string name="protection_guard_off">Guardián: no está corriendo</string>
+    <string name="protection_checked">Última revisión: %s</string>
     <string name="grid_still_locked">La burbuja sigue bloqueada.</string>
     <string name="working_opening">Abriendo…</string>
     <string name="widget_title">Bubble</string>

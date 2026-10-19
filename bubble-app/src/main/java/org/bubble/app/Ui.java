@@ -458,6 +458,17 @@ final class Ui {
         return row;
     }
 
+    /** A row with a one-colour glyph on the left, in the header actions' black or white. */
+    static Row row(LinearLayout parent, int iconRes, CharSequence title, CharSequence subtitle, View.OnClickListener onClick) {
+        Context c = parent.getContext();
+        Row row = new Row(c, true, title, subtitle, onClick);
+        row.icon.setImageResource(iconRes);
+        row.icon.setImageTintList(android.content.res.ColorStateList.valueOf(actionColor(c)));
+        parent.addView(row.view);
+        parent.addView(divider(c));
+        return row;
+    }
+
     static View divider(Context c) {
         View d = new View(c);
         d.setBackground(drawableAttr(c, android.R.attr.listDivider));
@@ -735,7 +746,7 @@ final class Ui {
         return color;
     }
 
-    private static Drawable drawableAttr(Context c, int attr) {
+    static Drawable drawableAttr(Context c, int attr) {
         TypedArray ta = c.obtainStyledAttributes(new int[]{attr});
         Drawable d = ta.getDrawable(0);
         ta.recycle();
