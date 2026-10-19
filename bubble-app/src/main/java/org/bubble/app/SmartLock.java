@@ -50,7 +50,9 @@ final class SmartLock {
     }
 
     private static synchronized void tryStart(Context app) {
-        if (running != null || !BootReceiver.insideBubble()) return;
+        // The Meta space (a work profile) runs the same VPN but is never locked by Bubble.
+        if (running != null || !BootReceiver.insideBubble()
+                || app.getSystemService(android.os.UserManager.class).isManagedProfile()) return;
         try {
             running = new SmartLock(app);
             android.util.Log.i("Bubble", "smart lock on");
