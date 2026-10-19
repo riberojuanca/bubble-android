@@ -43,6 +43,7 @@ public final class ProfileControlService extends Service {
                         || (profile != store.bubbleUser() && profile != store.metaUser())) {
                     throw new SecurityException("Unknown profile request");
                 }
+                out.putBoolean(ProfileBridge.KEEP_OPEN, profile == store.bubbleUser() && store.keepBubbleOpen());
                 out.putString(ProfileBridge.ALLOWED, String.join(",", profile == store.bubbleUser()
                         ? store.bubbleTokens() : store.metaTokens()));
             } else {

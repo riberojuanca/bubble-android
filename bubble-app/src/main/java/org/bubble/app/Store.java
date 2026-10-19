@@ -163,6 +163,11 @@ final class Store {
 
     void setGuard(int v) { prefs.edit().putInt("guard", v).apply(); }
 
+    /** The bubble stays open when the screen goes off, so its apps keep receiving and notifying. */
+    boolean keepBubbleOpen() { return prefs.getBoolean("keep_bubble_open", false); }
+
+    void setKeepBubbleOpen(boolean v) { prefs.edit().putBoolean("keep_bubble_open", v).apply(); }
+
     boolean noticeListenerAllowed() { return prefs.getBoolean("notice_listener", false); }
 
     void setNoticeListenerAllowed() { prefs.edit().putBoolean("notice_listener", true).apply(); }

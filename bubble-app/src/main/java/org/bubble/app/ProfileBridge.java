@@ -28,7 +28,7 @@ final class ProfileBridge {
             PHOTO_FOLDERS = 6, PHOTOS = 7, PHOTO_THUMB = 8, PHOTO_OPEN = 9, FILES = 10;
     static final String ERROR = "error", ALLOWED = "allowed", PACKAGE = "package",
             ID = "id", IDS = "ids", NAMES = "names", MIMES = "mimes", SIZES = "sizes", DATES = "dates",
-            COUNTS = "counts", BYTES = "bytes", FILE = "file";
+            COUNTS = "counts", BYTES = "bytes", FILE = "file", KEEP_OPEN = "keep_open";
     static final Handler MAIN = new Handler(Looper.getMainLooper());
 
     private ProfileBridge() {}
@@ -143,6 +143,11 @@ final class ProfileBridge {
         // The profile pulls the authoritative list from user 0. No stale snapshot can overwrite it.
         call(c, user, NETWORK, null);
         return "profile firewall applied locally\n";
+    }
+
+    /** Asked by the bubble's copy before it locks itself: the choice lives in the main copy. */
+    static boolean keepOpen(Context c) throws Exception {
+        return call(c, 0, RULES, null).getBoolean(KEEP_OPEN, false);
     }
 
     static String rules(Context c) throws Exception {

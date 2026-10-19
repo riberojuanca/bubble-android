@@ -10,6 +10,10 @@ Una burbuja bloqueada está detenida: Android cierra todas sus apps y mantiene s
 
 Volver a abrirla siempre pide tu bloqueo de pantalla (o el bloqueo propio de la burbuja, ver abajo). Bubble puede bloquear la burbuja pero nunca desbloquearla por su cuenta.
 
+## Notificaciones: mantener la burbuja abierta
+
+Una burbuja bloqueada no puede recibir nada: Signal y otras apps de mensajería reciben sus mensajes recién al desbloquearla. Para que avisen como siempre, elegí **Bubble → Ajustes → Bloquear la burbuja → A mano**. La burbuja queda abierta al apagar la pantalla, y los servicios de Google del teléfono igual no pueden leer sus notificaciones. Bloqueala vos con el candado del inicio de Bubble; reiniciar también la bloquea.
+
 ## Música con la pantalla apagada: el bloqueo inteligente
 
 El bloqueo automático del espacio privado de Android detiene la burbuja entera al bloquearse la pantalla, sin excepción para la música. Bubble lo reemplaza: pone el bloqueo automático de Android en *Solo después de reiniciar el dispositivo* y bloquea la burbuja ella misma, salvo mientras una de sus apps está sonando. Así podés escuchar NewPipe o Spotify en la burbuja con el teléfono bloqueado; cuando parás la música, la burbuja se bloquea.

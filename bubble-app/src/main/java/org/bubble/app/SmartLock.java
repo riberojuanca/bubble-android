@@ -83,9 +83,26 @@ final class SmartLock {
         @Override public void onReceive(Context c, Intent intent) {
             screenOff = Intent.ACTION_SCREEN_OFF.equals(intent.getAction());
             handler.removeCallbacks(lockIfIdle);
+            handler.removeCallbacks(lockNow);
             if (screenOff) lockIfIdle.run();
         }
     };
+
+    /**
+     * "Keep the bubble open" (Bubble → Settings) skips locking with the screen, so messaging apps
+     * keep receiving. Asked of the main copy each time; if it cannot answer, the bubble locks.
+     */
+    private void lockUnlessKeptOpen() {
+        new Thread(() -> {
+            boolean keep;
+            try {
+                keep = ProfileBridge.keepOpen(context);
+            } catch (Exception e) {
+                keep = false;
+            }
+            if (!keep) handler.post(lockNow);
+        }, "bubble-lock-choice").start();
+    }
 
     private final MediaController.Callback playback = new MediaController.Callback() {
         @Override public void onPlaybackStateChanged(PlaybackState state) {
@@ -107,6 +124,13 @@ final class SmartLock {
             handler.postDelayed(lockIfIdle, GRACE_MS);
             return;
         }
+        lockUnlessKeptOpen();
+    }
+
+    private final Runnable lockNow = this::lockNow;
+
+    private void lockNow() {
+        if (!screenOff) return;
         try {
             if (context.getSystemService(UserManager.class)
                     .requestQuietModeEnabled(true, Process.myUserHandle())) return;
@@ -114,8 +138,8 @@ final class SmartLock {
         } catch (RuntimeException e) {
             android.util.Log.w("Bubble", "could not lock the bubble", e);
         }
-        handler.removeCallbacks(lockIfIdle);
-        handler.postDelayed(lockIfIdle, GRACE_MS);
+        handler.removeCallbacks(lockNow);
+        handler.postDelayed(lockNow, GRACE_MS);
     }
 
     private void track(List<MediaController> active) {

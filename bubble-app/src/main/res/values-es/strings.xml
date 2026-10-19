@@ -274,6 +274,10 @@
     <string name="photos_none">No hay fotos en la burbuja.</string>
     <string name="assist_label">Bubble: fondos con fotos de la burbuja</string>
     <string name="assist_description">Agrega un botón «Fotos de la burbuja» al elegir un fondo de pantalla, para usar una foto de la burbuja. Solo detecta cuándo estás eligiendo un fondo; no lee nada de la pantalla.</string>
+    <string name="settings_lock">Bloquear la burbuja</string>
+    <string name="settings_lock_screen">Con la pantalla · sin notificaciones mientras está bloqueada</string>
+    <string name="settings_lock_manual">A mano · sus apps siguen avisando</string>
+    <string name="lock_body">Bloqueada, las apps de la burbuja se detienen: Signal y las demás no reciben nada hasta que la desbloquees. Abierta, reciben y avisan como siempre, y los servicios de Google del teléfono igual no pueden leer esas notificaciones. Bloqueala cuando quieras con el candado del inicio; reiniciar también la bloquea.</string>
     <string name="settings_assist">Fondos con fotos de la burbuja</string>
     <string name="settings_assist_on">Activado</string>
     <string name="settings_assist_off">Desactivado</string>

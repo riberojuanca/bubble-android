@@ -275,6 +275,10 @@
     <string name="photos_none">There are no photos in the bubble.</string>
     <string name="assist_label">Bubble: wallpaper from the bubble</string>
     <string name="assist_description">Adds a "Bubble photos" button when you choose a wallpaper, so you can use a photo from the bubble. It only notices when you are choosing a wallpaper; it does not read anything on the screen.</string>
+    <string name="settings_lock">Lock the bubble</string>
+    <string name="settings_lock_screen">With the screen · no notifications while locked</string>
+    <string name="settings_lock_manual">By hand · its apps keep notifying</string>
+    <string name="lock_body">Locked, the bubble's apps stop: Signal and the rest cannot receive anything until you unlock it. Left open, they receive and notify as usual, and the phone's Google services still cannot read those notifications. Lock it any time with the padlock on home; a restart locks it too.</string>
     <string name="settings_assist">Wallpapers with bubble photos</string>
     <string name="settings_assist_on">On</string>
     <string name="settings_assist_off">Off</string>

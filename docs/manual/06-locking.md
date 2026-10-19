@@ -10,6 +10,10 @@ A locked bubble is stopped: Android closes all its apps and keeps its storage en
 
 Opening it again always asks for your screen lock (or the bubble's own lock, see below). Bubble can lock the bubble but never unlock it by itself.
 
+## Notifications: keep the bubble open
+
+A locked bubble cannot receive anything: Signal and other messengers only get their messages when you unlock it. To be notified as usual, choose **Bubble → Settings → Lock the bubble → By hand**. The bubble then stays open when the screen turns off; the phone's Google services still cannot read its notifications. Lock it yourself with the padlock on Bubble's home; a restart locks it too.
+
 ## Music with the screen off: the smart lock
 
 Android's own Private Space auto-lock stops the whole bubble when the screen locks, with no exception for music. Bubble replaces it: it sets Android's auto-lock to *Only after device restarts* and locks the bubble itself, except while one of its apps is playing. So you can listen to NewPipe or Spotify in the bubble with the phone locked; when you stop the music, the bubble locks.

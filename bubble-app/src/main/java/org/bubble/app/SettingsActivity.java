@@ -24,6 +24,8 @@ public final class SettingsActivity extends Activity {
         assist = Ui.row(page, getString(R.string.settings_assist), "", null);
         assist.view.setOnClickListener(v -> toggleAssist(assist));
         if (getIntent().getBooleanExtra(EXTRA_ASSIST, false) && !PhotosAssistService.enabled(this)) toggleAssist(assist);
+        Ui.Row lock = Ui.row(page, getString(R.string.settings_lock), lockMode(), null);
+        lock.view.setOnClickListener(v -> pickLock(lock));
         Ui.Row shape = Ui.row(page, getString(R.string.settings_icon_shape),
                 getString(IconShape.title(new Store(this).iconShape())), null);
         shape.view.setOnClickListener(v -> pickShape(shape));
@@ -39,6 +41,24 @@ public final class SettingsActivity extends Activity {
     }
 
     private Ui.Row assist;
+
+    private String lockMode() {
+        return getString(new Store(this).keepBubbleOpen() ? R.string.settings_lock_manual : R.string.settings_lock_screen);
+    }
+
+    private void pickLock(Ui.Row row) {
+        Store store = new Store(this);
+        new Ui.Sheet(this).title(R.string.settings_lock).message(R.string.lock_body)
+                .choice(getString(R.string.settings_lock_screen), null, () -> {
+                    store.setKeepBubbleOpen(false);
+                    row.setSubtitle(lockMode());
+                })
+                .choice(getString(R.string.settings_lock_manual), null, () -> {
+                    store.setKeepBubbleOpen(true);
+                    row.setSubtitle(lockMode());
+                })
+                .cancel().show();
+    }
 
     /** Also after coming back from Android's accessibility settings. */
     @Override protected void onResume() {
