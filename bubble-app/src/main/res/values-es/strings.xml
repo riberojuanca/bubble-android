@@ -281,7 +281,7 @@
     <string name="settings_assist">Fondos con fotos de la burbuja</string>
     <string name="settings_assist_on">Activado</string>
     <string name="settings_assist_off">Desactivado</string>
-    <string name="assist_explain">Cuando elegís un fondo de pantalla, el teléfono abre Google Fotos, que no puede ver la burbuja. Si activás esto, ahí va a aparecer un botón «Fotos de la burbuja» para elegir una foto de la burbuja.\n\nPara eso Bubble necesita el permiso de accesibilidad de Android. Solo lo usa para saber cuándo estás eligiendo un fondo. No lee nada de la pantalla.</string>
+    <string name="assist_explain">Cuando elegís un fondo de pantalla, el teléfono abre Google Fotos, que no puede ver la burbuja. Si activás esto, ahí va a aparecer un botón «Fotos de la burbuja» para elegir una foto de la burbuja.\n\nPara eso Bubble necesita el permiso de accesibilidad de Android. Solo lo usa para saber cuándo estás eligiendo un fondo. No lee nada de la pantalla.\n\nCada tanto Android te va a mostrar un aviso de que Bubble tiene «acceso total al dispositivo». Es normal: Android lo muestra para toda app que usa este permiso. Mantenelo si usás esta función.</string>
     <string name="assist_turn_on">Activar</string>
     <string name="settings_assist_lost">Se desactivó. Tocá para activarlo de nuevo</string>
     <string name="assist_lost_title">Las fotos de la burbuja ya no aparecen al elegir un fondo</string>

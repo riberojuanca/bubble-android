@@ -282,7 +282,7 @@
     <string name="settings_assist">Wallpapers with bubble photos</string>
     <string name="settings_assist_on">On</string>
     <string name="settings_assist_off">Off</string>
-    <string name="assist_explain">When you choose a wallpaper, the phone opens Google Photos, which cannot see the bubble. Turn this on and a "Bubble photos" button will appear there, so you can pick a photo from the bubble.\n\nBubble needs Android\'s accessibility permission for this. It only uses it to notice when you are choosing a wallpaper. It does not read anything on the screen.</string>
+    <string name="assist_explain">When you choose a wallpaper, the phone opens Google Photos, which cannot see the bubble. Turn this on and a "Bubble photos" button will appear there, so you can pick a photo from the bubble.\n\nBubble needs Android\'s accessibility permission for this. It only uses it to notice when you are choosing a wallpaper. It does not read anything on the screen.\n\nFrom time to time Android will show a notice saying Bubble has \"full device access\". It is normal: Android shows it for every app that uses this permission. Keep it if you use this feature.</string>
     <string name="assist_turn_on">Turn on</string>
     <string name="settings_assist_lost">It turned off. Tap to turn it on again</string>
     <string name="assist_lost_title">Bubble photos no longer appear when choosing a wallpaper</string>
