@@ -1,9 +1,11 @@
 name: Release
 
-# A normal push to main builds, signs, versions and publishes the APK.
+# A normal push to main builds, signs, versions and publishes the APK. A push that only touches
+# the site, the docs or the notes publishes no new version (each one is a new F-Droid build).
 on:
   push:
     branches: [main]
+    paths-ignore: ["site/**", "docs/**", "notes/**"]
 
 permissions:
   contents: write
