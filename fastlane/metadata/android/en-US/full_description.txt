@@ -1,4 +1,4 @@
-<p><b>Requires Android 17.</b> On earlier versions Bubble cannot create the bubble.</p>
+<p><b>Requires Android 17.</b> On earlier versions Bubble cannot create the bubble yet; support for them is planned.</p>
 
 <p>Bubble turns Android's own <i>Private Space</i> into a "bubble": a separate, hidden profile where the apps you choose run natively, with their own data, <b>without Google services inside</b>, behind a deny-by-default firewall. Your normal phone keeps working exactly as before, banks and Google apps included.</p>
 

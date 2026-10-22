@@ -1,4 +1,4 @@
-<p><b>Necesita Android 17.</b> En versiones anteriores Bubble no puede crear la burbuja.</p>
+<p><b>Necesita Android 17.</b> En versiones anteriores Bubble todavía no puede crear la burbuja; está previsto darles soporte.</p>
 
 <p>Bubble convierte el <i>Espacio privado</i> de Android en una «burbuja»: un perfil aparte y oculto donde las apps que elijas corren de forma nativa, con sus propios datos, <b>sin servicios de Google adentro</b> y detrás de un firewall que bloquea todo de entrada. Tu teléfono normal sigue funcionando igual que antes, con bancos y apps de Google incluidos.</p>
 

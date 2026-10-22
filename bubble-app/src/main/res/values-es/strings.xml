@@ -54,7 +54,7 @@
     <string name="setup_pair_action">Vincular</string>
     <string name="setup_pair_notifications">Bubble necesita notificaciones: el código de vinculación se escribe en su notificación. Permitilas y tocá Vincular de nuevo.</string>
     <string name="setup_unsupported_title">Bubble necesita Android 17</string>
-    <string name="setup_unsupported_body">Este teléfono tiene Android %1$s. Bubble solo puede crear la burbuja en Android 17, así que todavía no hay nada para configurar. No se cambió nada en el teléfono.</string>
+    <string name="setup_unsupported_body">Este teléfono tiene Android %1$s. Por ahora Bubble solo puede crear la burbuja en Android 17; está previsto dar soporte a versiones anteriores. No se cambió nada en el teléfono.</string>
     <string name="setup_pair_next">Ahora abrí «Vincular dispositivo con código de vinculación» en Depuración inalámbrica, bajá la barra de notificaciones y escribí el código en la notificación de Bubble. Después volvé acá.</string>
     <string name="setup_create_title">Crear la burbuja</string>
     <string name="setup_create_body">La burbuja es un espacio privado sin Google, aparte del resto del teléfono. Viene con F-Droid para instalar apps y un teclado sin acceso a internet. Tarda alrededor de un minuto.</string>

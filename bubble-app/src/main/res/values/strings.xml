@@ -56,7 +56,7 @@
     <string name="setup_pair_action">Pair</string>
     <string name="setup_pair_notifications">Bubble needs notifications: the pairing code is typed into its notification. Allow them and tap Pair again.</string>
     <string name="setup_unsupported_title">Bubble needs Android 17</string>
-    <string name="setup_unsupported_body">This phone has Android %1$s. Bubble can only create the bubble on Android 17, so there is nothing to set up yet. Nothing on the phone was changed.</string>
+    <string name="setup_unsupported_body">This phone has Android %1$s. Bubble can only create the bubble on Android 17 for now; support for earlier versions is planned. Nothing on the phone was changed.</string>
     <string name="setup_pair_next">Now open «Pair device with pairing code» in Wireless debugging, pull down the notification shade and type the code into Bubble\'s notification. Then come back here.</string>
     <string name="setup_create_title">Create the bubble</string>
     <string name="setup_create_body">The bubble is a private space without Google, separate from the rest of the phone. It comes with F-Droid to install apps and a keyboard with no internet access. It takes about a minute.</string>
