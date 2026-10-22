@@ -848,4 +848,17 @@ final class Controller {
         store.setLog(log);
         return log;
     }
+
+    /**
+     * Move a photo of another space into Work's Pictures/Bubble, so Work apps (Instagram) show it in
+     * their gallery. The file is moved, not copied; it leaves its space. Needs the engine (a session).
+     */
+    String moveToWork(int fromUser, String ref) throws Exception {
+        if (store.metaUser() < 0) throw new IllegalStateException(context.getString(R.string.move_no_work));
+        return session(() -> {
+            String log = engine.run("space-move " + fromUser + " " + ref);
+            if (log.contains("bubble-shell:")) throw new IllegalStateException(log.substring(log.indexOf("bubble-shell:")));
+            return keepLog(log);
+        });
+    }
 }

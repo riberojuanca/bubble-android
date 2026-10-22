@@ -63,10 +63,8 @@ public final class MetaActivity extends Activity {
         content.addView(Ui.small(this, getString(R.string.meta_hint)));
         content.addView(Ui.button(this, getString(R.string.meta_add),
                 v -> startActivityForResult(AppPickerActivity.intent(this, AppPickerActivity.MODE_META), ADD_APPS)));
-        // Its own files, and the other spaces' photos, as for the bubble.
+        // Its own file browser; photos live in the single "Files" entry of the main menu.
         content.addView(Ui.button(this, getString(R.string.meta_files), v -> openFiles()));
-        content.addView(Ui.button(this, getString(R.string.photos_root),
-                v -> startActivity(new android.content.Intent(this, SpacePhotosActivity.class))));
         content.addView(Ui.title(this, getString(R.string.meta_inside)));
         list = Ui.column(this);
         content.addView(list);

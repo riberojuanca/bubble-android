@@ -105,6 +105,8 @@ public final class MainActivity extends Activity {
                 v -> startActivity(new Intent(this, AppsActivity.class)));
         firewallRow = Ui.row(page, R.drawable.ic_wifi, getString(R.string.home_firewall), "",
                 v -> startActivity(new Intent(this, FirewallActivity.class)));
+        Ui.row(page, R.drawable.ic_row_files, getString(R.string.home_files), getString(R.string.home_files_sub),
+                v -> startActivity(new Intent(this, SpacePhotosActivity.class).putExtra(SpacePhotosActivity.EXTRA_MANAGE, true)));
         Ui.row(page, R.drawable.ic_row_meta, getString(R.string.home_meta), getString(R.string.home_meta_sub),
                 v -> startActivity(new Intent(this, MetaActivity.class)));
         Ui.row(page, R.drawable.ic_row_settings, getString(R.string.home_settings), getString(R.string.home_settings_sub),

@@ -10,6 +10,15 @@
     <string name="home_bubble">Burbuja</string>
     <string name="home_apps">Gestionar apps</string>
     <string name="home_apps_sub">Apps dentro de la burbuja</string>
+    <string name="home_files">Archivos</string>
+    <string name="home_files_sub">Fotos y archivos de tus espacios; pasá fotos a Work</string>
+    <string name="photos_manage_hint">Fotos de cada espacio. Tocá una de la burbuja para pasarla a Work, donde apps como Instagram la ven. Se mueve: sale de la burbuja.</string>
+    <string name="move_title">Pasar a Work</string>
+    <string name="move_body">La foto se mueve a Work (Pictures/Bubble). Sale de la burbuja, no se copia, mantiene su calidad. Las apps de Work, como Instagram, la verán en su galería.</string>
+    <string name="move_action">Pasar a Work</string>
+    <string name="move_done">Movida a Work</string>
+    <string name="move_already_work">Esta foto ya está en Work</string>
+    <string name="move_no_work">Todavía no hay espacio Work. Creálo primero.</string>
     <string name="home_firewall">Firewall</string>
     <string name="home_settings">Ajustes</string>
     <string name="settings_updates_store">Instalada desde F-Droid: las actualizaciones llegan por F-Droid.</string>

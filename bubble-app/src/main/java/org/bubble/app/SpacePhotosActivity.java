@@ -25,8 +25,12 @@ public final class SpacePhotosActivity extends Activity {
 
     private static final int COLUMNS = 3;
 
+    /** Opened from the "Files" menu: tapping a bubble photo offers moving it to Work. */
+    static final String EXTRA_MANAGE = "manage";
+
     private LinearLayout list;
     private boolean picking;
+    private boolean manage;
     /** The album shown, as a document id, or null for the list of albums. */
     private String album;
     /** Android's unlock screen was asked for; it covers this one until confirmed or cancelled. */
@@ -36,8 +40,10 @@ public final class SpacePhotosActivity extends Activity {
         super.onCreate(savedInstanceState);
         String action = getIntent().getAction();
         picking = Intent.ACTION_PICK.equals(action) || Intent.ACTION_GET_CONTENT.equals(action);
+        manage = getIntent().getBooleanExtra(EXTRA_MANAGE, false);
         LinearLayout page = Ui.screen(this, getString(R.string.photos_root), null, null);
-        page.addView(Ui.body(this, getString(picking ? R.string.photos_pick_hint : R.string.photos_wallpaper_hint)));
+        page.addView(Ui.body(this, getString(picking ? R.string.photos_pick_hint
+                : manage ? R.string.photos_manage_hint : R.string.photos_wallpaper_hint)));
         list = new LinearLayout(this);
         list.setOrientation(LinearLayout.VERTICAL);
         page.addView(list);
@@ -173,11 +179,35 @@ public final class SpacePhotosActivity extends Activity {
         }, "bubble-photo-thumbs").start();
     }
 
+    /** Move a photo of the bubble into Work; a photo already in Work has nowhere to go. */
+    private void offerMove(String documentId) {
+        int slash = documentId.indexOf('/');
+        String space = documentId.substring(0, slash);
+        String ref = documentId.substring(slash + 1);
+        if (SpaceChannel.META.equals(space)) {
+            android.widget.Toast.makeText(this, R.string.move_already_work, android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!SpaceChannel.BUBBLE.equals(space)) return;
+        int fromUser = new Store(this).bubbleUser();
+        new Ui.Sheet(this).title(R.string.move_title).message(R.string.move_body)
+                .action(getString(R.string.move_action), () -> Ui.work(this, getString(R.string.working_applying),
+                        () -> new Controller(this).moveToWork(fromUser, ref), log -> {
+                            android.widget.Toast.makeText(this, R.string.move_done, android.widget.Toast.LENGTH_SHORT).show();
+                            showAlbums();
+                        }))
+                .cancel().show();
+    }
+
     private void picked(String documentId) {
         Uri uri = DocumentsContract.buildDocumentUri(SpacesProvider.AUTHORITY, documentId);
         if (picking) {
             setResult(RESULT_OK, new Intent().setData(uri).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION));
             finish();
+            return;
+        }
+        if (manage) {
+            offerMove(documentId);
             return;
         }
         // Android's own wallpaper screen: preview, crop, home or lock screen. It reads only this photo.

@@ -25,8 +25,6 @@ public final class BubbleActivity extends Activity {
         page.addView(Ui.button(this, getString(R.string.bubble_check_now), v -> check()));
         // The bubble's own files and photos, without entering it; a locked bubble asks to unlock here.
         page.addView(Ui.button(this, getString(R.string.bubble_files), v -> openFiles()));
-        page.addView(Ui.button(this, getString(R.string.photos_root),
-                v -> startActivity(new android.content.Intent(this, SpacePhotosActivity.class))));
         Controller.BubbleReport cached = BubbleCache.report();
         if (cached != null) {
             show(cached);
