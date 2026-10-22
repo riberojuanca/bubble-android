@@ -119,6 +119,10 @@
     <string name="settings_log">Registro técnico</string>
     <string name="settings_log_sub">La última salida del motor</string>
     <string name="settings_about">Acerca de</string>
+    <string name="settings_section_appearance">Apariencia</string>
+    <string name="settings_section_photos">Fotos</string>
+    <string name="settings_section_updates">Actualizaciones</string>
+    <string name="settings_section_advanced">Avanzado</string>
     <string name="settings_version">Versión %1$s</string>
     <string name="settings_updates">Buscar actualizaciones</string>
     <string name="settings_updates_sub">Nuevas versiones de Bubble desde GitHub</string>

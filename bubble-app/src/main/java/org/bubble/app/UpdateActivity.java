@@ -40,6 +40,15 @@ public final class UpdateActivity extends Activity {
         page.addView(status);
         action = Ui.button(this, getString(R.string.update_action), v -> act());
         page.addView(action);
+        // Automatic checks live here, next to the manual one, instead of a separate setting.
+        if (!Updates.fromStore(this)) {
+            page.addView(Ui.divider(this));
+            Ui.Row auto = Ui.row(page, getString(R.string.settings_updates_auto), autoUpdates(), null);
+            auto.view.setOnClickListener(v -> {
+                Updates.setAutomatic(this, !Updates.automatic(this));
+                auto.setSubtitle(autoUpdates());
+            });
+        }
         loading = findViewById(R.id.loading_bar);
         Object retained = getLastNonConfigurationInstance();
         task = retained instanceof Task ? (Task) retained : new Task(getApplicationContext());
@@ -55,6 +64,10 @@ public final class UpdateActivity extends Activity {
                 : getIntent().getStringExtra("release");
         task.autoDownload = savedInstanceState == null && getIntent().getBooleanExtra("download", false);
         task.check(release);
+    }
+
+    private String autoUpdates() {
+        return getString(Updates.automatic(this) ? R.string.settings_updates_auto_on : R.string.settings_updates_auto_off);
     }
 
     @Override public Object onRetainNonConfigurationInstance() { return task; }

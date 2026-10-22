@@ -121,6 +121,10 @@
     <string name="settings_log">Technical log</string>
     <string name="settings_log_sub">The last output of the engine</string>
     <string name="settings_about">About</string>
+    <string name="settings_section_appearance">Appearance</string>
+    <string name="settings_section_photos">Photos</string>
+    <string name="settings_section_updates">Updates</string>
+    <string name="settings_section_advanced">Advanced</string>
     <string name="settings_version">Version %1$s</string>
     <string name="settings_updates">Check for updates</string>
     <string name="settings_updates_sub">New versions of Bubble from GitHub</string>

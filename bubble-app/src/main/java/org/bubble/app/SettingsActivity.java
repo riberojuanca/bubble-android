@@ -16,40 +16,43 @@ public final class SettingsActivity extends Activity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LinearLayout page = Ui.screen(this, getString(R.string.home_settings), null, null);
-        Ui.row(page, getString(R.string.settings_repair), getString(R.string.settings_repair_sub), v -> {
-            startForegroundService(new Intent(this, PairingService.class));
-            Ui.alert(this, getString(R.string.setup_pair_title), getString(R.string.setup_pair_next));
-        });
-        Ui.row(page, getString(R.string.settings_log), getString(R.string.settings_log_sub), v -> showLog());
-        assist = Ui.row(page, getString(R.string.settings_assist), "", null);
-        assist.view.setOnClickListener(v -> toggleAssist(assist));
-        if (getIntent().getBooleanExtra(EXTRA_ASSIST, false) && !PhotosAssistService.enabled(this)) toggleAssist(assist);
+
+        // Appearance: how the bubble and its icons look.
+        page.addView(Ui.title(this, getString(R.string.settings_section_appearance)));
         Ui.Row lock = Ui.row(page, getString(R.string.settings_lock), lockMode(), null);
         lock.view.setOnClickListener(v -> pickLock(lock));
         Ui.Row shape = Ui.row(page, getString(R.string.settings_icon_shape),
                 getString(IconShape.title(new Store(this).iconShape())), null);
         shape.view.setOnClickListener(v -> pickShape(shape));
+
+        // Photos: the button over Google Photos for the wallpaper.
+        page.addView(Ui.title(this, getString(R.string.settings_section_photos)));
+        assist = Ui.row(page, getString(R.string.settings_assist), "", null);
+        assist.view.setOnClickListener(v -> toggleAssist(assist));
+        if (getIntent().getBooleanExtra(EXTRA_ASSIST, false) && !PhotosAssistService.enabled(this)) toggleAssist(assist);
+
+        // Updates: one entry; the manual check and the automatic switch live together inside it.
+        page.addView(Ui.title(this, getString(R.string.settings_section_updates)));
         if (Updates.fromStore(this)) {
             Ui.row(page, getString(R.string.settings_updates), getString(R.string.settings_updates_store),
                     v -> Ui.alert(this, getString(R.string.settings_updates), getString(R.string.settings_updates_store)));
         } else {
             Ui.row(page, getString(R.string.settings_updates), getString(R.string.settings_updates_sub),
                     v -> startActivity(new Intent(this, UpdateActivity.class)));
-            Ui.Row auto = Ui.row(page, getString(R.string.settings_updates_auto), autoUpdates(), null);
-            auto.view.setOnClickListener(v -> {
-                Updates.setAutomatic(this, !Updates.automatic(this));
-                auto.setSubtitle(autoUpdates());
-            });
         }
+
+        // Advanced: pairing again and the technical log.
+        page.addView(Ui.title(this, getString(R.string.settings_section_advanced)));
+        Ui.row(page, getString(R.string.settings_repair), getString(R.string.settings_repair_sub), v -> {
+            startForegroundService(new Intent(this, PairingService.class));
+            Ui.alert(this, getString(R.string.setup_pair_title), getString(R.string.setup_pair_next));
+        });
+        Ui.row(page, getString(R.string.settings_log), getString(R.string.settings_log_sub), v -> showLog());
         Ui.row(page, getString(R.string.settings_remove_all), getString(R.string.settings_remove_all_sub), v -> explainRemoveAll());
         Ui.row(page, getString(R.string.settings_about), version(), v -> { });
     }
 
     private Ui.Row assist;
-
-    private String autoUpdates() {
-        return getString(Updates.automatic(this) ? R.string.settings_updates_auto_on : R.string.settings_updates_auto_off);
-    }
 
     private String lockMode() {
         return getString(new Store(this).keepBubbleOpen() ? R.string.settings_lock_manual : R.string.settings_lock_screen);
