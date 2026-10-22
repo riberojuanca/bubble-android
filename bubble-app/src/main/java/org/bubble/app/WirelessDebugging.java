@@ -81,6 +81,12 @@ final class WirelessDebugging {
         return false;
     }
 
+    /** Whether Bubble holds the permission to flip the switch (granted at pairing). */
+    static boolean canSwitch(Context context) {
+        return context.checkSelfPermission(android.Manifest.permission.WRITE_SECURE_SETTINGS)
+                == android.content.pm.PackageManager.PERMISSION_GRANTED;
+    }
+
     /** False when the permission is not granted yet (before the first pairing). */
     static boolean set(Context context, boolean on) {
         try {

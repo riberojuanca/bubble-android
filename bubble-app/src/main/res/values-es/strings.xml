@@ -155,6 +155,7 @@
     <string name="error_generic">El motor no terminó. Mirá Ajustes → Registro técnico.</string>
     <string name="error_not_connected">No se pudo conectar a la depuración inalámbrica. Revisá que el Wi-Fi esté prendido.</string>
     <string name="error_network_not_trusted">Android preguntó si permitir la depuración inalámbrica en esta red Wi-Fi. Marcá «Permitir siempre en esta red», tocá Permitir y probá de nuevo.</string>
+    <string name="error_debugging_permission">Bubble ya no puede prender la depuración inalámbrica por su cuenta. Prendé Depuración inalámbrica en Opciones para desarrolladores y probá de nuevo: Bubble recupera el permiso.</string>
     <string name="error_no_bubble">Todavía no hay burbuja.</string>
     <string name="error_apk_unreadable">No se pudo leer el archivo.</string>
 

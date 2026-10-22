@@ -157,6 +157,7 @@
     <string name="error_generic">The engine did not finish. See Settings → Technical log.</string>
     <string name="error_not_connected">Could not connect to wireless debugging. Check that Wi-Fi is on.</string>
     <string name="error_network_not_trusted">Android asked whether to allow wireless debugging on this Wi-Fi network. Tick “Always allow on this network”, tap Allow and try again.</string>
+    <string name="error_debugging_permission">Bubble can no longer turn wireless debugging on by itself. Turn on Wireless debugging in Developer options and try again: Bubble takes the permission back.</string>
     <string name="error_no_bubble">There is no bubble yet.</string>
     <string name="error_apk_unreadable">Could not read the file.</string>
 

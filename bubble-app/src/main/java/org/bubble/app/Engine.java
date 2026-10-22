@@ -66,8 +66,7 @@ final class Engine {
     String setup() throws Exception {
         StringBuilder log = new StringBuilder();
         install(log);
-        log.append(adb.exec("pm grant " + context.getPackageName()
-                + " android.permission.WRITE_SECURE_SETTINGS 2>&1"));
+        log.append(grantSecureSettings());
         log.append(allowNoticeListener());
         // The paired key never expires (AdbKeyStore default is 7 days without use). The engine
         // saves the old value so "Remove everything" can put it back.
@@ -76,6 +75,11 @@ final class Engine {
         // unticked: otherwise Android turns debugging off again here the next time Bubble needs it.
         log.append(run("trust-network"));
         return log.toString();
+    }
+
+    /** What lets Bubble turn wireless debugging on by itself (WirelessDebugging). */
+    String grantSecureSettings() throws Exception {
+        return adb.exec("pm grant " + context.getPackageName() + " android.permission.WRITE_SECURE_SETTINGS 2>&1");
     }
 
     /** Let Bubble hide the "Wireless debugging connected" notification during its own sessions. */
