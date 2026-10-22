@@ -39,6 +39,14 @@ final class WirelessDebugging {
         }
     }
 
+    /** Turn the switch back on if Android turned it off while Bubble still holds it. */
+    static synchronized void reassert(Context context) {
+        if (users > 0 && !isOn(context) && set(context, true)) {
+            turnedOn = true;
+            marker(context).edit().putBoolean(MARKER, true).commit();
+        }
+    }
+
     /** Whether a Bubble session is running in this process (its connection is Bubble's own). */
     static synchronized boolean inSession() {
         return users > 0;

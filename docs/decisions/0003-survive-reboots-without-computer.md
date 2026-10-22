@@ -8,7 +8,7 @@
 After setup, Bubble regains `shell` without a computer and without pairing again, also after a reboot:
 
 - it grants itself `WRITE_SECURE_SETTINGS` (possible because the permission has the `development` bit) so it can turn wireless debugging back on;
-- its adb key never expires (`adb_allowed_connection_time=0`);
+- its adb key never expires (`adb_allowed_connection_time=0`, phone-wide; the old value is saved and restored on removal);
 - it reconnects to `127.0.0.1` with its own adb-TLS client and its StrongBox key.
 
 ## Reasons

@@ -69,8 +69,9 @@ final class Engine {
         log.append(adb.exec("pm grant " + context.getPackageName()
                 + " android.permission.WRITE_SECURE_SETTINGS 2>&1"));
         log.append(allowNoticeListener());
-        // The paired key never expires (AdbKeyStore default is 7 days without use).
-        log.append(adb.exec("settings put global adb_allowed_connection_time 0 2>&1"));
+        // The paired key never expires (AdbKeyStore default is 7 days without use). The engine
+        // saves the old value so "Remove everything" can put it back.
+        log.append(run("persist-access"));
         return log.toString();
     }
 

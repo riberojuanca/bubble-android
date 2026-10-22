@@ -50,8 +50,11 @@
     <string name="setup_step">Paso %1$d de %2$d</string>
     <string name="setup_pair_title">Vincular Bubble</string>
     <string name="setup_pair_why">Bubble usa la depuración inalámbrica del teléfono para crear y proteger la burbuja, sin root. Se vincula una sola vez con un código; después Bubble prende la depuración solo mientras trabaja.</string>
-    <string name="setup_pair_steps">1. Activá las Opciones de desarrollador: Ajustes → Información del teléfono → tocá 7 veces Número de compilación.\n2. Volvé a Bubble y tocá Vincular. Se inicia la notificación y se abren las Opciones de desarrollador.\n3. Conectate a Wi-Fi, activá Depuración inalámbrica y abrí «Vincular dispositivo con código de vinculación».\n4. Sin cerrar ese diálogo, abrí la notificación de Bubble, tocá Vincular, escribí los 6 dígitos y enviá. Volvé a Bubble cuando termine.</string>
+    <string name="setup_pair_steps">1. Activá las Opciones de desarrollador: Ajustes → Información del teléfono → tocá 7 veces Número de compilación.\n2. Volvé a Bubble y tocá Vincular. Se inicia la notificación y se abren las Opciones de desarrollador.\n3. Conectate a Wi-Fi y activá Depuración inalámbrica. Cuando Android pregunte, marcá «Permitir siempre en esta red» antes de tocar Permitir: Bubble lo necesita para prender la depuración después. Luego abrí «Vincular dispositivo con código de vinculación».\n4. Sin cerrar ese diálogo, abrí la notificación de Bubble, tocá Vincular, escribí los 6 dígitos y enviá. Volvé a Bubble cuando termine.</string>
     <string name="setup_pair_action">Vincular</string>
+    <string name="setup_pair_notifications">Bubble necesita notificaciones: el código de vinculación se escribe en su notificación. Permitilas y tocá Vincular de nuevo.</string>
+    <string name="setup_unsupported_title">Bubble necesita Android 17</string>
+    <string name="setup_unsupported_body">Este teléfono tiene Android %1$s. Bubble solo puede crear la burbuja en Android 17, así que todavía no hay nada para configurar. No se cambió nada en el teléfono.</string>
     <string name="setup_pair_next">Ahora abrí «Vincular dispositivo con código de vinculación» en Depuración inalámbrica, bajá la barra de notificaciones y escribí el código en la notificación de Bubble. Después volvé acá.</string>
     <string name="setup_create_title">Crear la burbuja</string>
     <string name="setup_create_body">La burbuja es un espacio privado sin Google, aparte del resto del teléfono. Viene con F-Droid para instalar apps y un teclado sin acceso a internet. Tarda alrededor de un minuto.</string>
@@ -151,6 +154,7 @@
     <string name="error_title">Algo salió mal</string>
     <string name="error_generic">El motor no terminó. Mirá Ajustes → Registro técnico.</string>
     <string name="error_not_connected">No se pudo conectar a la depuración inalámbrica. Revisá que el Wi-Fi esté prendido.</string>
+    <string name="error_network_not_trusted">Android preguntó si permitir la depuración inalámbrica en esta red Wi-Fi. Marcá «Permitir siempre en esta red», tocá Permitir y probá de nuevo.</string>
     <string name="error_no_bubble">Todavía no hay burbuja.</string>
     <string name="error_apk_unreadable">No se pudo leer el archivo.</string>
 

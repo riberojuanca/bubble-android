@@ -22,7 +22,7 @@ Bubble → Apps (or Meta space) → the **bin** next to the app. Only that space
 - The bubble, with its apps and data.
 - The Meta space, with its apps and data.
 - The phone's firewall: blocked apps get internet again.
-- The settings Bubble changed in the system: the silenced system events, the usage-statistics restriction, Bubble's saved state; the guard is stopped.
+- The settings Bubble changed in the system: the silenced system events, the usage-statistics restriction, the expiry of debugging authorizations, Bubble's saved state; the guard is stopped.
 
 **Kept**
 - The apps and data of your normal phone.

@@ -15,7 +15,7 @@ Granted once, by you, when you pair with the 6-digit code. While the engine runs
 - **Who can use it:** only a client holding a key that the phone's adb daemon has authorized. Bubble's key is generated inside the Android Keystore (StrongBox when available) and **cannot be exported**: copying Bubble's files does not give someone the key.
 - **When it is open:** only while Bubble works (setup, maintenance, actions that need it). Bubble connects to `127.0.0.1`; nothing listens for the outside network beyond Android's own wireless-debugging service.
 - **The guard** is a long-lived `shell` process. It only re-applies Bubble's firewall rules and disables Google services in the profiles Bubble created.
-- **Key expiry is disabled** (`adb_allowed_connection_time=0`) so Bubble keeps working; you can revoke it anytime in *Developer options → Revoke debugging authorizations*.
+- **Key expiry is disabled** (`adb_allowed_connection_time=0`) so Bubble keeps working. The setting is phone-wide, so computers authorized earlier stop expiring too. Bubble saves the old value and *Remove everything* puts it back. You can revoke every authorization anytime in *Developer options → Revoke debugging authorizations*.
 
 ### Permissions granted with `pm grant`
 

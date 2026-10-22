@@ -1,3 +1,5 @@
+<p><b>Necesita Android 17.</b> En versiones anteriores Bubble no puede crear la burbuja.</p>
+
 <p>Bubble convierte el <i>Espacio privado</i> de Android en una «burbuja»: un perfil aparte y oculto donde las apps que elijas corren de forma nativa, con sus propios datos, <b>sin servicios de Google adentro</b> y detrás de un firewall que bloquea todo de entrada. Tu teléfono normal sigue funcionando igual que antes, con bancos y apps de Google incluidos.</p>
 
 <p><b>Qué hace Bubble</b></p>
@@ -15,9 +17,9 @@
 </ul>
 
 <p><b>Cómo funciona</b></p>
-<p>Crear un perfil sin Google, filtrar su red y manejar sus apps necesita permisos de sistema que ninguna app común puede tener. Bubble los toma de la identidad <i>shell</i> de Android, a través de la depuración inalámbrica de tu propio teléfono, vinculada una sola vez con un código y sin computadora. Lo del día a día va directo de Bubble a su copia dentro de cada perfil.</p>
+<p>Crear un perfil sin Google, filtrar su red y manejar sus apps necesita permisos de sistema que ninguna app común puede tener. Bubble los toma de la identidad <i>shell</i> de Android, a través de la depuración inalámbrica de tu propio teléfono, vinculada una sola vez con un código y sin computadora. Para no perder esa vinculación, Bubble apaga el vencimiento de 7 días de las autorizaciones de depuración de todo el teléfono, incluidas las computadoras que autorizaste antes; al quitar todo vuelve el ajuste anterior. Lo del día a día va directo de Bubble a su copia dentro de cada perfil.</p>
 
 <p><b>Qué no hace Bubble</b></p>
 <p>Android igual puede saber que existe un perfil privado y qué apps tiene instaladas; no puede ver cuándo las usás, tus datos, tus cuentas ni tu tráfico. Las apps que exigen la verificación Play Integrity de Google (muchos bancos, algunos juegos) no funcionan dentro de la burbuja.</p>
 
-<p><b>Estado: experimental.</b> Hecha y probada en un Pixel 9a con Android 17 (de fábrica, con el bootloader bloqueado). Otros teléfonos y versiones de Android no están probados.</p>
+<p><b>Estado: experimental.</b> Hecha y probada en un Pixel 9a con Android 17 (de fábrica, con el bootloader bloqueado). Otros teléfonos no están probados.</p>

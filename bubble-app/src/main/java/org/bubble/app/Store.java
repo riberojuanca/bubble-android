@@ -46,6 +46,11 @@ final class Store {
 
     void setPaired(boolean v) { prefs.edit().putBoolean("paired", v).apply(); }
 
+    /** Whether Android's notification prompt was shown once (after a denial it may stop showing). */
+    boolean notificationsAsked() { return prefs.getBoolean("notifications_asked", false); }
+
+    void setNotificationsAsked() { prefs.edit().putBoolean("notifications_asked", true).apply(); }
+
     /** What the user wants blocked (the checkboxes). */
     Set<String> wanted() {
         if (!prefs.contains("wanted")) return new TreeSet<>(java.util.Arrays.asList(SUGGESTED));

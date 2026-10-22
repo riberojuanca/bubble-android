@@ -1,3 +1,5 @@
+<p><b>Requires Android 17.</b> On earlier versions Bubble cannot create the bubble.</p>
+
 <p>Bubble turns Android's own <i>Private Space</i> into a "bubble": a separate, hidden profile where the apps you choose run natively, with their own data, <b>without Google services inside</b>, behind a deny-by-default firewall. Your normal phone keeps working exactly as before, banks and Google apps included.</p>
 
 <p><b>What Bubble does</b></p>
@@ -15,9 +17,9 @@
 </ul>
 
 <p><b>How it works</b></p>
-<p>Creating a profile without Google, filtering its network and managing its apps need system permissions no ordinary app can get. Bubble borrows them from Android's shell identity, through your phone's own wireless debugging, paired once with a code, with no computer. Day-to-day actions go directly from Bubble to its copy inside each profile.</p>
+<p>Creating a profile without Google, filtering its network and managing its apps need system permissions no ordinary app can get. Bubble borrows them from Android's shell identity, through your phone's own wireless debugging, paired once with a code, with no computer. To keep that pairing, Bubble turns off the 7-day expiry of debugging authorizations for the whole phone, including computers you authorized before; removing everything puts the old setting back. Day-to-day actions go directly from Bubble to its copy inside each profile.</p>
 
 <p><b>What Bubble does not do</b></p>
 <p>Android itself can still know that a private profile exists and which apps are installed in it; it cannot see when you use them, your data, your accounts or your traffic. Apps that require Google's Play Integrity check (many banking apps, some games) will not work inside the bubble.</p>
 
-<p><b>Status: experimental.</b> Built and tested on a Pixel 9a with Android 17 (stock, locked bootloader). Other phones and Android versions are untested.</p>
+<p><b>Status: experimental.</b> Built and tested on a Pixel 9a with Android 17 (stock, locked bootloader). Other phones are untested.</p>

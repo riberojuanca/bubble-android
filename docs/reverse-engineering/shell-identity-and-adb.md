@@ -70,7 +70,7 @@ This affects only the engine. Using the bubble, its firewall and the bridge do n
 
 ## The resulting chain
 
-1. **Setup** (once, with the user's pairing code): pair Bubble's key; `pm grant` the development permissions; `adb_allowed_connection_time=0`.
+1. **Setup** (once, with the user's pairing code): pair Bubble's key; `pm grant` the development permissions; `adb_allowed_connection_time=0` (phone-wide; the old value is saved and *Remove everything* restores it).
 2. **Each boot**: on a trusted Wi-Fi network, wireless debugging comes back by itself; if the user turned it off, Bubble turns it on with `WRITE_SECURE_SETTINGS`.
 3. **When needed**: Bubble's own adb-TLS client connects to the local TLS port with its key and runs the engine.
 

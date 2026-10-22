@@ -52,8 +52,10 @@ public final class MainActivity extends Activity {
             page.addView(Ui.body(this, getString(R.string.inside_bubble_note)));
             return;
         }
-        // Android 13+: without this the pairing notification (the whole pairing UX) is suppressed.
-        if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+        // Bubble's own notices (a firewall left without its list, for example). Before setup the
+        // setup screen asks instead, right before pairing: here onResume would cover the prompt.
+        if (store.paired() && store.bubbleUser() >= 0
+                && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
         }
         if (getActionBar() != null) getActionBar().hide();

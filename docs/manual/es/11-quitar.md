@@ -22,7 +22,7 @@ Bubble → Apps (o Espacio Meta) → el **tacho** al lado de la app. Se borran s
 - La burbuja, con sus apps y datos.
 - El espacio Meta, con sus apps y datos.
 - El firewall del teléfono: las apps bloqueadas vuelven a tener internet.
-- Los ajustes que Bubble cambió en el sistema: los eventos silenciados, la restricción de estadísticas de uso, el estado guardado de Bubble; el guardián se detiene.
+- Los ajustes que Bubble cambió en el sistema: los eventos silenciados, la restricción de estadísticas de uso, el vencimiento de las autorizaciones de depuración, el estado guardado de Bubble; el guardián se detiene.
 
 **Queda**
 - Las apps y datos de tu teléfono normal.

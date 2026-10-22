@@ -460,7 +460,7 @@ public final class BubbleEngine {
     /**
      * Leave the system as Bubble found it, for "Remove everything": the silenced events write again
      * (log.tag.* back to unset), the usagestats dump goes back to its default for the apps it was
-     * denied to, and Bubble's saved state is deleted. The bubble, the Meta space and the phone's
+     * denied to, the adb key expiry goes back to its old value, and Bubble's saved state is deleted. The bubble, the Meta space and the phone's
      * firewall are removed by their own commands first.
      */
     private static void undoTweaks() {
@@ -488,8 +488,9 @@ public final class BubbleEngine {
             for (String pkg : pkgs) sh("pm", "enable", "--user", "0", pkg);
             say("usage dump: re-enabled " + pkgs.size() + " readers in user 0");
         }
+        restoreAccessExpiry();
         for (String path : new String[]{USAGE_HOLDERS, USAGE_DISABLED, FIREWALL_STATE, FIREWALL_PENDING,
-                META_FIREWALL_STATE, META_FIREWALL_PENDING}) {
+                META_FIREWALL_STATE, META_FIREWALL_PENDING, CONNECTION_TIME_BEFORE}) {
             new java.io.File(path).delete();
         }
     }
@@ -871,6 +872,8 @@ public final class BubbleEngine {
     private static final String FIREWALL_STATE = "/data/local/tmp/bubble/bubble-firewall.txt";
     /** The apps denied the usagestats dump, found by denyUsageDump. */
     private static final String USAGE_HOLDERS = "/data/local/tmp/bubble/usage-holders.txt";
+    /** adb_allowed_connection_time before Bubble set it to 0, for undo-tweaks. */
+    private static final String CONNECTION_TIME_BEFORE = "/data/local/tmp/bubble/adb-connection-time.txt";
     /** Usage readers disabled in user 0 because the app-op would not take; re-enabled by undo. */
     private static final String USAGE_DISABLED = "/data/local/tmp/bubble/usage-disabled.txt";
     /**
@@ -1199,11 +1202,45 @@ public final class BubbleEngine {
      * /data/misc/adb/adb_temp_keys.xml and expires after adb_allowed_connection_time ms (default
      * 604800000 = 7 days). Setting it to 0 disables expiry. Wireless debugging itself survives
      * reboots on Android 17 (persist.adb.tls_server.enable) on networks marked "Always allow".
+     *
+     * <p>The setting is phone-wide: it also keeps computers authorized earlier from expiring. The
+     * value found first is saved, and undo-tweaks puts it back.
      */
     private static void persistAccess() {
+        java.io.File saved = new java.io.File(CONNECTION_TIME_BEFORE);
+        if (!saved.exists()) {
+            String before = sh("settings", "get", "global", "adb_allowed_connection_time").out.trim();
+            // Versions before this one set 0 without saving the old value: a 0 found with nothing
+            // saved is taken as Bubble's own, so removal returns to Android's default.
+            if (before.equals("0")) before = "null";
+            try (java.io.FileOutputStream out = new java.io.FileOutputStream(saved)) {
+                out.write(before.getBytes(StandardCharsets.UTF_8));
+            } catch (java.io.IOException e) {
+                throw new EngineError("could not save adb key expiry: " + e.getMessage());
+            }
+        }
         Result r = sh("settings", "put", "global", "adb_allowed_connection_time", "0");
         if (r.code != 0) throw new EngineError("could not persist adb access: " + r.err());
         System.out.println("adb_allowed_connection_time=0 (paired key will not expire)");
+    }
+
+    /** Put back the key expiry found before Bubble ("null": Android's default, 7 days). */
+    private static void restoreAccessExpiry() {
+        String before;
+        if (new java.io.File(CONNECTION_TIME_BEFORE).exists()) {
+            List<String> saved = readRules(CONNECTION_TIME_BEFORE);
+            before = saved.isEmpty() ? "null" : saved.get(0);
+        } else {
+            // Set up by a version that saved nothing: a 0 is Bubble's own, as in persistAccess.
+            String now = sh("settings", "get", "global", "adb_allowed_connection_time").out.trim();
+            if (!now.equals("0")) return;
+            before = "null";
+        }
+        Result r = before.equals("null")
+                ? sh("settings", "delete", "global", "adb_allowed_connection_time")
+                : sh("settings", "put", "global", "adb_allowed_connection_time", before);
+        if (r.code != 0) throw new EngineError("could not restore adb key expiry: " + r.err());
+        say("adb key expiry restored: " + (before.equals("null") ? "default" : before));
     }
 
     // ---- host firewall (user 0, network rules only) ------------------------

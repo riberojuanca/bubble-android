@@ -42,7 +42,12 @@ final class Controller {
     }
 
     final class NotConnected extends IllegalStateException {
-        NotConnected() { super(context.getString(R.string.error_not_connected)); }
+        // Bubble turned debugging on and it is off again: Android switched it off on a network
+        // not marked "Always allow" and asked the user instead (AdbDebuggingManager).
+        NotConnected() {
+            super(context.getString(WirelessDebugging.isOn(context) || !WirelessDebugging.hasWifi(context)
+                    ? R.string.error_not_connected : R.string.error_network_not_trusted));
+        }
     }
 
     private int depth;
@@ -77,6 +82,10 @@ final class Controller {
         if (!held) {
             Progress.step(context, R.string.step_debug_on);
             WirelessDebugging.acquire(context);
+        } else {
+            // Android may have switched it off under the kept connection (network not trusted
+            // yet): once the user allows the network, the next try must turn it on again.
+            WirelessDebugging.reassert(context);
         }
         depth++;
         try {
