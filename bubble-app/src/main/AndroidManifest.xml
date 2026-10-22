@@ -139,6 +139,16 @@
             </intent-filter>
         </service>
 
+        <!-- In Bubble's copy inside the Meta space: hides Google's "Enable Google Play services" notice. -->
+        <service
+            android:name=".GmsNoticeListener"
+            android:exported="false"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
         <!-- "Bubble photos" on top of Google Photos' picker when Wallpaper & style opens it. Turned on
              from Bubble's settings; it only sees window changes of those two apps. -->
         <service

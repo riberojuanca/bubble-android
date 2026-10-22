@@ -15,7 +15,7 @@ El espacio Meta es un **perfil de trabajo aparte** donde sí funcionan: ahí Goo
 **Aceptás**
 - Android deja que cualquiera vuelva a prender Google desde Ajustes (el botón **Habilitar** de Google Play Services en el perfil de trabajo). Bubble no puede bloquear ese botón. Si pasa, el guardián vuelve a apagar Google, pero mientras tanto Google podría ver las apps de este espacio, nunca la burbuja.
 - El Google del teléfono sabe que el espacio Meta existe y qué apps tiene. Un perfil de trabajo no está oculto como la burbuja.
-- Sin notificaciones por Google para estas apps (Instagram tiene un canal propio para algunas).
+- Sin notificaciones por Google para estas apps (Instagram tiene un canal propio para algunas). Bubble borra apenas aparece el aviso «Habilitar Servicios de Google Play» que publican.
 
 ## Crearlo
 

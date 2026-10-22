@@ -15,7 +15,7 @@ The Meta space is a **separate work profile** where they work: Google Play Servi
 **You accept**
 - Android lets anyone turn Google back on from Settings (the **Enable** button of Google Play services in the Work profile). Bubble cannot block that button. If it happens, the guard turns Google off again, but meanwhile Google could see the apps of this space, never the bubble.
 - The phone's Google knows the Meta space exists and which apps it has. A work profile is not hidden like the bubble.
-- No notifications through Google for these apps (Instagram has its own channel for some).
+- No notifications through Google for these apps (Instagram has its own channel for some). The "Enable Google Play services" notice they post is removed by Bubble as soon as it appears.
 
 ## Create it
 

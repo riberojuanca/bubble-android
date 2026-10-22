@@ -762,10 +762,28 @@ public final class BubbleEngine {
         say((r.code == 0 ? "Meta space Settings off" : "COULD NOT TURN OFF Meta space Settings: " + r.err()));
     }
 
+    /**
+     * Apps of the Meta space find Play Services disabled and post Google's "Enable Google Play
+     * services" notice. Bubble's copy there removes it (GmsNoticeListener); the approval covers only
+     * that profile's notifications.
+     */
+    private static boolean metaNoticeListener(int id, String bubblePkg) {
+        Result r = sh("cmd", "notification", "allow_listener", bubblePkg + "/.GmsNoticeListener", String.valueOf(id));
+        say(r.code == 0 ? "Meta space: Google notices hidden" : "COULD NOT hide Google notices in the Meta space: " + r.err());
+        return r.code == 0;
+    }
+
+    /** Once per guard process: Meta spaces set up before GmsNoticeListener existed get it too. */
+    private static boolean metaNoticesChecked;
+
     /** Keep every Google service of the Meta space disabled, as the guard does for the bubble. */
     private static void metaGuard() {
         int id = metaProfileId();
         if (id <= 0) return;
+        if (!metaNoticesChecked) {
+            String[] saved = readFirewallState(META_FIREWALL_STATE);
+            if (saved != null && listPackages(id).contains(saved[0])) metaNoticesChecked = metaNoticeListener(id, saved[0]);
+        }
         // As for the bubble: a list sent while the Meta space was paused is sent again once it runs.
         if (new java.io.File(META_FIREWALL_PENDING).exists() && privateProfileLine(id).contains("(running)")) {
             String[] saved = readFirewallState(META_FIREWALL_STATE);
@@ -930,6 +948,7 @@ public final class BubbleEngine {
             if (r.code != 0) throw new EngineError("could not put " + bubblePkg + " in the bubble: " + r.err());
         }
         sh("appops", "set", "--user", user, bubblePkg, "ACTIVATE_VPN", "allow");
+        if (stateFile.equals(META_FIREWALL_STATE)) metaNoticeListener(userId, bubblePkg);
         // Provision the local profile bridge once. Afterward, app opening and network controls
         // use Android Binder directly and work without Wi-Fi, ADB, or an internet connection.
         for (String target : new String[]{"0", user}) {
