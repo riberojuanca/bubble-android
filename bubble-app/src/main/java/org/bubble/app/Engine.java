@@ -72,6 +72,9 @@ final class Engine {
         // The paired key never expires (AdbKeyStore default is 7 days without use). The engine
         // saves the old value so "Remove everything" can put it back.
         log.append(run("persist-access"));
+        // The network the user allowed for pairing, kept "Always allow" even if its box was left
+        // unticked: otherwise Android turns debugging off again here the next time Bubble needs it.
+        log.append(run("trust-network"));
         return log.toString();
     }
 

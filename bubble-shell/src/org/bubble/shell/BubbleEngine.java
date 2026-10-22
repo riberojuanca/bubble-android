@@ -244,6 +244,9 @@ public final class BubbleEngine {
                 case "launcher-icons":
                     launcherIcons();
                     break;
+                case "trust-network":
+                    trustNetwork();
+                    break;
                 case "bubble-smart-lock":
                     bubbleSmartLock(requireUserId(args), requireArg(args, 2, "bubble-package"));
                     break;
@@ -433,6 +436,60 @@ public final class BubbleEngine {
      * gives it, but Launcher3-based launchers (the Pixel's) print their DeviceProfile when dumped:
      * "iconSizePx=173" (Pixel 9a, 4x6 grid, 420 dpi). Reported as launcher_icon_px, or nothing.
      */
+    /**
+     * At pairing, mark the Wi-Fi network the user just allowed as "Always allow" for wireless
+     * debugging, as the box in Android's own prompt does; without it, the next time Bubble turns
+     * debugging on here Android turns it off again and asks. Reverse engineered from the Pixel 9a's
+     * services.jar (Android 17): AdbService.allowWirelessDebugging(alwaysAllow, bssid, ssid) only
+     * needs MANAGE_DEBUGGING, which shell holds, and adds the network even while debugging is on
+     * (AOSP main ignores the call then). Trusted networks are in "dumpsys adb", inside its keystore.
+     */
+    private static void trustNetwork() {
+        java.util.regex.Matcher wifi = java.util.regex.Pattern
+                .compile("SSID: (\"[^\"]*\"), BSSID: ([0-9a-f]{2}(?::[0-9a-f]{2}){5})")
+                .matcher(sh("cmd", "wifi", "status").out);
+        if (!wifi.find()) {
+            say("network_trusted=no-wifi");
+            return;
+        }
+        String ssid = wifi.group(1), bssid = wifi.group(2);
+        if (trustedNetworks().contains(bssid)) {
+            say("network_trusted=yes");
+            return;
+        }
+        try {
+            Object binder = Class.forName("android.os.ServiceManager").getMethod("getService", String.class).invoke(null, "adb");
+            Object adb = Class.forName("android.debug.IAdbManager$Stub")
+                    .getMethod("asInterface", Class.forName("android.os.IBinder")).invoke(null, binder);
+            adb.getClass().getMethod("allowWirelessDebugging", boolean.class, String.class, String.class)
+                    .invoke(adb, true, bssid, ssid);
+        } catch (ReflectiveOperationException e) {
+            throw new EngineError("could not mark this network Always allow: " + e);
+        }
+        // Handled on the adb service's own thread: wait for it to be saved.
+        for (int i = 0; i < 30; i++) {
+            if (trustedNetworks().contains(bssid)) {
+                say("network_trusted=added");
+                return;
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+        throw new EngineError("network not marked Always allow");
+    }
+
+    /** The keystore part of "dumpsys adb" (binary XML; the BSSIDs appear as plain text). */
+    private static String trustedNetworks() {
+        String dump = sh("dumpsys", "adb").out;
+        int start = dump.indexOf("keystore="), end = dump.indexOf("adb_wifi=");
+        if (start < 0) throw new EngineError("adb keystore not readable");
+        return end > start ? dump.substring(start, end) : dump.substring(start);
+    }
+
     private static void launcherIcons() {
         String home = sh("cmd", "package", "resolve-activity", "--brief", "-a", "android.intent.action.MAIN",
                 "-c", "android.intent.category.HOME").out.trim();
@@ -1643,6 +1700,7 @@ public final class BubbleEngine {
                 "  meta-settings-off <id>      turn off the Meta space's own Settings (stops the Play Services prompt)",
                 "  bubble-smart-lock <id> <bubble-pkg>  the bubble locks itself unless an app inside plays",
                 "  launcher-icons              report the launcher's home-screen icon size in px",
+                "  trust-network               mark the current Wi-Fi \"Always allow\" for wireless debugging",
                 "  bubble-tools <id>               add the installer and file picker if missing",
                 "  bubble-allow-installs <id> <pkg>  let an app store inside install apps",
                 "  bubble-keyboard <id> <ime>  enable and select the bubble's keyboard",
