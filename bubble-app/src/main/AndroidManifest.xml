@@ -30,9 +30,13 @@
          back on if the user switched it off. -->
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-    <!-- Granted only to Bubble's copy inside the bubble, by the engine (pm grant for that user), so
-         it can hand the bubble's photos to BubblePhotosProvider. Never requested on the phone. -->
+    <!-- Granted only to Bubble's copies in the bubble and the Meta space, by the engine (pm grant and
+         appops for that user), so each can hand its space's photos and files to the other spaces
+         (SpaceChannel). Never requested on the phone: the phone's files are not shared. -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:label="@string/app_name"
@@ -164,9 +168,9 @@
                 android:resource="@xml/photos_assist" />
         </service>
 
-        <!-- The bubble's photos for any app that asks for an image, or as the wallpaper from Bubble. -->
+        <!-- The other spaces' photos for any app that asks for an image, or as the wallpaper from Bubble. -->
         <activity
-            android:name=".BubblePhotoPickerActivity"
+            android:name=".SpacePhotosActivity"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/photos_root">
@@ -183,11 +187,11 @@
             </intent-filter>
         </activity>
 
-        <!-- "Bubble photos" in the phone's file picker: the bubble's photos, read one at a time
-             through the profile bridge, without copying them to the phone. -->
+        <!-- The other spaces in Android's file picker, in every space: their photos and files, read
+             where they are through the profile bridge, without copying them. -->
         <provider
-            android:name=".BubblePhotosProvider"
-            android:authorities="org.bubble.app.photos"
+            android:name=".SpacesProvider"
+            android:authorities="org.bubble.app.spaces"
             android:exported="true"
             android:grantUriPermissions="true"
             android:permission="android.permission.MANAGE_DOCUMENTS">
@@ -195,6 +199,13 @@
                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
         </provider>
+
+        <!-- From the file picker: asks Android to open a locked or paused space. -->
+        <activity
+            android:name=".SpaceUnlockActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <receiver
             android:name=".FirewallReceiver"

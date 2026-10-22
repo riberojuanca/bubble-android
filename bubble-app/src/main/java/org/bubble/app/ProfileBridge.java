@@ -25,10 +25,13 @@ import java.util.concurrent.TimeUnit;
 /** Local, signature-protected Binder calls between Bubble's copies. No network transport. */
 final class ProfileBridge {
     static final int APPS = 1, OPEN = 2, NETWORK = 3, RULES = 4, STATUS = 5,
-            PHOTO_FOLDERS = 6, PHOTOS = 7, PHOTO_THUMB = 8, PHOTO_OPEN = 9, FILES = 10;
+            FILES = 10, SPACES = 11, SPACE_LIST = 12, SPACE_OPEN = 13, SPACE_THUMB = 14, SPACE_UNLOCK = 15;
+    /** What a profile's copy may ask the phone's: its firewall rules, and the channel to the other space. */
+    private static final java.util.Set<Integer> FROM_PROFILE = new java.util.HashSet<>(java.util.Arrays.asList(
+            RULES, SPACES, SPACE_LIST, SPACE_OPEN, SPACE_THUMB, SPACE_UNLOCK));
     static final String ERROR = "error", ALLOWED = "allowed", PACKAGE = "package",
             ID = "id", IDS = "ids", NAMES = "names", MIMES = "mimes", SIZES = "sizes", DATES = "dates",
-            COUNTS = "counts", BYTES = "bytes", FILE = "file", KEEP_OPEN = "keep_open";
+            SUMMARIES = "summaries", LOCKED = "locked", BYTES = "bytes", FILE = "file", KEEP_OPEN = "keep_open";
     static final Handler MAIN = new Handler(Looper.getMainLooper());
 
     private ProfileBridge() {}
@@ -53,7 +56,7 @@ final class ProfileBridge {
         int ownUser = Process.myUid() / 100000;
         Store store = new Store(c);
         boolean valid = ownUser == 0 ? user > 0 && (user == store.bubbleUser() || user == store.metaUser())
-                : user == 0 && operation == RULES;
+                : user == 0 && FROM_PROFILE.contains(operation);
         if (!valid) throw new SecurityException("Profile not managed by Bubble");
         ArrayBlockingQueue<Bundle> result = new ArrayBlockingQueue<>(1);
         Messenger reply = new Messenger(new Handler(Looper.getMainLooper(), message -> {
@@ -106,38 +109,6 @@ final class ProfileBridge {
         return out;
     }
 
-    /** The bubble's photo folders, newest first: ids, names, photo counts and newest dates. */
-    static Bundle photoFolders(Context c, int user) throws Exception {
-        return call(c, user, PHOTO_FOLDERS, null);
-    }
-
-    /** The photos of one folder, newest first: ids, names, mime types, sizes and dates. */
-    static Bundle photos(Context c, int user, String folder) throws Exception {
-        Bundle request = new Bundle();
-        request.putString(ID, folder);
-        return call(c, user, PHOTOS, request);
-    }
-
-    /** A small JPEG of one photo, made by the bubble's media provider. */
-    static byte[] photoThumb(Context c, int user, long id, int size) throws Exception {
-        Bundle request = new Bundle();
-        request.putLong(ID, id);
-        request.putInt(BYTES, size);
-        byte[] jpeg = call(c, user, PHOTO_THUMB, request).getByteArray(BYTES);
-        if (jpeg == null) throw new IOException("Missing thumbnail");
-        return jpeg;
-    }
-
-    /** One photo opened for reading inside the bubble; only this file leaves it. */
-    static android.os.ParcelFileDescriptor openPhoto(Context c, int user, long id) throws Exception {
-        Bundle request = new Bundle();
-        request.putLong(ID, id);
-        android.os.ParcelFileDescriptor file = call(c, user, PHOTO_OPEN, request)
-                .getParcelable(FILE, android.os.ParcelFileDescriptor.class);
-        if (file == null) throw new IOException("Missing photo");
-        return file;
-    }
-
     static String applyNetwork(Context c, int user) throws Exception {
         if (locked(c, user)) return "bubble locked: firewall list saved, applied when the profile is unlocked\n";
         // The profile pulls the authoritative list from user 0. No stale snapshot can overwrite it.
@@ -162,7 +133,7 @@ final class ProfileBridge {
         launch(c, call(c, user, OPEN, request));
     }
 
-    /** Android's file browser inside the profile, on its own storage (the bubble's files only). */
+    /** Android's file browser inside the profile, on its own storage (that space's files only). */
     static void files(Context c, int user) throws Exception {
         launch(c, call(c, user, FILES, null));
     }

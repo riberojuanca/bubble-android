@@ -765,6 +765,15 @@ final class Controller {
         return "";
     }
 
+    /** The Meta space's file browser; a paused space is resumed from Android's Work tab, not here. */
+    String openMetaFiles() throws Exception {
+        int user = metaUserOrThrow();
+        if (!ProfileBridge.available(context)) throw new IllegalStateException(context.getString(R.string.error_profile_setup));
+        if (ProfileBridge.locked(context, user)) return context.getString(R.string.grid_meta_paused);
+        ProfileBridge.files(context, user);
+        return "";
+    }
+
     /** Open an app of the bubble; when it is locked, Android's unlock prompt comes first. */
     String openInBubble(String pkg) throws Exception {
         return openInBubble(pkg, null);

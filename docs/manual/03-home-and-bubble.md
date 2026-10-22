@@ -47,13 +47,17 @@ When the bubble is locked, Android stops all its apps and keeps its storage encr
 
 The Private section only appears in the app drawer when the bubble has at least one app. Bubble always keeps F-Droid there for this reason.
 
-## Using bubble photos and files on the phone
+## Photos and files between spaces
 
-Photos and downloads saved inside the bubble (with Immich or a browser there) stay in the bubble. Bubble lets you reach them from the normal phone without moving the rest:
+Each space keeps its own storage: photos and downloads saved inside the bubble (with Immich or a browser there) stay in the bubble, and the Meta space has its own. Bubble connects them without copying anything: from each space you can open the other spaces' photos and files where they are, and only the one you pick is read.
 
-- **Wallpaper from Wallpaper & style**: turn on Bubble → Settings → **Wallpapers with bubble photos**. Then Wallpaper & style → *Choose a photo* still opens Google Photos, with a **Bubble photos** button on top: tap it, open a folder and tap a photo. Android's own wallpaper screen opens to crop it and set it on the home screen, the lock screen or both. The Pixel's wallpaper app always asks Google Photos by name, and Google Photos only shows the normal phone's photos, so the button is how the bubble's photos get there. It uses an accessibility service that only sees which screen of those two apps is open, never what is on it.
-- **Wallpaper from Bubble**: Bubble → Bubble → **Bubble photos**, then the same steps.
-- **Any app that asks for an image** can choose **Bubble photos** among the apps it offers, or in Android's file picker (menu → **Browse** → **Bubble photos**).
-- **Bubble files**: Bubble → Bubble → **Bubble files** opens Android's file browser inside the bubble, on the bubble's own storage (its Downloads and folders, apart from the phone's).
+- **In Android's file picker**, in any app of any space: menu → **Browse** shows **Bubble** and **Meta space** (on the phone both, in the bubble the Meta space, in the Meta space the bubble). Each one has **Photos** (by album) and **Files** (its whole storage).
+- **Apps that ask for an image** can also choose **Bubble photos** among the apps they offer: the other spaces' albums, with thumbnails.
+- **Wallpaper from Wallpaper & style**: turn on Bubble → Settings → **Wallpapers with bubble photos**. Then Wallpaper & style → *Choose a photo* still opens Google Photos, with a **Bubble photos** button on top: tap it, open an album and tap a photo. Android's own wallpaper screen opens to crop it and set it on the home screen, the lock screen or both. The Pixel's wallpaper app always asks Google Photos by name, and Google Photos only shows the normal phone's photos, so the button is how the other spaces' photos get there. It uses an accessibility service that only sees which screen of those two apps is open, never what is on it.
+- **Wallpaper from Bubble**: Bubble → Bubble (or Meta space) → **Bubble photos**, then the same steps.
+- **Bubble files** and **Meta space files** (in Bubble's Bubble and Meta space screens) open Android's file browser inside that space, on its own storage.
 
-If the bubble is locked, Android asks for your fingerprint or PIN right there and the photos or files open after it. Only the photo you choose leaves the bubble, and Bubble keeps no copy; the app you give it to may keep its own (Android stores the wallpaper image, for example).
+If a space is locked or paused, the picker shows a button to open it: Android asks for your fingerprint or PIN when needed, and the list appears. Files are read-only from other spaces, and the phone's own files are not offered to the bubble or the Meta space. Bubble keeps no copy; the app you give a file to may keep its own (Android stores the wallpaper image, for example).
+
+The gallery that some apps build themselves (Instagram's upload screen, for example) reads only its own space's photos. In those apps, use their option to choose a file or open the system picker, if they have one.
+

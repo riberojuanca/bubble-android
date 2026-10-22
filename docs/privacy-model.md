@@ -46,6 +46,10 @@ None of these can be removed without root: the permissions are signature/privile
 
 The Meta space has Google Play Services installed but disabled, so that Facebook and Instagram can run. If Google were enabled there (Android lets anyone tap *Enable* in Settings), it would see that profile's apps and their use, never the bubble. A work profile is not hidden: the phone's Google knows it exists and which apps it holds. See [Meta space](reverse-engineering/instagram-firebase-crash.md) and [decision 0006](decisions/0006-meta-space-with-google-off.md).
 
+## The channel between spaces
+
+The bubble and the Meta space can read each other's photos and files, and the phone can read both, through Bubble ([cross-profile access](reverse-engineering/cross-profile.md#the-channel-between-spaces)). Only the file a user picks in Android's picker is read, read-only, and nothing is copied. For that, Bubble's copy in each space holds all-files access to that space's own storage. Once a Meta app has a picked file, it can keep it. The phone's files are never offered to the spaces, so the phone's Google never gets a way in through Bubble.
+
 ## Bubble's own power
 
 Bubble borrows the `shell` identity and holds `WRITE_SECURE_SETTINGS`, `INTERACT_ACROSS_USERS` and `MODIFY_QUIET_MODE`. That is a lot of power in one app. It is granted only by an explicit user action (pairing), Bubble's adb key lives in the hardware keystore, and the code is open for review. See [SECURITY.md](../SECURITY.md).

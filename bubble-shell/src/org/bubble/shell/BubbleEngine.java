@@ -830,16 +830,18 @@ public final class BubbleEngine {
         return r.code == 0;
     }
 
-    /** Once per guard process: Meta spaces set up before GmsNoticeListener existed get it too. */
-    private static boolean metaNoticesChecked;
+    /** Once per guard process: Meta spaces set up by an older Bubble get what is new (spaceAccess). */
+    private static boolean metaAccessChecked;
 
     /** Keep every Google service of the Meta space disabled, as the guard does for the bubble. */
     private static void metaGuard() {
         int id = metaProfileId();
         if (id <= 0) return;
-        if (!metaNoticesChecked) {
+        if (!metaAccessChecked) {
+            // Bubble's package, from either saved firewall (a Meta space may never have had its own).
             String[] saved = readFirewallState(META_FIREWALL_STATE);
-            if (saved != null && listPackages(id).contains(saved[0])) metaNoticesChecked = metaNoticeListener(id, saved[0]);
+            if (saved == null) saved = readFirewallState(FIREWALL_STATE);
+            if (saved != null && listPackages(id).contains(saved[0])) metaAccessChecked = spaceAccess(id, saved[0], true);
         }
         // As for the bubble: a list sent while the Meta space was paused is sent again once it runs.
         if (new java.io.File(META_FIREWALL_PENDING).exists() && privateProfileLine(id).contains("(running)")) {
@@ -1005,15 +1007,7 @@ public final class BubbleEngine {
             if (r.code != 0) throw new EngineError("could not put " + bubblePkg + " in the bubble: " + r.err());
         }
         sh("appops", "set", "--user", user, bubblePkg, "ACTIVATE_VPN", "allow");
-        if (stateFile.equals(META_FIREWALL_STATE)) metaNoticeListener(userId, bubblePkg);
-        // Provision the local profile bridge once. Afterward, app opening and network controls
-        // use Android Binder directly and work without Wi-Fi, ADB, or an internet connection.
-        for (String target : new String[]{"0", user}) {
-            sh("pm", "grant", "--user", target, bubblePkg, "android.permission.INTERACT_ACROSS_USERS");
-            sh("pm", "grant", "--user", target, bubblePkg, "android.permission.MODIFY_QUIET_MODE");
-        }
-        // Only inside: the copy there hands one photo at a time to "Bubble photos" on the phone.
-        sh("pm", "grant", "--user", user, bubblePkg, "android.permission.READ_MEDIA_IMAGES");
+        spaceAccess(userId, bubblePkg, stateFile.equals(META_FIREWALL_STATE));
         // Always-on (without lockdown): Android itself starts the VPN every time the bubble is
         // unlocked. Needed because on Android 17 the profile's BOOT_COMPLETED does not reach this
         // copy, and broadcasts sent while the bubble is locked are dropped (both seen on the Pixel).
@@ -1026,6 +1020,29 @@ public final class BubbleEngine {
                 "--es", "allowed", String.join(",", allowed));
         say((r.code == 0 ? "bubble firewall (deny by default), allowed: " : "COULD NOT SET BUBBLE FIREWALL: ")
                 + (allowed.isEmpty() ? "none" : String.join(",", allowed)));
+    }
+
+    /**
+     * What Bubble's copy in a space needs besides the VPN. Given with the firewall, and once per
+     * guard for the Meta space too: its firewall is sent only when its lists change, so a Meta space
+     * set up by an older Bubble would otherwise never get the newer grants (seen on the emulator).
+     * Returns whether the Meta space's notice listener was approved (always true for the bubble).
+     */
+    private static boolean spaceAccess(int userId, String bubblePkg, boolean meta) {
+        String user = String.valueOf(userId);
+        boolean notices = !meta || metaNoticeListener(userId, bubblePkg);
+        // Provision the local profile bridge once. Afterward, app opening and network controls
+        // use Android Binder directly and work without Wi-Fi, ADB, or an internet connection.
+        for (String target : new String[]{"0", user}) {
+            sh("pm", "grant", "--user", target, bubblePkg, "android.permission.INTERACT_ACROSS_USERS");
+            sh("pm", "grant", "--user", target, bubblePkg, "android.permission.MODIFY_QUIET_MODE");
+        }
+        // Only inside: the copy there hands this space's photos and files, one at a time and only
+        // the one picked, to the other spaces (SpaceChannel). The phone's copy gets none of these.
+        sh("pm", "grant", "--user", user, bubblePkg, "android.permission.READ_MEDIA_IMAGES");
+        sh("pm", "grant", "--user", user, bubblePkg, "android.permission.READ_MEDIA_VIDEO");
+        sh("appops", "set", "--user", user, bubblePkg, "MANAGE_EXTERNAL_STORAGE", "allow");
+        return notices;
     }
 
     private static void bubbleAdd(int userId, List<String> pkgs) {

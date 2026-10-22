@@ -39,9 +39,12 @@ public final class ProfileControlService extends Service {
             if (ownUser == 0) {
                 Store store = new Store(this);
                 int profile = sender / 100000;
-                if (request.what != ProfileBridge.RULES || profile <= 0
-                        || (profile != store.bubbleUser() && profile != store.metaUser())) {
+                if (profile <= 0 || (profile != store.bubbleUser() && profile != store.metaUser())) {
                     throw new SecurityException("Unknown profile request");
+                }
+                if (request.what != ProfileBridge.RULES) {
+                    relay(request.what, new Bundle(request.getData()), profile, reply);
+                    return true;
                 }
                 out.putBoolean(ProfileBridge.KEEP_OPEN, profile == store.bubbleUser() && store.keepBubbleOpen());
                 out.putString(ProfileBridge.ALLOWED, String.join(",", profile == store.bubbleUser()
@@ -83,22 +86,13 @@ public final class ProfileControlService extends Service {
                     case ProfileBridge.STATUS:
                         profileStatus(out);
                         break;
-                    case ProfileBridge.PHOTO_FOLDERS:
-                    case ProfileBridge.PHOTOS:
-                    case ProfileBridge.PHOTO_THUMB:
-                    case ProfileBridge.PHOTO_OPEN:
-                        // Media queries and thumbnails read storage: off the main thread.
+                    case ProfileBridge.SPACE_LIST:
+                    case ProfileBridge.SPACE_OPEN:
+                    case ProfileBridge.SPACE_THUMB:
+                        // This space's photos and files, for another space: storage reads, off the main thread.
                         int what = request.what;
                         Bundle args = new Bundle(request.getData());
-                        new Thread(() -> {
-                            try {
-                                Bundle photos = BubblePhotos.serve(this, what, args);
-                                reply(reply, photos);
-                                android.os.ParcelFileDescriptor sent =
-                                        photos.getParcelable(ProfileBridge.FILE, android.os.ParcelFileDescriptor.class);
-                                if (sent != null) sent.close();
-                            } catch (Exception e) { reply(reply, ProfileBridge.error(e.getMessage())); }
-                        }, "bubble-profile-photos").start();
+                        new Thread(() -> answer(reply, () -> SpaceStore.serve(this, what, args)), "bubble-space").start();
                         return true;
                     default:
                         throw new IllegalArgumentException("Unknown profile operation");
@@ -107,6 +101,43 @@ public final class ProfileControlService extends Service {
             reply(reply, out);
         } catch (Exception e) { reply(reply, ProfileBridge.error(e.getMessage())); }
         return true;
+    }
+
+    /**
+     * On the phone's copy: a profile asks for the other space (see {@link SpaceChannel}). Only to
+     * the other space Bubble manages, never to the asking profile itself or to the phone's files.
+     */
+    private void relay(int what, Bundle args, int profile, Messenger reply) {
+        if (what == ProfileBridge.SPACES) {
+            new Thread(() -> answer(reply, () -> SpaceChannel.spacesFor(this, profile)), "bubble-spaces").start();
+            return;
+        }
+        int target = SpaceChannel.relayTarget(this, profile, args.getString(SpaceChannel.SPACE));
+        if (what == ProfileBridge.SPACE_UNLOCK) {
+            // Android shows its own unlock prompt when the space needs one.
+            getSystemService(android.os.UserManager.class).requestQuietModeEnabled(false, ProfileBridge.handle(target));
+            reply(reply, new Bundle());
+            return;
+        }
+        if (what != ProfileBridge.SPACE_LIST && what != ProfileBridge.SPACE_OPEN && what != ProfileBridge.SPACE_THUMB) {
+            throw new SecurityException("Unknown profile request");
+        }
+        args.remove(SpaceChannel.SPACE);
+        new Thread(() -> answer(reply, () -> ProfileBridge.call(this, target, what, args)), "bubble-space-relay").start();
+    }
+
+    private interface Answer {
+        Bundle get() throws Exception;
+    }
+
+    /** Reply with the answer; a file sent along is closed here once Binder has passed it on. */
+    private static void answer(Messenger reply, Answer answer) {
+        try {
+            Bundle out = answer.get();
+            reply(reply, out);
+            android.os.ParcelFileDescriptor sent = out.getParcelable(ProfileBridge.FILE, android.os.ParcelFileDescriptor.class);
+            if (sent != null) sent.close();
+        } catch (Exception e) { reply(reply, ProfileBridge.error(e.getMessage())); }
     }
 
     private void applyNetwork(String rules, Messenger reply) {

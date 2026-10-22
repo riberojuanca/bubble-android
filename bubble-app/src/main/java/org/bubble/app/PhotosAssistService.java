@@ -123,7 +123,7 @@ public final class PhotosAssistService extends AccessibilityService {
     private void open() {
         hide();
         performGlobalAction(GLOBAL_ACTION_BACK);
-        main.postDelayed(() -> startActivity(new Intent(this, BubblePhotoPickerActivity.class)
+        main.postDelayed(() -> startActivity(new Intent(this, SpacePhotosActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)), 250);
     }
 

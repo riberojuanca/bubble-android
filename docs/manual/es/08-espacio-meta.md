@@ -29,6 +29,8 @@ Sus apps están en la pestaña **Trabajo** del cajón de apps, con un maletín. 
 
 La pestaña Trabajo tiene un interruptor **Pausar apps de trabajo**: detiene todo el espacio Meta (sin actividad de fondo ni notificaciones) hasta que lo reanudes. La burbuja y tu teléfono normal no se ven afectados.
 
+**Archivos del espacio Meta** (Bubble → Espacio Meta) abre el explorador de archivos de Android en el almacenamiento propio del espacio Meta. Desde el espacio Meta, las fotos y archivos de la burbuja están en el selector de archivos de Android, en **Burbuja**, y al revés ([capítulo 3](03-inicio-y-burbuja.md#fotos-y-archivos-entre-espacios)).
+
 ## Para tener en cuenta
 
 - **El nombre de la pestaña Trabajo y el maletín** los pone Android; no se pueden cambiar.

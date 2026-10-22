@@ -257,11 +257,16 @@
     <string name="firewall_rules_missing_body">El firewall no pudo recibir la lista de apps con internet, así que por seguridad todas quedaron sin red. Abrí Bubble para que la vuelva a enviar.</string>
     <string name="bubble_fingerprint_hint">Si una app de la burbuja te pide huella (por ejemplo un banco), dale a la burbuja su propio bloqueo: en Ajustes → Espacio privado → Bloqueo del espacio privado, elegí un PIN y agregá tu huella. Hacelo con la burbuja abierta.</string>
     <string name="bubble_fingerprint_open">Abrir ajustes de seguridad</string>
-    <!-- Fotos de la burbuja en los selectores de archivos y fotos del teléfono (BubblePhotosProvider) -->
-    <string name="photos_root">Fotos de la burbuja</string>
-    <string name="photos_root_summary">Elegí una foto guardada en la burbuja</string>
-    <string name="photos_locked">La burbuja está bloqueada. Desbloqueala y volvé a abrir esta carpeta.</string>
-    <string name="photos_no_access">Bubble todavía no puede ver las fotos de la burbuja. Abrí Bubble una vez y volvé a intentar.</string>
+    <!-- Los otros espacios en los selectores de archivos y fotos de cada espacio (SpacesProvider, SpacePhotosActivity) -->
+    <string name="photos_root">Fotos de Bubble</string>
+        <string name="photos_locked">La burbuja está bloqueada. Abrila para ver sus fotos y archivos.</string>
+    <string name="space_summary">Fotos y archivos, leídos donde están</string>
+    <string name="space_locked">Bloqueado o pausado: abrilo para ver sus fotos y archivos</string>
+    <string name="space_open">Abrir este espacio</string>
+    <string name="space_photos">Fotos</string>
+    <string name="space_files">Archivos</string>
+    <string name="meta_files">Archivos del espacio Meta</string>
+    <string name="photos_no_access">Bubble todavía no llega a los otros espacios. Abrí Bubble en el teléfono una vez y volvé a intentar.</string>
     <plurals name="photos_count">
         <item quantity="one">%d foto</item>
         <item quantity="other">%d fotos</item>
@@ -277,11 +282,11 @@
     <string name="shape_four_sided_cookie">Galleta de 4 lados</string>
     <string name="shape_seven_sided_cookie">Galleta de 7 lados</string>
     <string name="bubble_files">Archivos de la burbuja</string>
-    <string name="photos_pick_hint">Elegí una foto guardada en la burbuja. Solo se comparte esa foto.</string>
-    <string name="photos_wallpaper_hint">Tocá una foto para ponerla de fondo de pantalla. Solo esa foto sale de la burbuja.</string>
-    <string name="photos_none">No hay fotos en la burbuja.</string>
+    <string name="photos_pick_hint">Elegí una foto guardada en otro espacio. Solo se comparte esa foto.</string>
+    <string name="photos_wallpaper_hint">Tocá una foto para ponerla de fondo de pantalla. Solo esa foto sale de su espacio.</string>
+    <string name="photos_none">No hay fotos en este espacio.</string>
     <string name="assist_label">Bubble: fondos con fotos de la burbuja</string>
-    <string name="assist_description">Agrega un botón «Fotos de la burbuja» al elegir un fondo de pantalla, para usar una foto de la burbuja. Solo detecta cuándo estás eligiendo un fondo; no lee nada de la pantalla.</string>
+    <string name="assist_description">Agrega un botón «Fotos de Bubble» al elegir un fondo de pantalla, para usar una foto de la burbuja o del espacio Meta. Solo detecta cuándo estás eligiendo un fondo; no lee nada de la pantalla.</string>
     <string name="settings_lock">Bloquear la burbuja</string>
     <string name="settings_lock_screen">Con la pantalla · sin notificaciones mientras está bloqueada</string>
     <string name="settings_lock_manual">A mano · sus apps siguen avisando</string>
@@ -289,7 +294,7 @@
     <string name="settings_assist">Fondos con fotos de la burbuja</string>
     <string name="settings_assist_on">Activado</string>
     <string name="settings_assist_off">Desactivado</string>
-    <string name="assist_explain">Cuando elegís un fondo de pantalla, el teléfono abre Google Fotos, que no puede ver la burbuja. Si activás esto, ahí va a aparecer un botón «Fotos de la burbuja» para elegir una foto de la burbuja.\n\nPara eso Bubble necesita el permiso de accesibilidad de Android. Solo lo usa para saber cuándo estás eligiendo un fondo. No lee nada de la pantalla.\n\nCada tanto Android te va a mostrar un aviso de que Bubble tiene «acceso total al dispositivo». Es normal: Android lo muestra para toda app que usa este permiso. Mantenelo si usás esta función.</string>
+    <string name="assist_explain">Cuando elegís un fondo de pantalla, el teléfono abre Google Fotos, que no puede ver la burbuja. Si activás esto, ahí va a aparecer un botón «Fotos de Bubble» para elegir una foto de la burbuja o del espacio Meta.\n\nPara eso Bubble necesita el permiso de accesibilidad de Android. Solo lo usa para saber cuándo estás eligiendo un fondo. No lee nada de la pantalla.\n\nCada tanto Android te va a mostrar un aviso de que Bubble tiene «acceso total al dispositivo». Es normal: Android lo muestra para toda app que usa este permiso. Mantenelo si usás esta función.</string>
     <string name="assist_turn_on">Activar</string>
     <string name="settings_assist_lost">Se desactivó. Tocá para activarlo de nuevo</string>
     <string name="assist_lost_title">Las fotos de la burbuja ya no aparecen al elegir un fondo</string>

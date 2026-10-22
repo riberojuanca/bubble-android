@@ -6,7 +6,7 @@
 |---|---|
 | **Pair again** | Repeats the pairing ([chapter 2](02-install-and-set-up.md)). Only needed if Bubble cannot connect anymore, for example after revoking debugging authorizations |
 | **Technical log** | Shows the last output of the engine. Useful when something fails; you can select and copy it |
-| **Wallpapers with bubble photos** | Shows a **Bubble photos** button on top of Google Photos when Wallpaper & style opens it to choose a photo ([chapter 3](03-home-and-bubble.md#using-bubble-photos-and-files-on-the-phone)). It turns on an accessibility service that only sees which screen of those two apps is open. Off by default |
+| **Wallpapers with bubble photos** | Shows a **Bubble photos** button (the bubble's and the Meta space's albums) on top of Google Photos when Wallpaper & style opens it to choose a photo ([chapter 3](03-home-and-bubble.md#photos-and-files-between-spaces)). It turns on an accessibility service that only sees which screen of those two apps is open. Off by default |
 | **Icon shape** | The shape of the app icons Bubble draws (its screens, the widget and the icons on the home screen). Choose the same one as Wallpaper & style → Icons; Android does not let Bubble read it. Square by default |
 | **Check for updates** | Checks GitHub for a newer version and lets you download and install it |
 | **Remove everything** | Leaves the phone as it was before Bubble ([chapter 11](11-removing.md)) |

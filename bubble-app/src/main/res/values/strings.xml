@@ -259,11 +259,16 @@
     <string name="firewall_rules_missing_body">The firewall could not get the list of apps with internet, so to be safe none has network. Open Bubble to send it again.</string>
     <string name="bubble_fingerprint_hint">If an app in the bubble asks for your fingerprint (a bank, for example), give the bubble its own lock: in Settings → Private space → Private space lock, choose a PIN and add your fingerprint. Do it with the bubble open.</string>
     <string name="bubble_fingerprint_open">Open security settings</string>
-    <!-- Bubble photos in the phone's file and photo pickers (BubblePhotosProvider) -->
+    <!-- The other spaces in every space's file and photo pickers (SpacesProvider, SpacePhotosActivity) -->
     <string name="photos_root">Bubble photos</string>
-    <string name="photos_root_summary">Pick a photo saved in the bubble</string>
-    <string name="photos_locked">The bubble is locked. Unlock it and open this folder again.</string>
-    <string name="photos_no_access">Bubble cannot see the bubble\'s photos yet. Open Bubble once and try again.</string>
+        <string name="photos_locked">The bubble is locked. Open it to see its photos and files.</string>
+    <string name="space_summary">Photos and files, read where they are</string>
+    <string name="space_locked">Locked or paused: open it to see its photos and files</string>
+    <string name="space_open">Open this space</string>
+    <string name="space_photos">Photos</string>
+    <string name="space_files">Files</string>
+    <string name="meta_files">Meta space files</string>
+    <string name="photos_no_access">Bubble cannot reach the other spaces yet. Open Bubble on the phone once and try again.</string>
     <plurals name="photos_count">
         <item quantity="one">%d photo</item>
         <item quantity="other">%d photos</item>
@@ -278,9 +283,9 @@
     <string name="shape_four_sided_cookie">4-sided cookie</string>
     <string name="shape_seven_sided_cookie">7-sided cookie</string>
     <string name="bubble_files">Bubble files</string>
-    <string name="photos_pick_hint">Choose a photo saved in the bubble. Only that photo is shared.</string>
-    <string name="photos_wallpaper_hint">Tap a photo to make it your wallpaper. Only that photo leaves the bubble.</string>
-    <string name="photos_none">There are no photos in the bubble.</string>
+    <string name="photos_pick_hint">Choose a photo saved in another space. Only that photo is shared.</string>
+    <string name="photos_wallpaper_hint">Tap a photo to make it your wallpaper. Only that photo leaves its space.</string>
+    <string name="photos_none">There are no photos in this space.</string>
     <string name="assist_label">Bubble: wallpaper from the bubble</string>
     <string name="assist_description">Adds a "Bubble photos" button when you choose a wallpaper, so you can use a photo from the bubble. It only notices when you are choosing a wallpaper; it does not read anything on the screen.</string>
     <string name="settings_lock">Lock the bubble</string>

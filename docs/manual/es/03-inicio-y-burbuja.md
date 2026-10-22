@@ -47,13 +47,17 @@ Con la burbuja bloqueada, Android detiene todas sus apps y mantiene su almacenam
 
 La sección Privado solo aparece en el cajón de apps si la burbuja tiene al menos una app. Por eso Bubble siempre deja F-Droid ahí.
 
-## Usar fotos y archivos de la burbuja en el teléfono
+## Fotos y archivos entre espacios
 
-Las fotos y descargas guardadas dentro de la burbuja (con Immich o con un navegador de ahí) se quedan en la burbuja. Bubble te deja llegar a ellas desde el teléfono normal sin mover lo demás:
+Cada espacio tiene su propio almacenamiento: las fotos y descargas guardadas dentro de la burbuja (con Immich o con un navegador de ahí) se quedan en la burbuja, y el espacio Meta tiene el suyo. Bubble los conecta sin copiar nada: desde cada espacio abrís las fotos y archivos de los otros donde están, y solo se lee el que elegís.
 
-- **Fondo desde Fondo de pantalla y estilo**: activá Bubble → Ajustes → **Fondos con fotos de la burbuja**. Después, Fondo de pantalla y estilo → *Elegir una foto* sigue abriendo Google Fotos, con un botón **Fotos de la burbuja** encima: tocalo, abrí una carpeta y tocá una foto. Se abre la pantalla de fondo de pantalla de Android para recortarla y ponerla en la pantalla de inicio, la de bloqueo o las dos. La app de fondos del Pixel siempre le pide la foto a Google Fotos por nombre, y Google Fotos solo muestra las fotos del teléfono normal; por eso las de la burbuja llegan con ese botón. Usa un servicio de accesibilidad que solo ve qué pantalla de esas dos apps está abierta, nunca lo que muestra.
-- **Fondo desde Bubble**: Bubble → Burbuja → **Fotos de la burbuja**, y los mismos pasos.
-- **Cualquier app que pida una imagen** puede elegir **Fotos de la burbuja** entre las apps que ofrece, o en el selector de archivos de Android (menú → **Explorar** → **Fotos de la burbuja**).
-- **Archivos de la burbuja**: Bubble → Burbuja → **Archivos de la burbuja** abre el explorador de archivos de Android dentro de la burbuja, en su propio almacenamiento (sus Descargas y carpetas, aparte de las del teléfono).
+- **En el selector de archivos de Android**, en cualquier app de cualquier espacio: menú → **Explorar** muestra **Burbuja** y **Espacio Meta** (en el teléfono los dos, en la burbuja el espacio Meta, en el espacio Meta la burbuja). Cada uno tiene **Fotos** (por álbum) y **Archivos** (todo su almacenamiento).
+- **Las apps que piden una imagen** también pueden elegir **Fotos de Bubble** entre las apps que ofrecen: los álbumes de los otros espacios, con miniaturas.
+- **Fondo desde Fondo de pantalla y estilo**: activá Bubble → Ajustes → **Fondos con fotos de la burbuja**. Después, Fondo de pantalla y estilo → *Elegir una foto* sigue abriendo Google Fotos, con un botón **Fotos de Bubble** encima: tocalo, abrí un álbum y tocá una foto. Se abre la pantalla de fondo de pantalla de Android para recortarla y ponerla en la pantalla de inicio, la de bloqueo o las dos. La app de fondos del Pixel siempre le pide la foto a Google Fotos por nombre, y Google Fotos solo muestra las fotos del teléfono normal; por eso las de los otros espacios llegan con ese botón. Usa un servicio de accesibilidad que solo ve qué pantalla de esas dos apps está abierta, nunca lo que muestra.
+- **Fondo desde Bubble**: Bubble → Burbuja (o Espacio Meta) → **Fotos de Bubble**, y los mismos pasos.
+- **Archivos de la burbuja** y **Archivos del espacio Meta** (en las pantallas Burbuja y Espacio Meta de Bubble) abren el explorador de archivos de Android dentro de ese espacio, en su propio almacenamiento.
 
-Si la burbuja está bloqueada, Android te pide la huella o el PIN ahí mismo y después se abren las fotos o los archivos. Solo sale de la burbuja la foto que elegís, y Bubble no guarda ninguna copia; la app a la que se la das puede guardar la suya (Android guarda la imagen del fondo, por ejemplo).
+Si un espacio está bloqueado o pausado, el selector muestra un botón para abrirlo: Android te pide la huella o el PIN cuando hace falta, y aparece la lista. Desde otro espacio los archivos son de solo lectura, y los archivos propios del teléfono no se ofrecen a la burbuja ni al espacio Meta. Bubble no guarda ninguna copia; la app a la que le das un archivo puede guardar la suya (Android guarda la imagen del fondo, por ejemplo).
+
+La galería que arman algunas apps por su cuenta (la pantalla de subida de Instagram, por ejemplo) lee solo las fotos de su propio espacio. En esas apps usá su opción de elegir un archivo o de abrir el selector del sistema, si la tienen.
+

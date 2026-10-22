@@ -63,11 +63,22 @@ public final class MetaActivity extends Activity {
         content.addView(Ui.small(this, getString(R.string.meta_hint)));
         content.addView(Ui.button(this, getString(R.string.meta_add),
                 v -> startActivityForResult(AppPickerActivity.intent(this, AppPickerActivity.MODE_META), ADD_APPS)));
+        // Its own files, and the other spaces' photos, as for the bubble.
+        content.addView(Ui.button(this, getString(R.string.meta_files), v -> openFiles()));
+        content.addView(Ui.button(this, getString(R.string.photos_root),
+                v -> startActivity(new android.content.Intent(this, SpacePhotosActivity.class))));
         content.addView(Ui.title(this, getString(R.string.meta_inside)));
         list = Ui.column(this);
         content.addView(list);
         content.addView(Ui.dangerButton(this, getString(R.string.meta_delete), v -> confirmDelete(r.user)));
         reloadApps();
+    }
+
+    /** Android's file browser inside the Meta space, on its own storage. */
+    private void openFiles() {
+        Ui.work(this, getString(R.string.working_opening), () -> new Controller(this).openMetaFiles(), log -> {
+            if (!log.isEmpty()) Ui.alert(this, getString(R.string.error_title), log);
+        });
     }
 
     /** The tradeoff first: Google installed but off, what is gained and what is accepted. */

@@ -29,6 +29,8 @@ Its apps are in the **Work** tab of the app drawer, with a briefcase badge. They
 
 The Work tab has a **Pause work apps** switch: it stops the whole Meta space (no background activity, no notifications) until you resume it. The bubble and your normal phone are not affected.
 
+**Meta space files** (Bubble → Meta space) opens Android's file browser on the Meta space's own storage. From the Meta space, the bubble's photos and files are in Android's file picker under **Bubble**, and the other way round ([chapter 3](03-home-and-bubble.md#photos-and-files-between-spaces)).
+
 ## Things to know
 
 - **The Work tab name and the briefcase** come from Android; they cannot be changed.
