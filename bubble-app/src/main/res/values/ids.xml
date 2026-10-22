@@ -3,4 +3,6 @@
     <item name="loading_bar" type="id" />
     <item name="loading_label" type="id" />
     <item name="screen_scroll" type="id" />
+    <item name="screen_back" type="id" />
+    <item name="screen_action" type="id" />
 </resources>

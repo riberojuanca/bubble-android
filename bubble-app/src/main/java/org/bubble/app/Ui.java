@@ -50,6 +50,7 @@ final class Ui {
             header.setGravity(Gravity.CENTER_VERTICAL);
             header.setPadding(dp(a, 4), dp(a, 4), dp(a, 8), dp(a, 4));
             TextView back = text(a, "←", android.R.style.TextAppearance_DeviceDefault_Large);
+            back.setId(R.id.screen_back);
             back.setPadding(dp(a, 16), dp(a, 12), dp(a, 16), dp(a, 12));
             back.setBackground(drawableAttr(a, android.R.attr.selectableItemBackgroundBorderless));
             back.setContentDescription(a.getString(R.string.action_back));
@@ -61,6 +62,7 @@ final class Ui {
             header.addView(t, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
             if (action != null) {
                 TextView act = text(a, action, android.R.style.TextAppearance_DeviceDefault_Medium);
+                act.setId(R.id.screen_action);
                 act.setTextColor(actionColor(a));
                 act.setPadding(dp(a, 16), dp(a, 12), dp(a, 16), dp(a, 12));
                 act.setBackground(drawableAttr(a, android.R.attr.selectableItemBackground));

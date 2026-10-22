@@ -14,11 +14,13 @@
     <string name="home_apps_sub">Apps inside the bubble</string>
     <string name="home_files">Files</string>
     <string name="home_files_sub">Photos and files of your spaces; send photos to Work</string>
-    <string name="photos_manage_hint">Photos of each space. Tap one in the bubble to send it to Work, where apps like Instagram can see it. It moves: it leaves the bubble.</string>
+    <string name="photos_manage_hint">Photos of each space. Tap the ones in the bubble to tick them, then Send to move them to Work, where apps like Instagram see them. They move: they leave the bubble.</string>
     <string name="move_title">Send to Work</string>
     <string name="move_body">The photo moves to Work (Pictures/Bubble). It leaves the bubble, is not copied, keeps its quality. Apps in Work, like Instagram, will see it in their gallery.</string>
     <string name="move_action">Send to Work</string>
     <string name="move_done">Moved to Work</string>
+    <string name="move_action_n">Send (%1$d)</string>
+    <string name="move_done_n">%1$d moved to Work</string>
     <string name="move_already_work">This photo is already in Work</string>
     <string name="move_no_work">There is no Work space yet. Create it first.</string>
     <string name="home_firewall">Firewall</string>

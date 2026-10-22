@@ -853,12 +853,21 @@ final class Controller {
      * Move a photo of another space into Work's Pictures/Bubble, so Work apps (Instagram) show it in
      * their gallery. The file is moved, not copied; it leaves its space. Needs the engine (a session).
      */
-    String moveToWork(int fromUser, String ref) throws Exception {
+    String moveToWork(int fromUser, java.util.List<String> refs) throws Exception {
         if (store.metaUser() < 0) throw new IllegalStateException(context.getString(R.string.move_no_work));
+        if (refs.isEmpty()) return "";
         return session(() -> {
-            String log = engine.run("space-move " + fromUser + " " + ref);
-            if (log.contains("bubble-shell:")) throw new IllegalStateException(log.substring(log.indexOf("bubble-shell:")));
-            return keepLog(log);
+            StringBuilder log = new StringBuilder();
+            // One session for all of them; the first failure stops and is shown.
+            for (String ref : refs) {
+                String out = engine.run("space-move " + fromUser + " " + ref);
+                log.append(out);
+                if (out.contains("bubble-shell:")) {
+                    keepLog(log.toString());
+                    throw new IllegalStateException(out.substring(out.indexOf("bubble-shell:")));
+                }
+            }
+            return keepLog(log.toString());
         });
     }
 }
