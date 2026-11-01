@@ -59,5 +59,14 @@ Cada espacio tiene su propio almacenamiento: las fotos y descargas guardadas den
 
 Si un espacio está bloqueado o pausado, el selector muestra un botón para abrirlo: Android te pide la huella o el PIN cuando hace falta, y aparece la lista. Desde otro espacio los archivos son de solo lectura, y los archivos propios del teléfono no se ofrecen a la burbuja ni al espacio Meta. Bubble no guarda ninguna copia; la app a la que le das un archivo puede guardar la suya (Android guarda la imagen del fondo, por ejemplo).
 
-La galería que arman algunas apps por su cuenta (la pantalla de subida de Instagram, por ejemplo) lee solo las fotos de su propio espacio. En esas apps usá su opción de elegir un archivo o de abrir el selector del sistema, si la tienen.
+La galería que arman algunas apps por su cuenta (la pantalla de subida de Instagram, por ejemplo) lee solo las fotos de su propio espacio. En esas apps usá su opción de elegir un archivo o de abrir el selector del sistema, si la tienen, o mové las fotos a ese espacio con la Galería.
+
+### Galería
+
+**Galería** tiene su propio ícono, que aparece solo en el teléfono, en la burbuja y en el espacio Meta. Abre las fotos y videos de su espacio, por álbum; arriba a la derecha elegís otro espacio. Desde la burbuja o el espacio Meta no se ven las fotos del teléfono. En el teléfono, la primera vez pide permiso para leer sus fotos: se muestran solo ahí, ningún otro espacio las ve.
+
+- Tocá una foto o un video para verlo a pantalla completa; deslizá a los costados para pasar al siguiente. Los videos se reproducen ahí mismo.
+- Mantené presionada una foto para empezar a elegir; tocá otras para sumarlas y después **Mover (N)** → el espacio de destino. Se mueven a *Pictures/Bubble* de ese espacio: salen de donde estaban, no se copian y mantienen su calidad. Así Instagram en el espacio Meta las ve en su propia galería.
+- Mover necesita Wi-Fi y tarda unos segundos (lo hace la conexión de configuración). Ver no necesita red.
+- Al mover al teléfono, Google Fotos puede subirlas a la nube si tenés su copia de seguridad activada; Bubble lo avisa antes.
 

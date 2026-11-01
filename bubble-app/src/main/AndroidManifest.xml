@@ -30,9 +30,10 @@
          back on if the user switched it off. -->
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-    <!-- Granted only to Bubble's copies in the bubble and the Meta space, by the engine (pm grant and
+    <!-- Granted to Bubble's copies in the bubble and the Meta space by the engine (pm grant and
          appops for that user), so each can hand its space's photos and files to the other spaces
-         (SpaceChannel). Never requested on the phone: the phone's files are not shared. -->
+         (SpaceChannel). On the phone, asked of the user only by the Gallery, to show the phone's own
+         photos there; the phone's files are never served to the other spaces. -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
@@ -69,6 +70,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Gallery: a launcher icon in every space (its copies there keep it), with the photos and
+             videos of each space. -->
+        <activity
+            android:name=".GalleryActivity"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_gallery"
+            android:label="@string/gallery_label"
+            android:taskAffinity="org.bubble.app.gallery">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".GalleryViewerActivity"
+            android:exported="false"
+            android:taskAffinity="org.bubble.app.gallery" />
         <!-- In Bubble's copy inside the bubble: opens an app there when the shell cannot. -->
         <activity
             android:name=".ProfileOpenActivity"

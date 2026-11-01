@@ -12,17 +12,6 @@
     <string name="home_bubble">Bubble</string>
     <string name="home_apps">Manage apps</string>
     <string name="home_apps_sub">Apps inside the bubble</string>
-    <string name="home_files">Files</string>
-    <string name="home_files_sub">Photos and files of your spaces; send photos to Work</string>
-    <string name="photos_manage_hint">Photos of each space. Tap the ones in the bubble to tick them, then Send to move them to Work, where apps like Instagram see them. They move: they leave the bubble.</string>
-    <string name="move_title">Send to Work</string>
-    <string name="move_body">The photo moves to Work (Pictures/Bubble). It leaves the bubble, is not copied, keeps its quality. Apps in Work, like Instagram, will see it in their gallery.</string>
-    <string name="move_action">Send to Work</string>
-    <string name="move_done">Moved to Work</string>
-    <string name="move_action_n">Send (%1$d)</string>
-    <string name="move_done_n">%1$d moved to Work</string>
-    <string name="move_already_work">This photo is already in Work</string>
-    <string name="move_no_work">There is no Work space yet. Create it first.</string>
     <string name="home_firewall">Firewall</string>
     <string name="home_settings">Settings</string>
     <string name="settings_updates_store">Installed from F-Droid: updates arrive through F-Droid.</string>
@@ -229,6 +218,25 @@
     <string name="error_no_meta">There is no Meta space yet.</string>
     <!-- Bubble Apps -->
     <string name="grid_label">Bubble Apps</string>
+    <!-- Gallery: the photos and videos of every space, with its own icon in each -->
+    <string name="gallery_label">Gallery</string>
+    <string name="gallery_phone">Phone</string>
+    <string name="gallery_choose_space">Choose a space</string>
+    <string name="gallery_hint">Tap a photo or video to see it. Press and hold to choose several and move them to another space.</string>
+    <string name="gallery_permission">To show the phone\'s photos and videos, Bubble needs permission to read them. They are shown only here; no other space sees them.</string>
+    <string name="gallery_permission_allow">Allow</string>
+    <string name="gallery_empty">There are no photos or videos in this space.</string>
+    <string name="gallery_move_n">Move (%1$d)</string>
+    <string name="gallery_move_to">Move to…</string>
+    <string name="gallery_move_body">They go to that space\'s Pictures/Bubble: they leave where they are, are not copied and keep their quality. Its apps, like Instagram in Work, will see them. It needs Wi-Fi.</string>
+    <string name="gallery_move_phone">On the phone, Google Photos may upload them to the cloud if its backup is on.</string>
+    <string name="gallery_move_confirm">Move to %1$s</string>
+    <string name="gallery_moved_n">Moved: %1$d</string>
+    <string name="gallery_no_space">That space does not exist yet. Create it first.</string>
+    <string name="gallery_open_failed">This file could not be opened.</string>
+    <string name="gallery_position">%1$d / %2$d</string>
+    <string name="gallery_video">Video</string>
+    <string name="working_moving">Moving…</string>
     <string name="grid_hint">Press and hold an app to add its icon to the home screen.</string>
     <string name="grid_meta_paused">The Meta space is paused. Resume it from the Work tab of the app drawer.</string>
     <string name="bubble_locked">The bubble is locked.</string>
@@ -287,6 +295,10 @@
     <plurals name="photos_count">
         <item quantity="one">%d photo</item>
         <item quantity="other">%d photos</item>
+    </plurals>
+    <plurals name="videos_count">
+        <item quantity="one">%d video</item>
+        <item quantity="other">%d videos</item>
     </plurals>
     <string name="icon_widget_description">An app of the bubble or the Meta space, as an icon</string>
     <string name="settings_icon_shape">Icon shape</string>

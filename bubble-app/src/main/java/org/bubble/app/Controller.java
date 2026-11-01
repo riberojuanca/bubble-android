@@ -850,17 +850,22 @@ final class Controller {
     }
 
     /**
-     * Move a photo of another space into Work's Pictures/Bubble, so Work apps (Instagram) show it in
-     * their gallery. The file is moved, not copied; it leaves its space. Needs the engine (a session).
+     * Move photos or videos from one space to another (the phone, the bubble, the Meta space) into
+     * the target's Pictures/Bubble, so its apps (Instagram in Work) show them. Moved, not copied;
+     * they leave their space. Needs the engine (a session).
      */
-    String moveToWork(int fromUser, java.util.List<String> refs) throws Exception {
-        if (store.metaUser() < 0) throw new IllegalStateException(context.getString(R.string.move_no_work));
+    String moveMedia(int fromUser, int toUser, java.util.List<String> refs) throws Exception {
+        if (fromUser < 0 || toUser < 0 || fromUser == toUser) throw new IllegalArgumentException("Invalid spaces");
+        for (String ref : refs) {
+            // Each ref goes on the engine's command line: only the store's own ids.
+            if (!ref.matches("(image|video):[0-9]+")) throw new IllegalArgumentException("Invalid media id: " + ref);
+        }
         if (refs.isEmpty()) return "";
         return session(() -> {
             StringBuilder log = new StringBuilder();
             // One session for all of them; the first failure stops and is shown.
             for (String ref : refs) {
-                String out = engine.run("space-move " + fromUser + " " + ref);
+                String out = engine.run("space-move " + fromUser + " " + toUser + " " + ref);
                 log.append(out);
                 if (out.contains("bubble-shell:")) {
                     keepLog(log.toString());

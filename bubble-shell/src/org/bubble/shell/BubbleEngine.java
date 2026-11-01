@@ -200,7 +200,8 @@ public final class BubbleEngine {
                     bubbleApps(requireUserId(args));
                     break;
                 case "space-move":
-                    spaceMove(requireUserId(args), requireArg(args, 2, "image:<id> or video:<id>"));
+                    spaceMove(requireUserId(args), parseUser(requireArg(args, 2, "to-user-id")),
+                            requireArg(args, 3, "image:<id> or video:<id>"));
                     break;
                 case "bubble-add":
                     bubbleAdd(requireUserId(args), packagesFrom(args, 2));
@@ -1649,16 +1650,17 @@ public final class BubbleEngine {
     }
 
     /**
-     * Move one photo or video from a space's media store into Work's Pictures/Bubble, then delete
-     * the original: the file leaves the bubble, is not copied, keeps its bytes. Work apps (Instagram)
-     * read only their own space's media store, so the file must live there to appear in their gallery.
-     * Done with cross-user `content` (shell can read/write/delete another user's media). Names cross
-     * as argv binds, never as shell text; only the byte copy uses a shell, with a fixed numeric URI.
+     * Move one photo or video between two spaces (the phone, the bubble, the Meta space) into the
+     * target's Pictures/Bubble, then delete the original: the file leaves its space, is not copied,
+     * keeps its bytes. Apps (Instagram in Work) read only their own space's media store, so the file
+     * must live there to appear in their gallery. Done with cross-user `content` (shell can
+     * read/write/delete another user's media). Names cross as argv binds, never as shell text; only
+     * the byte copy uses a shell, with fixed numeric URIs.
      */
-    private static void spaceMove(int fromUser, String ref) {
-        int work = metaProfileId();
-        if (work <= 0) throw new EngineError("no Work space to move into");
-        if (fromUser == work) throw new EngineError("already in Work");
+    private static void spaceMove(int fromUser, int toUser, String ref) {
+        if (!isSpace(fromUser)) throw new EngineError("user " + fromUser + " is not a space Bubble manages");
+        if (!isSpace(toUser)) throw new EngineError("user " + toUser + " is not a space Bubble manages");
+        if (fromUser == toUser) throw new EngineError("already in that space");
         boolean video = ref.startsWith("video:");
         if (!video && !ref.startsWith("image:")) throw new EngineError("not a photo or video: " + ref);
         String id = ref.substring(ref.indexOf(':') + 1);
@@ -1672,13 +1674,13 @@ public final class BubbleEngine {
         if (mime == null) mime = video ? "video/mp4" : "image/jpeg";
 
         // Create the target row (name as a bind value, so odd names cannot reach a shell).
-        Result ins = sh("content", "insert", "--user", String.valueOf(work), "--uri", collection,
+        Result ins = sh("content", "insert", "--user", String.valueOf(toUser), "--uri", collection,
                 "--bind", "_display_name:s:" + name, "--bind", "mime_type:s:" + mime,
                 "--bind", "relative_path:s:Pictures/Bubble/");
-        if (ins.code != 0) throw new EngineError("could not create the file in Work: " + ins.err());
-        // The row just inserted is the newest in Work's collection; found by id, not by name.
-        String newId = queryNewestId(work, collection);
-        if (newId == null) throw new EngineError("could not find the new file in Work");
+        if (ins.code != 0) throw new EngineError("could not create the file in the target space: " + ins.err());
+        // The row just inserted is the newest in the target's collection; found by id, not by name.
+        String newId = queryNewestId(toUser, collection);
+        if (newId == null) throw new EngineError("could not find the new file in the target space");
         String dst = collection + "/" + newId;
 
         new java.io.File("/data/local/tmp/bubble").mkdirs();
@@ -1686,20 +1688,33 @@ public final class BubbleEngine {
         try {
             Result read = sh("sh", "-c", "content read --user " + fromUser + " --uri '" + src + "' > '" + tmp + "'");
             if (read.code != 0) throw new EngineError("could not read the original: " + read.err());
-            Result write = sh("sh", "-c", "content write --user " + work + " --uri '" + dst + "' < '" + tmp + "'");
-            if (write.code != 0) throw new EngineError("could not write the file in Work: " + write.err());
+            Result write = sh("sh", "-c", "content write --user " + toUser + " --uri '" + dst + "' < '" + tmp + "'");
+            if (write.code != 0) throw new EngineError("could not write the file in the target space: " + write.err());
             // Only delete the original once the copy has the same size.
             long original = new java.io.File(tmp).length();
-            long copied = sizeOf(work, dst);
+            long copied = sizeOf(toUser, dst);
             if (original <= 0 || copied != original) {
-                sh("content", "delete", "--user", String.valueOf(work), "--uri", dst);
+                sh("content", "delete", "--user", String.valueOf(toUser), "--uri", dst);
                 throw new EngineError("the file did not transfer whole (" + copied + "/" + original + "); nothing removed");
             }
             Result del = sh("content", "delete", "--user", String.valueOf(fromUser), "--uri", src);
-            if (del.code != 0) throw new EngineError("copied to Work but could not remove the original: " + del.err());
-            say("moved " + ref + " to Work/Pictures/Bubble as " + name);
+            if (del.code != 0) throw new EngineError("copied but could not remove the original: " + del.err());
+            say("moved " + ref + " to user " + toUser + " Pictures/Bubble as " + name);
         } finally {
             new java.io.File(tmp).delete();
+        }
+    }
+
+    /** The phone, the bubble or the Meta space; never another user of the device. */
+    private static boolean isSpace(int user) {
+        return user == 0 || (user > 0 && (user == privateProfileId() || user == metaProfileId()));
+    }
+
+    private static int parseUser(String raw) {
+        try {
+            return Integer.parseInt(raw.trim());
+        } catch (NumberFormatException e) {
+            throw new EngineError("invalid user-id: " + raw);
         }
     }
 

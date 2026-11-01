@@ -23,8 +23,9 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * One space (the bubble or the Meta space) as Bubble's copy there sees it, for {@link SpaceChannel}:
- * its photos by album and its whole storage as folders. Names and types cross the bridge; a file's
+ * One space as Bubble's copy there sees it, for {@link SpaceChannel}: the bubble or the Meta space
+ * for the other spaces, and any space (the phone too) for its own Gallery. Its photos by album and
+ * its whole storage as folders. Names and types cross the bridge; a file's
  * bytes only when that file is opened. Read-only. Local ids:
  * <ul>
  *   <li>{@code ""}: the space, with {@link #PHOTOS} and {@link #FILES} inside;</li>
@@ -105,23 +106,27 @@ final class SpaceStore {
     }
 
     private static void albums(Context c, Rows rows) {
-        // bucket id -> {name, count, newest date}, in newest-first order.
+        // bucket id -> {name, photos, videos, newest date}, in newest-first order.
         Map<String, Object[]> buckets = new LinkedHashMap<>();
         String[] projection = {MediaStore.MediaColumns.BUCKET_ID, MediaStore.MediaColumns.BUCKET_DISPLAY_NAME,
-                MediaStore.MediaColumns.DATE_MODIFIED};
+                MediaStore.MediaColumns.DATE_MODIFIED, MediaStore.Files.FileColumns.MEDIA_TYPE};
         try (Cursor cur = c.getContentResolver().query(MEDIA, projection, VISUAL, null, NEWEST)) {
             while (cur != null && cur.moveToNext()) {
                 String bucket = cur.getString(0);
                 if (bucket == null) continue;
                 Object[] b = buckets.get(bucket);
-                if (b == null) buckets.put(bucket, new Object[]{cur.getString(1), 1, cur.getLong(2)});
-                else b[1] = (Integer) b[1] + 1;
+                if (b == null) buckets.put(bucket, b = new Object[]{cur.getString(1), 0, 0, cur.getLong(2)});
+                int kind = cur.getInt(3) == MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO ? 2 : 1;
+                b[kind] = (Integer) b[kind] + 1;
             }
         }
         for (Map.Entry<String, Object[]> e : buckets.entrySet()) {
             Object[] b = e.getValue();
-            rows.album(ALBUM + e.getKey(), b[0] == null ? e.getKey() : (String) b[0], (Long) b[2] * 1000,
-                    c.getResources().getQuantityString(R.plurals.photos_count, (Integer) b[1], b[1]));
+            int photos = (Integer) b[1], videos = (Integer) b[2];
+            String photoCount = c.getResources().getQuantityString(R.plurals.photos_count, photos, photos);
+            String videoCount = c.getResources().getQuantityString(R.plurals.videos_count, videos, videos);
+            rows.album(ALBUM + e.getKey(), b[0] == null ? e.getKey() : (String) b[0], (Long) b[3] * 1000,
+                    videos == 0 ? photoCount : photos == 0 ? videoCount : photoCount + " · " + videoCount);
         }
     }
 

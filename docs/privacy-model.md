@@ -48,7 +48,7 @@ The Meta space has Google Play Services installed but disabled, so that Facebook
 
 ## The channel between spaces
 
-The bubble and the Meta space can read each other's photos and files, and the phone can read both, through Bubble ([cross-profile access](reverse-engineering/cross-profile.md#the-channel-between-spaces)). Only the file a user picks in Android's picker is read, read-only, and nothing is copied. For that, Bubble's copy in each space holds all-files access to that space's own storage. Once a Meta app has a picked file, it can keep it. The phone's files are never offered to the spaces, so the phone's Google never gets a way in through Bubble.
+The bubble and the Meta space can read each other's photos and files, and the phone can read both, through Bubble ([cross-profile access](reverse-engineering/cross-profile.md#the-channel-between-spaces)). Only the file a user picks in Android's picker is read, read-only, and nothing is copied. For that, Bubble's copy in each space holds all-files access to that space's own storage. Once a Meta app has a picked file, it can keep it. The phone's files are never offered to the spaces, so the phone's Google never gets a way in through Bubble. The Gallery on the phone reads the phone's own photos with a permission the user grants there, and shows them only there; the channel still never serves them. Moving a photo between spaces is an explicit action of the user through the engine: the file leaves its space for the target's Pictures/Bubble. A space's copy can ask the phone's to move its photos or the other space's, never the phone's; the phone can be a target, where Google Photos may back it up.
 
 ## Bubble's own power
 

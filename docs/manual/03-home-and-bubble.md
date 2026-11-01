@@ -59,5 +59,14 @@ Each space keeps its own storage: photos and downloads saved inside the bubble (
 
 If a space is locked or paused, the picker shows a button to open it: Android asks for your fingerprint or PIN when needed, and the list appears. Files are read-only from other spaces, and the phone's own files are not offered to the bubble or the Meta space. Bubble keeps no copy; the app you give a file to may keep its own (Android stores the wallpaper image, for example).
 
-The gallery that some apps build themselves (Instagram's upload screen, for example) reads only its own space's photos. In those apps, use their option to choose a file or open the system picker, if they have one.
+The gallery that some apps build themselves (Instagram's upload screen, for example) reads only its own space's photos. In those apps, use their option to choose a file or open the system picker, if they have one, or move the photos into that space with the Gallery.
+
+### Gallery
+
+**Gallery** has its own icon, which appears by itself on the phone, in the bubble and in the Meta space. It opens its space's photos and videos, by album; at the top right you choose another space. From the bubble or the Meta space the phone's photos are not shown. On the phone, the first time it asks for permission to read its photos: they are shown only there, and no other space sees them.
+
+- Tap a photo or video to see it full screen; swipe sideways for the next one. Videos play right there.
+- Press and hold a photo to start choosing; tap others to add them, then **Move (N)** → the target space. They go to that space's *Pictures/Bubble*: they leave where they were, are not copied and keep their quality. That way Instagram in the Meta space sees them in its own gallery.
+- Moving needs Wi-Fi and takes a few seconds (the setup connection does it). Viewing needs no network.
+- When moving to the phone, Google Photos may upload them to the cloud if its backup is on; Bubble warns you first.
 

@@ -10,7 +10,6 @@ import android.provider.DocumentsContract;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +25,8 @@ public final class SpacePhotosActivity extends Activity {
 
     private static final int COLUMNS = 3;
 
-    /** Opened from the "Files" menu: tapping a bubble photo offers moving it to Work. */
-    static final String EXTRA_MANAGE = "manage";
-
     private LinearLayout list;
     private boolean picking;
-    private boolean manage;
-    /** Manage mode: bubble photos the user ticked, as document ids, to move to Work together. */
-    private final java.util.LinkedHashSet<String> selected = new java.util.LinkedHashSet<>();
-    private TextView moveAction;
     /** The album shown, as a document id, or null for the list of albums. */
     private String album;
     /** Android's unlock screen was asked for; it covers this one until confirmed or cancelled. */
@@ -44,18 +36,11 @@ public final class SpacePhotosActivity extends Activity {
         super.onCreate(savedInstanceState);
         String action = getIntent().getAction();
         picking = Intent.ACTION_PICK.equals(action) || Intent.ACTION_GET_CONTENT.equals(action);
-        manage = getIntent().getBooleanExtra(EXTRA_MANAGE, false);
-        // In manage mode the header carries the "Send (N) to Work" action, hidden until a tick.
-        LinearLayout page = manage
-                ? Ui.screen(this, getString(R.string.photos_root), getString(R.string.move_action), v -> moveSelected())
-                : Ui.screen(this, getString(R.string.photos_root), null, null);
-        page.addView(Ui.body(this, getString(picking ? R.string.photos_pick_hint
-                : manage ? R.string.photos_manage_hint : R.string.photos_wallpaper_hint)));
+        LinearLayout page = Ui.screen(this, getString(R.string.photos_root), null, null);
+        page.addView(Ui.body(this, getString(picking ? R.string.photos_pick_hint : R.string.photos_wallpaper_hint)));
         list = new LinearLayout(this);
         list.setOrientation(LinearLayout.VERTICAL);
         page.addView(list);
-        moveAction = findViewById(R.id.screen_action);
-        if (moveAction != null) moveAction.setVisibility(android.view.View.GONE);
         // Inside an album the back arrow returns to the album list, like the gesture back, instead
         // of closing the screen and jumping to the Bubble menu.
         android.view.View back = findViewById(R.id.screen_back);
@@ -98,8 +83,6 @@ public final class SpacePhotosActivity extends Activity {
     private void showAlbums() {
         album = null;
         backGoesToAlbums(false);
-        selected.clear();
-        updateMoveAction();
         list.removeAllViews();
         Ui.work(this, getString(R.string.working_reading), () -> {
             List<Object[]> spaces = new ArrayList<>();
@@ -172,12 +155,7 @@ public final class SpacePhotosActivity extends Activity {
                 lp.setMargins(0, 0, gap, gap);
                 cell.setLayoutParams(lp);
                 String docId = SpacesProvider.documentId(space, photo.id);
-                if (manage) {
-                    markSelected(cell, selected.contains(docId));
-                    cell.setOnClickListener(v -> toggleSelect(space, docId, cell));
-                } else {
-                    cell.setOnClickListener(v -> picked(docId));
-                }
+                cell.setOnClickListener(v -> picked(docId));
                 grid.addView(cell);
                 cells.add(cell);
             }
@@ -201,44 +179,6 @@ public final class SpacePhotosActivity extends Activity {
                 }
             }
         }, "bubble-photo-thumbs").start();
-    }
-
-    /** Tick or untick a bubble photo. Work photos have nowhere to move, so they are not selectable. */
-    private void toggleSelect(String space, String documentId, ImageView cell) {
-        if (!SpaceChannel.BUBBLE.equals(space)) {
-            android.widget.Toast.makeText(this, R.string.move_already_work, android.widget.Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!selected.remove(documentId)) selected.add(documentId);
-        markSelected(cell, selected.contains(documentId));
-        updateMoveAction();
-    }
-
-    private void markSelected(ImageView cell, boolean on) {
-        cell.setForeground(on ? new android.graphics.drawable.ColorDrawable(0x663B5BDB) : null);
-    }
-
-    private void updateMoveAction() {
-        if (moveAction == null) return;
-        int n = selected.size();
-        moveAction.setVisibility(n > 0 ? android.view.View.VISIBLE : android.view.View.GONE);
-        moveAction.setText(getString(R.string.move_action_n, n));
-    }
-
-    /** Move every ticked bubble photo into Work in one session. */
-    private void moveSelected() {
-        if (selected.isEmpty()) return;
-        int fromUser = new Store(this).bubbleUser();
-        java.util.List<String> refs = new ArrayList<>();
-        for (String docId : selected) refs.add(docId.substring(docId.indexOf('/') + 1));
-        new Ui.Sheet(this).title(R.string.move_title).message(R.string.move_body)
-                .action(getString(R.string.move_action_n, refs.size()), () -> Ui.work(this, getString(R.string.working_applying),
-                        () -> new Controller(this).moveToWork(fromUser, refs), log -> {
-                            android.widget.Toast.makeText(this, getString(R.string.move_done_n, refs.size()),
-                                    android.widget.Toast.LENGTH_SHORT).show();
-                            showAlbums();
-                        }))
-                .cancel().show();
     }
 
     private void picked(String documentId) {

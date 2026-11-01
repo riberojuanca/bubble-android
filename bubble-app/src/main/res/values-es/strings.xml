@@ -10,17 +10,6 @@
     <string name="home_bubble">Burbuja</string>
     <string name="home_apps">Gestionar apps</string>
     <string name="home_apps_sub">Apps dentro de la burbuja</string>
-    <string name="home_files">Archivos</string>
-    <string name="home_files_sub">Fotos y archivos de tus espacios; pasá fotos a Work</string>
-    <string name="photos_manage_hint">Fotos de cada espacio. Tocá las de la burbuja para marcarlas y después Pasar, para moverlas a Work, donde apps como Instagram las ven. Se mueven: salen de la burbuja.</string>
-    <string name="move_title">Pasar a Work</string>
-    <string name="move_body">La foto se mueve a Work (Pictures/Bubble). Sale de la burbuja, no se copia, mantiene su calidad. Las apps de Work, como Instagram, la verán en su galería.</string>
-    <string name="move_action">Pasar a Work</string>
-    <string name="move_done">Movida a Work</string>
-    <string name="move_action_n">Pasar (%1$d)</string>
-    <string name="move_done_n">%1$d movidas a Work</string>
-    <string name="move_already_work">Esta foto ya está en Work</string>
-    <string name="move_no_work">Todavía no hay espacio Work. Creálo primero.</string>
     <string name="home_firewall">Firewall</string>
     <string name="home_settings">Ajustes</string>
     <string name="settings_updates_store">Instalada desde F-Droid: las actualizaciones llegan por F-Droid.</string>
@@ -227,6 +216,25 @@
     <string name="error_no_meta">Todavía no hay espacio Meta.</string>
     <!-- Bubble Apps -->
     <string name="grid_label">Bubble Apps</string>
+    <!-- Galería: las fotos y videos de cada espacio, con su propio ícono en cada uno -->
+    <string name="gallery_label">Galería</string>
+    <string name="gallery_phone">Teléfono</string>
+    <string name="gallery_choose_space">Elegí un espacio</string>
+    <string name="gallery_hint">Tocá una foto o un video para verlo. Mantené presionado para elegir varios y moverlos a otro espacio.</string>
+    <string name="gallery_permission">Para mostrar las fotos y videos del teléfono, Bubble necesita permiso para leerlos. Solo se muestran acá; ningún otro espacio los ve.</string>
+    <string name="gallery_permission_allow">Dar permiso</string>
+    <string name="gallery_empty">No hay fotos ni videos en este espacio.</string>
+    <string name="gallery_move_n">Mover (%1$d)</string>
+    <string name="gallery_move_to">Mover a…</string>
+    <string name="gallery_move_body">Van a Pictures/Bubble de ese espacio: salen de donde están, no se copian y mantienen su calidad. Sus apps, como Instagram en Work, las van a ver. Necesita Wi-Fi.</string>
+    <string name="gallery_move_phone">En el teléfono, Google Fotos puede subirlas a la nube si tenés la copia de seguridad activada.</string>
+    <string name="gallery_move_confirm">Mover a %1$s</string>
+    <string name="gallery_moved_n">Movidas: %1$d</string>
+    <string name="gallery_no_space">Ese espacio todavía no existe. Crealo primero.</string>
+    <string name="gallery_open_failed">No se pudo abrir este archivo.</string>
+    <string name="gallery_position">%1$d / %2$d</string>
+    <string name="gallery_video">Video</string>
+    <string name="working_moving">Moviendo…</string>
     <string name="grid_hint">Mantené apretada una app para agregar su ícono a la pantalla de inicio.</string>
     <string name="grid_meta_paused">El espacio Meta está pausado. Reanudalo desde la pestaña Trabajo del cajón de apps.</string>
     <string name="bubble_locked">La burbuja está bloqueada.</string>
@@ -286,6 +294,11 @@
         <item quantity="one">%d foto</item>
         <item quantity="other">%d fotos</item>
         <item quantity="many">%d fotos</item>
+    </plurals>
+    <plurals name="videos_count">
+        <item quantity="one">%d video</item>
+        <item quantity="other">%d videos</item>
+        <item quantity="many">%d videos</item>
     </plurals>
     <string name="icon_widget_description">Una app de la burbuja o del espacio Meta, como ícono</string>
     <string name="settings_icon_shape">Forma de los íconos</string>

@@ -16,11 +16,13 @@ import java.util.List;
  * copied. The phone's copy calls each space directly; a profile's copy asks the phone's, which
  * passes the call on only to the other space Bubble manages (never the phone's own files). Every
  * screen or provider that needs another space's files goes through here: {@link SpacesProvider} for
- * Android's file picker, {@link SpacePhotosActivity} for "pick an image" and the wallpaper.
+ * Android's file picker, {@link SpacePhotosActivity} for "pick an image" and the wallpaper,
+ * {@link GalleryActivity} for browsing. The gallery also reads this copy's own space ({@link #own}),
+ * in place, and moves photos between spaces through the engine ({@link #move}).
  */
 final class SpaceChannel {
 
-    static final String BUBBLE = "bubble", META = "meta", SPACE = "space";
+    static final String BUBBLE = "bubble", META = "meta", PHONE = "phone", SPACE = "space";
 
     private SpaceChannel() {}
 
@@ -36,7 +38,9 @@ final class SpaceChannel {
             this.locked = locked;
         }
 
-        int title() { return BUBBLE.equals(name) ? R.string.home_bubble : R.string.home_meta; }
+        int title() {
+            return BUBBLE.equals(name) ? R.string.home_bubble : META.equals(name) ? R.string.home_meta : R.string.gallery_phone;
+        }
     }
 
     /** One file, folder or album. */
@@ -92,6 +96,52 @@ final class SpaceChannel {
             out.add(new Space(names.get(i), users[i], locked[i]));
         }
         return out;
+    }
+
+    /**
+     * The space this copy runs in, read here with its own permissions: the phone (never offered to
+     * the others), or the bubble or Meta space (a work profile) it is a copy in.
+     */
+    static Space own(Context c) {
+        if (onPhone()) return new Space(PHONE, 0, false);
+        boolean meta = c.getSystemService(UserManager.class).isManagedProfile();
+        return new Space(meta ? META : BUBBLE, Process.myUid() / 100000, false);
+    }
+
+    /**
+     * Move photos or videos ({@code image:<id>}, {@code video:<id>}) from one space to another.
+     * The phone's copy runs the engine; a profile's copy asks it, waiting for the whole session.
+     */
+    static void move(Context c, String from, String to, List<String> refs) throws Exception {
+        if (onPhone()) {
+            new Controller(c).moveMedia(userOf(c, from), userOf(c, to), refs);
+            return;
+        }
+        Bundle args = new Bundle();
+        args.putString(SPACE, from);
+        args.putString(ProfileBridge.TARGET, to);
+        args.putStringArrayList(ProfileBridge.IDS, new ArrayList<>(refs));
+        ProfileBridge.call(c, 0, ProfileBridge.SPACE_MOVE, args, 600);
+    }
+
+    /**
+     * On the phone's copy, for a profile's move: from a space Bubble manages (never the phone,
+     * whose photos a profile cannot see) to any other, the phone included.
+     */
+    static Bundle moveFor(Context c, int requester, Bundle args) throws Exception {
+        String from = args.getString(SPACE), to = args.getString(ProfileBridge.TARGET);
+        ArrayList<String> refs = args.getStringArrayList(ProfileBridge.IDS);
+        if (from == null || to == null || refs == null || PHONE.equals(from)) throw new SecurityException("Unknown move");
+        new Controller(c).moveMedia(userOf(c, from), userOf(c, to), refs);
+        return new Bundle();
+    }
+
+    /** On the phone's copy: the user of a space by name. */
+    private static int userOf(Context c, String space) {
+        Store store = new Store(c);
+        int user = PHONE.equals(space) ? 0 : BUBBLE.equals(space) ? store.bubbleUser() : META.equals(space) ? store.metaUser() : -1;
+        if (user < 0) throw new IllegalStateException(c.getString(R.string.gallery_no_space));
+        return user;
     }
 
     /** Running and unlocked, so its copy and its storage answer. */
@@ -158,6 +208,8 @@ final class SpaceChannel {
     }
 
     private static Bundle call(Context c, String space, int operation, Bundle args) throws Exception {
+        // This copy's own space is read here, without the bridge.
+        if (own(c).name.equals(space)) return SpaceStore.serve(c, operation, args);
         Space target = null;
         for (Space s : spaces(c)) if (s.name.equals(space)) target = s;
         if (target == null) throw new java.io.FileNotFoundException(space);

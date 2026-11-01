@@ -166,12 +166,13 @@ public final class SpacesProvider extends DocumentsProvider {
                 PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
-    /** {space, id in that space}. */
-    private static String[] split(String documentId) throws FileNotFoundException {
+    /** {space, id in that space}: only the other spaces, never this copy's own (the gallery reads that). */
+    private String[] split(String documentId) throws FileNotFoundException {
         int slash = documentId.indexOf('/');
         if (slash <= 0) throw new FileNotFoundException(documentId);
         String space = documentId.substring(0, slash);
-        if (!SpaceChannel.BUBBLE.equals(space) && !SpaceChannel.META.equals(space)) throw new FileNotFoundException(documentId);
+        if (!SpaceChannel.BUBBLE.equals(space) && !SpaceChannel.META.equals(space)
+                || space.equals(SpaceChannel.own(getContext()).name)) throw new FileNotFoundException(documentId);
         return new String[]{space, documentId.substring(slash + 1)};
     }
 

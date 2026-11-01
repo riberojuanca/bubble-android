@@ -106,10 +106,16 @@ public final class ProfileControlService extends Service {
     /**
      * On the phone's copy: a profile asks for the other space (see {@link SpaceChannel}). Only to
      * the other space Bubble manages, never to the asking profile itself or to the phone's files.
+     * Moving photos is the exception that names the phone, and only as a target.
      */
     private void relay(int what, Bundle args, int profile, Messenger reply) {
         if (what == ProfileBridge.SPACES) {
             new Thread(() -> answer(reply, () -> SpaceChannel.spacesFor(this, profile)), "bubble-spaces").start();
+            return;
+        }
+        if (what == ProfileBridge.SPACE_MOVE) {
+            // The engine runs here; a profile can never move the phone's files (it cannot see them).
+            new Thread(() -> answer(reply, () -> SpaceChannel.moveFor(this, profile, args)), "bubble-space-move").start();
             return;
         }
         int target = SpaceChannel.relayTarget(this, profile, args.getString(SpaceChannel.SPACE));

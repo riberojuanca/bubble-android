@@ -25,13 +25,18 @@ import java.util.concurrent.TimeUnit;
 /** Local, signature-protected Binder calls between Bubble's copies. No network transport. */
 final class ProfileBridge {
     static final int APPS = 1, OPEN = 2, NETWORK = 3, RULES = 4, STATUS = 5,
-            FILES = 10, SPACES = 11, SPACE_LIST = 12, SPACE_OPEN = 13, SPACE_THUMB = 14, SPACE_UNLOCK = 15;
-    /** What a profile's copy may ask the phone's: its firewall rules, and the channel to the other space. */
+            FILES = 10, SPACES = 11, SPACE_LIST = 12, SPACE_OPEN = 13, SPACE_THUMB = 14, SPACE_UNLOCK = 15,
+            SPACE_MOVE = 16;
+    /**
+     * What a profile's copy may ask the phone's: its firewall rules, the channel to the other space,
+     * and moving photos between spaces (only the phone's copy runs the engine).
+     */
     private static final java.util.Set<Integer> FROM_PROFILE = new java.util.HashSet<>(java.util.Arrays.asList(
-            RULES, SPACES, SPACE_LIST, SPACE_OPEN, SPACE_THUMB, SPACE_UNLOCK));
+            RULES, SPACES, SPACE_LIST, SPACE_OPEN, SPACE_THUMB, SPACE_UNLOCK, SPACE_MOVE));
     static final String ERROR = "error", ALLOWED = "allowed", PACKAGE = "package",
             ID = "id", IDS = "ids", NAMES = "names", MIMES = "mimes", SIZES = "sizes", DATES = "dates",
-            SUMMARIES = "summaries", LOCKED = "locked", BYTES = "bytes", FILE = "file", KEEP_OPEN = "keep_open";
+            SUMMARIES = "summaries", LOCKED = "locked", BYTES = "bytes", FILE = "file", KEEP_OPEN = "keep_open",
+            TARGET = "target";
     static final Handler MAIN = new Handler(Looper.getMainLooper());
 
     private ProfileBridge() {}
@@ -52,6 +57,11 @@ final class ProfileBridge {
 
     /** Only called by a worker. Reply handlers stay on main, so Binder cannot deadlock the UI. */
     static Bundle call(Context c, int user, int operation, Bundle args) throws Exception {
+        return call(c, user, operation, args, 10);
+    }
+
+    /** The same, waiting up to {@code seconds} for the answer (an engine session takes longer). */
+    static Bundle call(Context c, int user, int operation, Bundle args, int seconds) throws Exception {
         if (Looper.myLooper() == Looper.getMainLooper()) throw new IllegalStateException("Profile call on main thread");
         int ownUser = Process.myUid() / 100000;
         Store store = new Store(c);
@@ -84,7 +94,7 @@ final class ProfileBridge {
         boolean bound = c.bindServiceAsUser(intent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT, handle(user));
         if (!bound) throw new IOException(c.getString(R.string.error_profile_unavailable));
         try {
-            Bundle response = result.poll(10, TimeUnit.SECONDS);
+            Bundle response = result.poll(seconds, TimeUnit.SECONDS);
             if (response == null) throw new IOException(c.getString(R.string.error_profile_unavailable));
             if (response.containsKey(ERROR)) throw new IOException(response.getString(ERROR));
             return response;
